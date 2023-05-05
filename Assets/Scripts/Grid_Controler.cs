@@ -7,11 +7,19 @@ public class Grid_Controler : MonoBehaviour
 {
     public Tile[,] tiles;
 
-    [SerializeField] List<GameObject> tilePrefabs;
+    [Header("Tiles: ")]
+    [SerializeField] GameObject tileOcean;
+    [SerializeField] GameObject tileWater;
+    [SerializeField] List<GameObject> tileDesert;
+    [SerializeField] List<GameObject> tilePlains;
+    [SerializeField] List<GameObject> tileWoods;
+    [SerializeField] List<GameObject> tileMountain;
+    [Header("Settings: ")]
     [SerializeField] Transform grid;
     [SerializeField] int column =10;
     [SerializeField] int row = 5;
     float tileSize = 0.5f;
+
 
     public Vector2Int noiseOffset;
     float magnitudeOffset = 10f;
@@ -55,8 +63,8 @@ public class Grid_Controler : MonoBehaviour
 
     void createGrid()
     {
-        Vector2 bottomOffset = new Vector2(tileSize * Mathf.Sqrt(3) * 0.5f, -3 * tileSize * 0.25f);
-        Vector2 rightOffset = new Vector2(Mathf.Sqrt(3) * tileSize, 0);
+        Vector2 bottomOffset = new Vector2(0.5f, -15f/ 32);
+        Vector2 rightOffset = new Vector2(33 / 32, 0);
 
         Vector2 offset = new Vector2();
         for (int i = 0; i < row; i++)
@@ -78,7 +86,8 @@ public class Grid_Controler : MonoBehaviour
 
             for (int j = 0; j < column; j++)
             {
-                Tile temp = Instantiate(tilePrefabs[map[j,i]], offset + rightOffset * j, tilePrefabs[map[j, i]].transform.rotation).GetComponent<Tile>();
+                GameObject spawn = getBiomVariant(map[j, i]);
+                Tile temp = Instantiate(spawn, offset + rightOffset * j, spawn.transform.rotation).GetComponent<Tile>();
                 temp.transform.SetParent(grid);
                 temp.initTile(new Vector2Int(j, i));
                 //temp.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
@@ -87,6 +96,33 @@ public class Grid_Controler : MonoBehaviour
             }
 
         }
+    }
+
+    GameObject getBiomVariant(int Biom)
+    {
+        int temp;
+        switch(Biom)
+        {
+            case 0:
+                return tileOcean;
+            case 1:
+                return tileWater;
+            case 2:
+                temp = Random.Range(0, tileDesert.Count);
+                return tileDesert[temp];
+            case 3:
+                temp = Random.Range(0, tilePlains.Count);
+                return tilePlains[temp];
+
+            case 4:
+                temp = Random.Range(0, tileWoods.Count);
+                return tileWoods[temp];
+
+            case 5:
+                temp = Random.Range(0, tileMountain.Count);
+                return tileMountain[temp];
+        }
+        return null;
     }
 
     int GetBitIDByNoise(int x, int y)

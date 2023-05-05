@@ -1615,13 +1615,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faec73d52c484ae41af4db595e481d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs:
-  - {fileID: 6852938640613704177, guid: 63f6aa79fa8e82a4db32de2c22ed41b4, type: 3}
-  - {fileID: 6852938640613704177, guid: a07c14214d8ca014983990cfcd0c06d2, type: 3}
-  - {fileID: 6852938640613704177, guid: e9ba65141953bcb48814ee0fe7cf5cd8, type: 3}
-  - {fileID: 6852938640613704177, guid: f6576bfd374371f4e94cc08239e11a7c, type: 3}
-  - {fileID: 6852938640613704177, guid: 31840ad00c6f77c4083cceb81a20980e, type: 3}
-  - {fileID: 6852938640613704177, guid: ee861687e818ae54a87e6c929b60b754, type: 3}
+  tileOcean: {fileID: 2652924183118149419, guid: 1d094c0627bb7184eb9f9c9abe8025a1, type: 3}
+  tileWater: {fileID: 2652924183118149419, guid: 1d094c0627bb7184eb9f9c9abe8025a1, type: 3}
+  tileDesert:
+  - {fileID: 8655810179212108740, guid: 873a40e1fc0b8c54cac627c1cb2fff91, type: 3}
+  - {fileID: 6370526721094088039, guid: c1fa8fc7980830341b39558493a4b28f, type: 3}
+  - {fileID: 3164484948694901811, guid: eb908a8a1f2a225408d025faaff10fd1, type: 3}
+  tilePlains:
+  - {fileID: 4987648294411891025, guid: d85c29c31359b0e46bd803e4e940e62b, type: 3}
+  tileWoods:
+  - {fileID: 4189087679363254717, guid: 1f31e6bbc8641044892389401d5a860c, type: 3}
+  tileMountain:
+  - {fileID: 8792473253122616644, guid: e9e986d396c4289498ecf2c1fd90c68b, type: 3}
+  - {fileID: 7585893062098410694, guid: e79eed1f55def2949b6c59f7db2cbbb7, type: 3}
   grid: {fileID: 226606856}
   column: 100
   row: 50
