@@ -14,6 +14,8 @@ public class Grid_Controler : MonoBehaviour
     [SerializeField] List<GameObject> tilePlains;
     [SerializeField] List<GameObject> tileWoods;
     [SerializeField] List<GameObject> tileMountain;
+    [SerializeField] List<GameObject> tileSpecialDesert;
+    [SerializeField] List<GameObject> tileSpecialPlains;
     [Header("Settings: ")]
     [SerializeField] Transform grid;
     [SerializeField] int column =10;
@@ -108,9 +110,22 @@ public class Grid_Controler : MonoBehaviour
             case 1:
                 return tileWater;
             case 2:
-                temp = Random.Range(0, tileDesert.Count);
-                return tileDesert[temp];
+                if(Random.value > 0.98f)
+                {
+                    temp = Random.Range(0, tileSpecialDesert.Count);
+                    return tileSpecialDesert[temp];
+                }
+                else
+                {
+                    temp = Random.Range(0, tileDesert.Count);
+                    return tileDesert[temp];
+                }
             case 3:
+                if(Random.value > 0.995f)
+                {
+                    temp = Random.Range(0, tileSpecialPlains.Count);
+                    return tileSpecialPlains[temp];
+                }
                 temp = Random.Range(0, tilePlains.Count);
                 return tilePlains[temp];
 
@@ -203,11 +218,18 @@ public class Grid_Controler : MonoBehaviour
 
         perlinNoise *= biomsCount;
 
-        if(perlinNoise == biomsCount)
+        switch(perlinNoise)
         {
-            return biomsCount - 1;
+            case <= 1f:
+                return 0;
+            case <= 2.25f:
+                return 1;
+            case <= 3.5f:
+                return 2;
+            case <= 4:
+                return 3;
         }
-        return Mathf.FloorToInt(perlinNoise);
+        return 0;
     }
 
     int[,] addMaps(int[,] item1, int[,] item2)

@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitOnTile: {fileID: 0}
+  maxResources: 02000000030000000100000000000000
+  minResources: 00000000010000000000000000000000
   position: {x: 0, y: 0}
   biom: 2
   block: 0
