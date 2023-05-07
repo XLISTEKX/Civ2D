@@ -12,4 +12,8 @@ public class Unit : MonoBehaviour, ISelectable
         transform.SetParent(destination.transform);
         transform.localPosition = Vector3.zero;
     }
+    public void nextRound()
+    {
+        movementLeft = movementRange;
+    }
 }

@@ -22,7 +22,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         name = "Tile(" + this.position.x + "," + this.position.y + ")";
         maxResources = null;
         minResources = null;
-
     }
 
     public void OnBeginDrag(PointerEventData eventData)

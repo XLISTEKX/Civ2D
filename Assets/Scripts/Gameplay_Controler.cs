@@ -6,6 +6,7 @@ using UnityEngine;
 public class Gameplay_Controler : MonoBehaviour
 {
     public Tile selectedTile;
+    [SerializeField] List<Player> players;
 
     [SerializeField] Grid_Controler grid_Controler;
     [SerializeField] GameObject cheats_panel;
@@ -13,6 +14,14 @@ public class Gameplay_Controler : MonoBehaviour
 
     Tile[] unitMoves;
     bool moving = false;
+
+    public void startNewTurn()
+    {
+        foreach(Player player in players)
+        {
+            player.startNextRound();
+        }
+    }
 
     public void selectTile(Tile newSelected)
     {
@@ -79,6 +88,7 @@ public class Gameplay_Controler : MonoBehaviour
     void moveUnit(Tile start, Tile destination)
     {
 
+        start.unitOnTile.movementLeft -= distance(axisToCube(start.position), axisToCube(destination.position));
         start.unitOnTile.moveUnit(destination);
         destination.unitOnTile = start.unitOnTile;
         start.unitOnTile = null;
@@ -164,12 +174,18 @@ public class Gameplay_Controler : MonoBehaviour
         int y = position.y;
         return new Vector2Int(x,y);
     }
+
+    int distance(Vector3Int start, Vector3Int end)
+    {
+        Vector3Int tempVec = start - end;
+        return Mathf.Max(Mathf.Abs(tempVec.x), Mathf.Abs(tempVec.y), Mathf.Abs(tempVec.z));
+    }
      
-    public void spawnUnit(GameObject unit, Tile loacation) 
+    public void spawnUnit(GameObject unit, Tile loacation, int playerID = 0) 
     {
         GameObject temp = Instantiate(unit, loacation.transform.position, unit.transform.rotation);
         temp.transform.SetParent(loacation.transform);
-
+        players[playerID].allUnits.Add(temp.GetComponent<Unit>());
         loacation.unitOnTile = temp.GetComponent<Unit>();
     }
 }
