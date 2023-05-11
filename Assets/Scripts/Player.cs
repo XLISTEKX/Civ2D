@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public List<Unit> allUnits;
+    public List<Tile_City> allCities;
 
 
     public void startNextRound()
