@@ -10,17 +10,22 @@ public class Gameplay_Controler : MonoBehaviour
 
     [SerializeField] Grid_Controler grid_Controler;
     [SerializeField] GameObject cheats_panel;
+    [SerializeField] UI_Controler uI_Controler;
     Color lastColor;
 
     Tile[] unitMoves;
     bool moving = false;
 
+    public int turn = 0;
+
     public void startNewTurn()
     {
+        turn++;
         foreach(Player player in players)
         {
             player.startNextRound();
         }
+        uI_Controler.nextTurn(turn);
     }
 
     public void selectTile(Tile newSelected)
@@ -43,7 +48,8 @@ public class Gameplay_Controler : MonoBehaviour
         }
         else
         {
-            cheats_panel.SetActive(true);
+            if(!newSelected.block)
+                cheats_panel.SetActive(true);
             selectNewTile(newSelected);
         }
         
@@ -61,6 +67,8 @@ public class Gameplay_Controler : MonoBehaviour
             selectedTile.GetComponent<SpriteRenderer>().color = lastColor;
 
         selectedTile = newSelected;
+        if (newSelected.block)
+            cheats_panel.SetActive(false);
         lastColor = selectedTile.GetComponent<SpriteRenderer>().color;
 
         selectedTile.GetComponent<SpriteRenderer>().color = Color.red;
@@ -199,15 +207,19 @@ public class Gameplay_Controler : MonoBehaviour
         cityTile.initTile(location.position);
         cityTile.resources = location.resources;
 
+       
+        foreach (Tile tile in findTilesInRange(location, 1))
+        {
+            cityTile.cityResouces += tile.resources;
+        }
         Destroy(grid_Controler.tiles[location.position.x, location.position.y].gameObject);
 
         grid_Controler.tiles[location.position.x, location.position.y] = cityTile;
-        foreach (Tile tile in findTilesInRange(location, 1))
-        {
-            cityTile.cityResouces.food += tile.resources.food;
-            cityTile.cityResouces.science += tile.resources.science;
-            cityTile.cityResouces.production += tile.resources.production;
-        }
 
+    }
+
+    public void openCity(Tile_City city)
+    {
+        uI_Controler.openCloseCity(city);
     }
 }

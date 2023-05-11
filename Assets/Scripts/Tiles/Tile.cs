@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public TileBiom biom;
     public bool block; 
 
-    bool canClick = true;
+    protected bool canClick = true;
 
     public virtual void initTile(Vector2Int position)
     {
@@ -39,7 +39,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         canClick = true;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
         if(canClick) 
             GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().selectTile(this);
