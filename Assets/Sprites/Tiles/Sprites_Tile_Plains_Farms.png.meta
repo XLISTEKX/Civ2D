@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad950b017229ee847acbfa98f870a41a
+guid: 0daf27dd48d573d41896c1d2739ab56d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: iso-icons-default_0
+      name: Sprites_Tile_Plains_Farms_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 16
-        height: 16
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,41 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eadfd1b8c32fdf4980eaa5acd1f7c21
-      internalID: -1648759526
+      spriteID: fd98d60665fe8a94d95b97abc4a8a4ff
+      internalID: -1503084192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 69b97be8ad015604fbe0a57e3407527e
-      internalID: 1456454796
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: iso-icons-default_2
+      name: Sprites_Tile_Plains_Farms_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 16
-        width: 16
-        height: 16
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +152,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e02ffcf76c775443aab88daaa8a7342
-      internalID: 1864924984
+      spriteID: 2f163f92c4485dd4ab3c8f588dcf9d3f
+      internalID: 837312700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_3
+      name: Sprites_Tile_Plains_Farms_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 164569f62dc133249b7286e133f37519
+      internalID: 567610417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_Tile_Plains_Farms_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b27a94b05bbe7824dba6e0062255ee6b
+      internalID: 1762376577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_Tile_Plains_Farms_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a50a38d3697ef384f9fbfc68cb97ea64
-      internalID: 1829583763
+      spriteID: 02e3dee0aaef82a4ba2d70772035ee7e
+      internalID: -1137709417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_4
+      name: Sprites_Tile_Plains_Farms_5
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,8 +236,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38c8d4b222216d6459a5df82433bd8f4
-      internalID: -1936191632
+      spriteID: dcb4d128895761349bea9c2de907369b
+      internalID: 588746282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_Tile_Plains_Farms_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ea1a3135d9ee54499ceca891904442
+      internalID: 1481747398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites_Tile_Plains_Farms_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c5c4d7c3fea9df4d94bffb5b2ba3681
+      internalID: -747509668
       vertices: []
       indices: 
       edges: []
@@ -232,11 +295,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      iso-icons-default_0: -1648759526
-      iso-icons-default_1: 1456454796
-      iso-icons-default_2: 1864924984
-      iso-icons-default_3: 1829583763
-      iso-icons-default_4: -1936191632
+      Sprites_Tile_Plains_Farms_0: -1503084192
+      Sprites_Tile_Plains_Farms_1: 837312700
+      Sprites_Tile_Plains_Farms_2: 567610417
+      Sprites_Tile_Plains_Farms_3: 1762376577
+      Sprites_Tile_Plains_Farms_4: -1137709417
+      Sprites_Tile_Plains_Farms_5: 588746282
+      Sprites_Tile_Plains_Farms_6: 1481747398
+      Sprites_Tile_Plains_Farms_7: -747509668
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

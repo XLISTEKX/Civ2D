@@ -13,16 +13,15 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public TileBiom biom;
     public bool block; 
 
-    bool canClick = true;
+    protected bool canClick = true;
 
-    public void initTile(Vector2Int position)
+    public virtual void initTile(Vector2Int position)
     {
         resources = new ResourcesTile(Random.Range(minResources[0], maxResources[0] + 1), Random.Range(minResources[1], maxResources[1] + 1), Random.Range(minResources[2], maxResources[2] + 1));
         this.position = position;
         name = "Tile(" + this.position.x + "," + this.position.y + ")";
         maxResources = null;
         minResources = null;
-
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -40,7 +39,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         canClick = true;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
         if(canClick) 
             GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().selectTile(this);

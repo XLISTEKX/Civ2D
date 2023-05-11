@@ -6,20 +6,35 @@ using UnityEngine;
 public class Gameplay_Controler : MonoBehaviour
 {
     public Tile selectedTile;
+    [SerializeField] List<Player> players;
 
     [SerializeField] Grid_Controler grid_Controler;
     [SerializeField] GameObject cheats_panel;
+    [SerializeField] UI_Controler uI_Controler;
     Color lastColor;
 
     Tile[] unitMoves;
     bool moving = false;
 
+    public int turn = 0;
+
+    public void startNewTurn()
+    {
+        turn++;
+        foreach(Player player in players)
+        {
+            player.startNextRound();
+        }
+        uI_Controler.nextTurn(turn);
+    }
+
     public void selectTile(Tile newSelected)
     {
+
         if (moving)
         {
             cheats_panel.SetActive(false);
-            if (unitMoves.Contains(newSelected))
+            if (unitMoves.Contains(newSelected) && selectedTile != newSelected)
             {
                 moveUnit(selectedTile, newSelected);
                 selectedTile.GetComponent<SpriteRenderer>().color = lastColor;
@@ -33,7 +48,8 @@ public class Gameplay_Controler : MonoBehaviour
         }
         else
         {
-            cheats_panel.SetActive(true);
+            if(!newSelected.block)
+                cheats_panel.SetActive(true);
             selectNewTile(newSelected);
         }
         
@@ -51,6 +67,8 @@ public class Gameplay_Controler : MonoBehaviour
             selectedTile.GetComponent<SpriteRenderer>().color = lastColor;
 
         selectedTile = newSelected;
+        if (newSelected.block)
+            cheats_panel.SetActive(false);
         lastColor = selectedTile.GetComponent<SpriteRenderer>().color;
 
         selectedTile.GetComponent<SpriteRenderer>().color = Color.red;
@@ -79,9 +97,12 @@ public class Gameplay_Controler : MonoBehaviour
     void moveUnit(Tile start, Tile destination)
     {
 
+        start.unitOnTile.movementLeft -= distance(axisToCube(start.position), axisToCube(destination.position));
         start.unitOnTile.moveUnit(destination);
         destination.unitOnTile = start.unitOnTile;
         start.unitOnTile = null;
+        start.block = false;
+        destination.block = true;
         removeInitUnitMove();
         moving = false;
 
@@ -164,12 +185,41 @@ public class Gameplay_Controler : MonoBehaviour
         int y = position.y;
         return new Vector2Int(x,y);
     }
-     
-    public void spawnUnit(GameObject unit, Tile loacation) 
-    {
-        GameObject temp = Instantiate(unit, loacation.transform.position, unit.transform.rotation);
-        temp.transform.SetParent(loacation.transform);
 
-        loacation.unitOnTile = temp.GetComponent<Unit>();
+    int distance(Vector3Int start, Vector3Int end)
+    {
+        Vector3Int tempVec = start - end;
+        return Mathf.Max(Mathf.Abs(tempVec.x), Mathf.Abs(tempVec.y), Mathf.Abs(tempVec.z));
+    }
+     
+    public void spawnUnit(GameObject unit, Tile location, int playerID = 0) 
+    {
+        GameObject temp = Instantiate(unit, location.transform.position, unit.transform.rotation);
+        temp.transform.SetParent(location.transform);
+        players[playerID].allUnits.Add(temp.GetComponent<Unit>());
+        location.unitOnTile = temp.GetComponent<Unit>();
+        location.block = true;
+    }
+
+    public void spawnCity(GameObject city, Tile location, int playerID = 0)
+    {
+        Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
+        cityTile.initTile(location.position);
+        cityTile.resources = location.resources;
+
+       
+        foreach (Tile tile in findTilesInRange(location, 1))
+        {
+            cityTile.cityResouces += tile.resources;
+        }
+        Destroy(grid_Controler.tiles[location.position.x, location.position.y].gameObject);
+
+        grid_Controler.tiles[location.position.x, location.position.y] = cityTile;
+
+    }
+
+    public void openCity(Tile_City city)
+    {
+        uI_Controler.openCloseCity(city);
     }
 }
