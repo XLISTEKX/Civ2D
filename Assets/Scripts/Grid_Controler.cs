@@ -214,6 +214,7 @@ public class Grid_Controler : MonoBehaviour
     int GetBiomByNoise(int x, int y)
     {
         float perlinNoise = Mathf.PerlinNoise((x + biomsOffset.x) / magnitudeBiom, (y + biomsOffset.y) / magnitudeBiom);
+        perlinNoise -= Random.Range(0, 0.125f);
         perlinNoise = Mathf.Clamp(perlinNoise, 0, 1);
 
         perlinNoise *= biomsCount;

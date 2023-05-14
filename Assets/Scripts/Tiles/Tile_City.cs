@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Tile_City : Tile, IPointerClickHandler
 {
     public ResourcesTile cityResouces = new ResourcesTile(0,0,0);
+    public List<Building> buildingsBuild = new List<Building>();
+    public List<Building> productionQueue = new List<Building>();
     Gameplay_Controler gameplay_Controler;
 
     public override void initTile(Vector2Int position)
@@ -21,5 +24,10 @@ public class Tile_City : Tile, IPointerClickHandler
             gameplay_Controler.openCity(this);
         }
             
+    }
+
+    public void addToQueue()
+    {
+
     }
 }
