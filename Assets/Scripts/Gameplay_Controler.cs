@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Gameplay_Controler : MonoBehaviour
 {
+
     public Tile selectedTile;
     [SerializeField] List<Player> players;
 
@@ -204,7 +205,7 @@ public class Gameplay_Controler : MonoBehaviour
     public void spawnCity(GameObject city, Tile location, int playerID = 0)
     {
         Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
-        cityTile.initTile(location.position);
+        cityTile.initCityTile(location.position, players[playerID]);
         cityTile.resources = location.resources;
 
        

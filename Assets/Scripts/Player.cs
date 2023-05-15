@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public List<Unit> allUnits;
     public List<Tile_City> allCities;
-
+    public List<GameObject> possibleBuildings;
 
     public void startNextRound()
     {

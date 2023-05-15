@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class UI_Controler : MonoBehaviour
 {
-    [SerializeField] List<GameObject> UIPanels;
+    [SerializeField] 
+    List<GameObject> UIPanels;
     [Header("City Settings")]
-    [SerializeField] List<TMP_Text> cityTexts; // 0 - food, 1 - cash, 2 - production
-    [SerializeField] TMP_Text turnTxt;
+    [SerializeField] 
+    List<TMP_Text> cityTexts; // 0 - food, 1 - cash, 2 - production
+    [SerializeField] 
+    TMP_Text turnTxt;
+    [SerializeField]
+    GameObject slotPrefab;
     int ID = 0;
     
     public void openPanel(int id)

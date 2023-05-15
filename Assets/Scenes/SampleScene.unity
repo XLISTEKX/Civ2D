@@ -2540,7 +2540,7 @@ GameObject:
   - component: {fileID: 700075861}
   - component: {fileID: 700075860}
   m_Layer: 5
-  m_Name: UI_Icon
+  m_Name: UI_Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4472,6 +4472,7 @@ MonoBehaviour:
   - {fileID: 932620088}
   - {fileID: 2070434923}
   turnTxt: {fileID: 1983114011}
+  slotPrefab: {fileID: 0}
 --- !u!1 &1118246048
 GameObject:
   m_ObjectHideFlags: 0
@@ -7155,6 +7156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allUnits: []
   allCities: []
+  possibleBuildings: []
 --- !u!4 &1902818579
 Transform:
   m_ObjectHideFlags: 0
@@ -7803,8 +7805,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 337.79047, y: 0}
-  m_SizeDelta: {x: 675.58093, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2073529637
 CanvasRenderer:
