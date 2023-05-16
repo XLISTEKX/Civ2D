@@ -14,5 +14,9 @@ public class Player : MonoBehaviour
         {
             unit.nextRound();
         }
+        foreach (Tile_City city in allCities)
+        {
+            city.nextTurn();
+        }
     }
 }

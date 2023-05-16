@@ -207,6 +207,7 @@ public class Gameplay_Controler : MonoBehaviour
         Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
         cityTile.initCityTile(location.position, players[playerID]);
         cityTile.resources = location.resources;
+        players[playerID].allCities.Add(cityTile);
 
        
         foreach (Tile tile in findTilesInRange(location, 1))

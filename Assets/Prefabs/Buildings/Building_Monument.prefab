@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildCost: 250
+  resources: {x: 2, y: 1, z: 10}
   isTile: 0
   buildingSprite: {fileID: 21300000, guid: e96479fa8ede505418a20f4722564886, type: 3}
