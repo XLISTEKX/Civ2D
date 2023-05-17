@@ -12,7 +12,6 @@ public class Building : MonoBehaviour
     {
         city.cityResouces += new ResourcesTile((short)resources.x, (short)resources.y, (short)resources.z);
         city.buildingsBuild.Add(gameObject);
-        city.possibleBuildings.Remove(gameObject);
 
     }
 

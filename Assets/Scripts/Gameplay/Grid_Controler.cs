@@ -20,7 +20,6 @@ public class Grid_Controler : MonoBehaviour
     [SerializeField] Transform grid;
     [SerializeField] int column =10;
     [SerializeField] int row = 5;
-    float tileSize = 0.5f;
 
 
     public Vector2Int noiseOffset;

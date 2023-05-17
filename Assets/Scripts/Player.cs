@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Color color;
+
     public List<Unit> allUnits;
     public List<Tile_City> allCities;
     public List<GameObject> possibleBuildings;
@@ -19,4 +21,5 @@ public class Player : MonoBehaviour
             city.nextTurn();
         }
     }
+
 }

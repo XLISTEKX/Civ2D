@@ -39,16 +39,17 @@ public class UI_City_Controler : MonoBehaviour
         cityTexts[1].text = city.cityResouces.cash.ToString();
         cityTexts[2].text = city.cityResouces.production.ToString();
 
+        cityTexts[3].text = city.cityName;
+
         int i = 0;
         foreach (GameObject buildingGO in city.possibleBuildings)
         {
             Building building = buildingGO.GetComponent<Building>();
 
-            float time = (float) building.buildCost / city.cityResouces.production;
-            int newTime = Mathf.CeilToInt(time);
+            float time = City.turnsToBuild(city.cityResouces.production, building.buildCost);
 
             UI_Slot slot = Instantiate(slotPrefab, spawnSlot).GetComponent<UI_Slot>();
-            slot.initSlot(building.buildingSprite, newTime.ToString() + "turns");
+            slot.initSlot(building.buildingSprite, time.ToString() + "turns");
             int temp = i;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlot(temp));
             slots.Add(slot);
@@ -65,16 +66,15 @@ public class UI_City_Controler : MonoBehaviour
 
             if(j == 0)
             {
-                time = (city.buildProduction - city.buildingProgress) / (float)city.cityResouces.production;
+                time = city.turnsLeft;
             }
             else
             {
-                time = (float)building.buildCost / city.cityResouces.production;
+                time = City.turnsToBuild(city.cityResouces.production, building.buildCost);
             }
             
-            int newTime = Mathf.CeilToInt(time);
 
-            slot.initSlot(building.buildingSprite, newTime.ToString());
+            slot.initSlot(building.buildingSprite, time.ToString());
             int temp = j;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlotQueue(temp));
             slotsQueue.Add(slot);
