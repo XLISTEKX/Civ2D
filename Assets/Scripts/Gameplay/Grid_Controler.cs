@@ -148,18 +148,16 @@ public class Grid_Controler : MonoBehaviour
         {
             case >= 0.5f:
                 return 2;
-                break;
+
             case >= 0.4f:
                 return 1;
-                break;
+
             case < 0.4f:
                 return 0;
-                break;
+
             default:
                 return 0;
-                break;
         }
-        return 0;
          
     }
 

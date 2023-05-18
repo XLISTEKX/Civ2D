@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class City 
 {
-    static string[] cityNames = {"Warsaw", "Berlin", "Pekin", "Paris", "Moskau", "Kiev", "Madrid", "Kraków", 
-        "Lublin", "Dresden", "Frankfurt", "Gdañsk", "Sydney", "Tokyo", "Washington", "New York", "London"};
+    static string[] cityNames = {"Warsaw", "Berlin", "Pekin", "Paris", "Moskau", "Kiev", "Madrid", "Krakow", 
+        "Lublin", "Dresden", "Frankfurt", "Gdansk", "Sydney", "Tokyo", "Washington", "New York", "London"};
 
 
     public static string randomCityName()

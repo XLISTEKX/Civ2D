@@ -3044,6 +3044,7 @@ MonoBehaviour:
   slotPrefab: {fileID: 4870592236559267681, guid: a16c5885eaa686443853a8820ea968e1, type: 3}
   slotQueuePrefab: {fileID: 6108858367521348225, guid: 8ea342cb3a784754199eb6c4cfdc9f7f, type: 3}
   spawnSlot: {fileID: 2073529636}
+  spawnUnitSlot: {fileID: 1625150526}
   spawnQueue: {fileID: 1505447551}
   layout: {fileID: 1592564675}
   cityTexts:
@@ -5515,6 +5516,8 @@ MonoBehaviour:
   possibleBuildings:
   - {fileID: 3311417924963137917, guid: 9d80c27ed7087104d94e4c2f3ef55d7b, type: 3}
   - {fileID: 3311417924963137917, guid: 9d80c27ed7087104d94e4c2f3ef55d7b, type: 3}
+  possibleUnits:
+  - {fileID: 7754086547817741617, guid: 2baea72a45bea10409623280af17e43e, type: 3}
 --- !u!4 &1902818579
 Transform:
   m_ObjectHideFlags: 0

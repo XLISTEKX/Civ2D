@@ -6,9 +6,12 @@ public class Player : MonoBehaviour
 {
     public Color color;
 
+    public int ID;
+
     public List<Unit> allUnits;
     public List<Tile_City> allCities;
     public List<GameObject> possibleBuildings;
+    public List<GameObject> possibleUnits;
 
     public void startNextRound()
     {
