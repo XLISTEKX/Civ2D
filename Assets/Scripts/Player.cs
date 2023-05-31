@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Color color;
+    public int money = 0;
+    public int science;
 
     public int ID;
 
@@ -21,6 +23,8 @@ public class Player : MonoBehaviour
         }
         foreach (Tile_City city in allCities)
         {
+            money += city.cityResouces.cash;
+            science += city.cityResouces.science;
             city.nextTurn();
         }
     }

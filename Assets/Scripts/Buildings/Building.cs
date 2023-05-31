@@ -4,7 +4,7 @@ using UnityEngine;
 public class Building : MonoBehaviour, IProduct
 {
     public int buildCost;
-    public Vector3 resources;
+    public Vector4 resources;
     public bool isTile;
     public Sprite buildingSprite;
 
@@ -18,7 +18,7 @@ public class Building : MonoBehaviour, IProduct
     }
     public virtual void construct(Tile_City city)
     {
-        city.cityResouces += new ResourcesTile((short)resources.x, (short)resources.y, (short)resources.z);
+        city.cityResouces += new ResourcesTile((short)resources.x, (short)resources.y, (short)resources.z, (short) resources.w);
     }
     public int type()
     {

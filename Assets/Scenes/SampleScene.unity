@@ -2988,6 +2988,9 @@ MonoBehaviour:
   - {fileID: 1953388222}
   - {fileID: 806734828}
   - {fileID: 1118246048}
+  resourcesText:
+  - {fileID: 1768597316}
+  - {fileID: 1030677693}
   turnTxt: {fileID: 1983114011}
   slotPrefab: {fileID: 0}
 --- !u!1 &1118246048
@@ -5511,6 +5514,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0.68485904, b: 1, a: 0.5882353}
+  money: 0
+  science: 0
+  ID: 0
   allUnits: []
   allCities: []
   possibleBuildings:

@@ -10,7 +10,7 @@ public class Tile_City : Tile, IPointerClickHandler
 
     public string cityName;
 
-    public ResourcesTile cityResouces = new ResourcesTile(0,0,0);
+    public ResourcesTile cityResouces = new ResourcesTile(0,0,0,0);
     public List<GameObject> buildingsBuild = new List<GameObject>();
     public List<GameObject> productionQueue = new List<GameObject>();
     public List<GameObject> possibleBuildings, possibleUnits;
