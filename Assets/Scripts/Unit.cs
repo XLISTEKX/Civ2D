@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour, IProduct
 {
@@ -10,6 +11,8 @@ public class Unit : MonoBehaviour, IProduct
 
     public int productionCost;
     public Sprite unitSprite;
+
+    [SerializeField] Image[] unitColors;  //0 - Out, 1 - In
 
     public void moveUnit(Tile destination)
     {
@@ -20,6 +23,17 @@ public class Unit : MonoBehaviour, IProduct
     {
         movementLeft = movementRange;
     }
+
+    public void initUnit(Player player)
+    {
+        Color color = player.color;
+        color.a = 1f;
+
+        unitColors[0].color = color;
+        color.a = 0.75f;
+        unitColors[1].color = color;
+    }
+
     public int getBuildCost()
     {
         return productionCost;

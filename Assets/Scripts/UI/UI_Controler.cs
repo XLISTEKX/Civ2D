@@ -8,8 +8,11 @@ public class UI_Controler : MonoBehaviour
     [SerializeField] 
     List<GameObject> UIPanels;
     [SerializeField]
-    List<TMP_Text> resourcesText; 
+    List<TMP_Text> resourcesText;
 
+    [Header("Toolbar")]
+    [SerializeField] RectTransform toolbar;
+    bool toolBarState;
     [Header("City Settings")]
     [SerializeField] 
     TMP_Text turnTxt;
@@ -46,6 +49,24 @@ public class UI_Controler : MonoBehaviour
         openPanel(2);
 
         
+    }
+
+
+    public void openCloseToolbar()
+    {
+        Vector3 pos = toolbar.position;
+
+        if (toolBarState)
+        {
+            pos.x = -toolbar.sizeDelta.x / 4;
+            toolbar.position = pos;
+            toolBarState = false;
+            return;
+        }
+
+        pos.x = toolbar.sizeDelta.x / 4;
+        toolbar.position = pos;
+        toolBarState = true;
     }
 
     void updateUI()

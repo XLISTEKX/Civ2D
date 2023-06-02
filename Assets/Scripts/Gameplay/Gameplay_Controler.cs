@@ -197,8 +197,10 @@ public class Gameplay_Controler : MonoBehaviour
     {
         GameObject temp = Instantiate(unit, location.transform.position, unit.transform.rotation);
         temp.transform.SetParent(location.transform);
-        players[playerID].allUnits.Add(temp.GetComponent<Unit>());
-        location.unitOnTile = temp.GetComponent<Unit>();
+        Unit tempUnit = temp.GetComponent<Unit>();
+        tempUnit.initUnit(players[playerID]);
+        players[playerID].allUnits.Add(tempUnit);
+        location.unitOnTile = tempUnit;
         location.block = true;
     }
 
