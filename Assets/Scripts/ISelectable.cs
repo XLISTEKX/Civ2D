@@ -39,3 +39,11 @@ public enum TileBiom
     Mountain,
 }
 
+public interface IDamageable
+{
+    public void takeDamage(int damage)
+    {
+
+    }
+}
+

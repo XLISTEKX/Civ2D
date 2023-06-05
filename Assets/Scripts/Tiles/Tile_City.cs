@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Tile_City : Tile, IPointerClickHandler
 {
-    public Player owner;
 
     public string cityName;
 

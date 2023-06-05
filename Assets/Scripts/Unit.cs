@@ -1,18 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Unit : MonoBehaviour, IProduct
+public class Unit : MonoBehaviour, IProduct, IDamageable
 {
+    public int health;
+    public int damage;
+
     public int movementRange;
     public int movementLeft;
 
     public int productionCost;
     public Sprite unitSprite;
 
-    [SerializeField] Image[] unitColors;  //0 - Out, 1 - In
+    [SerializeField] Image[] unitColors; //0 - Out, 1 - In
+    [SerializeField] TMP_Text textHP;
+    public Player owner;
 
     public void moveUnit(Tile destination)
     {
@@ -26,12 +31,27 @@ public class Unit : MonoBehaviour, IProduct
 
     public void initUnit(Player player)
     {
-        Color color = player.color;
+        owner = player;
+        updateUI();
+    }
+
+    void updateUI()
+    {
+        Color color = owner.color;
         color.a = 1f;
 
         unitColors[0].color = color;
         color.a = 0.75f;
         unitColors[1].color = color;
+
+        textHP.text = health.ToString();
+    }
+
+    void killUnit()
+    {
+        owner.allUnits.Remove(this);
+        Destroy(gameObject);
+
     }
 
     public int getBuildCost()
@@ -56,5 +76,15 @@ public class Unit : MonoBehaviour, IProduct
     public int type()
     {
         return 1;
+    }
+
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+
+        if(health <= 0)
+        {
+            killUnit();
+        }
     }
 }

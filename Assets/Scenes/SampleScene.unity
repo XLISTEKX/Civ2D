@@ -4616,6 +4616,13 @@ MonoBehaviour:
   tileSpecialPlains:
   - {fileID: 5951085379296312442, guid: 243a4ffa92721564d8b7494311368c96, type: 3}
   - {fileID: 2899213235557728245, guid: 4cf191f6fe5801f4cb89ae7d7b54fa93, type: 3}
+  borders:
+  - {fileID: 1609106463725888694, guid: feacab6d27d2c6246ad2c4f6070b5b53, type: 3}
+  - {fileID: 7711548039669834864, guid: a7f3c8f88b9c572438107ed167d3cc26, type: 3}
+  - {fileID: 2169844324283205991, guid: 7c61f11573dec0f48b999d402a1697d1, type: 3}
+  - {fileID: 9069216752303733628, guid: c7b9c68fdc42c7a45b1c1696c056b490, type: 3}
+  - {fileID: 2231876843213699280, guid: 0f19e1d0bdf8abb44b7cb50d06cf14a7, type: 3}
+  - {fileID: 1803915388212416647, guid: b15b1aa76ac10d245bdba5e1d5322a94, type: 3}
   grid: {fileID: 226606856}
   column: 80
   row: 50
