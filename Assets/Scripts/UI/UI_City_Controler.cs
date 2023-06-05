@@ -9,7 +9,7 @@ public class UI_City_Controler : MonoBehaviour
     [SerializeField]
     GameObject slotPrefab, slotQueuePrefab;
     [SerializeField]
-    Transform spawnSlot, spawnQueue;
+    Transform spawnSlot,spawnUnitSlot, spawnQueue;
     [SerializeField]
     RectTransform layout;
     [SerializeField]
@@ -17,13 +17,16 @@ public class UI_City_Controler : MonoBehaviour
 
     List<UI_Slot> slots = new List<UI_Slot>();
     List<UI_Slot> slotsQueue = new List<UI_Slot>();
+    List<UI_Slot> slotsUnits = new List<UI_Slot>();
 
     public Tile_City city;
 
     private void OnEnable()
     {
         updateUI();
-        
+        cityTexts[3].text = city.cityName;
+        cityTexts[3].color = city.owner.color;
+
     }
     private void OnDisable()
     {
@@ -44,20 +47,32 @@ public class UI_City_Controler : MonoBehaviour
         {
             Building building = buildingGO.GetComponent<Building>();
 
-            float time = (float) building.buildCost / city.cityResouces.production;
-            int newTime = Mathf.CeilToInt(time);
+            float time = City.turnsToBuild(city.cityResouces.production, building.buildCost);
 
             UI_Slot slot = Instantiate(slotPrefab, spawnSlot).GetComponent<UI_Slot>();
-            slot.initSlot(building.buildingSprite, newTime.ToString() + "turns");
+            slot.initSlot(building.buildingSprite, time.ToString() + "turns");
             int temp = i;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlot(temp));
             slots.Add(slot);
 
             i++;
         }
+        for (int j = 0; j < city.possibleUnits.Count; j++)
+        {
+            Unit unit = city.possibleUnits[j].GetComponent<Unit>();
+
+            UI_Slot slot = Instantiate(slotPrefab, spawnUnitSlot).GetComponent<UI_Slot>();
+
+            float time = City.turnsToBuild(city.cityResouces.production, unit.productionCost);
+
+            slot.initSlot(unit.unitSprite, time.ToString() + "turns");
+            int temp = j;
+            slot.GetComponent<Button>().onClick.AddListener(() => clickUnitSlot(temp));
+            slotsUnits.Add(slot);
+        }
         for (int j = 0; j < city.productionQueue.Count; j++)
         {
-            Building building = city.productionQueue[j].GetComponent<Building>();
+            IProduct product = city.productionQueue[j].GetComponent<IProduct>();
 
             UI_Slot slot = Instantiate(slotQueuePrefab, spawnQueue).GetComponent<UI_Slot>();
 
@@ -65,41 +80,52 @@ public class UI_City_Controler : MonoBehaviour
 
             if(j == 0)
             {
-                time = (city.buildProduction - city.buildingProgress) / (float)city.cityResouces.production;
+                time = city.turnsLeft;
             }
             else
             {
-                time = (float)building.buildCost / city.cityResouces.production;
+                time = City.turnsToBuild(city.cityResouces.production, product.getBuildCost());
             }
             
-            int newTime = Mathf.CeilToInt(time);
 
-            slot.initSlot(building.buildingSprite, newTime.ToString());
+            slot.initSlot(product.getImage(), time.ToString());
             int temp = j;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlotQueue(temp));
             slotsQueue.Add(slot);
         }
+        
         LayoutRebuilder.ForceRebuildLayoutImmediate(layout);
     }
     void destroyUI()
     {
-        for (int i = 0; i < slots.Count; i++)
+        foreach (UI_Slot slot in slots)
         {
-            Destroy(slots[i].gameObject);
+            Destroy(slot.gameObject);
         }
         slots.Clear();
-        for (int i = 0; i < slotsQueue.Count; i++)
+        foreach (UI_Slot slot in slotsQueue)
         {
-            Destroy(slotsQueue[i].gameObject);
+            Destroy(slot.gameObject);
         }
         slotsQueue.Clear();
+        foreach (UI_Slot slot in slotsUnits)
+        {
+            Destroy(slot.gameObject);
+        }
+        slotsUnits.Clear();
+        
     }
 
     public void clickSlot(int ID)
     {
-        city.addToQueue(ID);
+        city.addToQueue(ID, 0);
         updateUI();
 
+    }
+    public void clickUnitSlot(int ID)
+    {
+        city.addToQueue(ID, 1);
+        updateUI();
     }
     public void clickSlotQueue(int ID)
     {

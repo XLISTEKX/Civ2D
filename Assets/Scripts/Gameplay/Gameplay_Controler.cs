@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class Gameplay_Controler : MonoBehaviour
 {
@@ -84,6 +85,15 @@ public class Gameplay_Controler : MonoBehaviour
 
         foreach (Tile tile in unitMoves)
         {
+            if (tile.unitOnTile != null)
+            {
+                if (tile.unitOnTile.owner == players[0])
+                {
+                    tile.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.6f);
+                    continue;
+                }
+            }
+
             tile.GetComponent<SpriteRenderer>().color -= new Color(0,0,0, 0.4f);
         }
     }
@@ -91,7 +101,7 @@ public class Gameplay_Controler : MonoBehaviour
     {
         foreach(Tile tile in unitMoves)
         {
-            tile.GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0.4f);
+            tile.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         }
         unitMoves = null;
     }
@@ -125,6 +135,16 @@ public class Gameplay_Controler : MonoBehaviour
                 int s = -q - r;
                 Vector3Int cubeOffset = new Vector3Int(q, r, s) + cubeLocation;
                 Vector2Int location = cubeToAxis(cubeOffset);
+
+                if(location.x < 0 || location.x > grid_Controler.column - 1)
+                {
+                    continue;
+                    
+                }
+                if (location.y < 0 || location.y > grid_Controler.row - 1)
+                {
+                    continue;
+                }
 
                 returnValues.Add(grid_Controler.tiles[location.x, location.y]);
             }
@@ -170,24 +190,34 @@ public class Gameplay_Controler : MonoBehaviour
             Vector3Int newLocation = cubeLocation + vector;
             Vector2Int output = cubeToAxis(newLocation);
 
+            if (output.x < 0 || output.x > grid_Controler.column - 1)
+            {
+                continue;
+
+            }
+            if (output.y < 0 || output.y > grid_Controler.row - 1)
+            {
+                continue;
+            }
+
             returnValues.Add(grid_Controler.tiles[output.x, output.y]);
         }
         return returnValues.ToArray();
     }
-    Vector3Int axisToCube(Vector2Int position)
+    public static Vector3Int axisToCube(Vector2Int position)
     {
         int q = position.x - (position.y + (position.y & 1)) / 2;
 
         return new Vector3Int(q, position.y, -q - position.y);
     }
-    Vector2Int cubeToAxis(Vector3Int position)
+    public static Vector2Int cubeToAxis(Vector3Int position)
     {
         int x = position.x + (position.y + (position.y & 1)) / 2;
         int y = position.y;
         return new Vector2Int(x,y);
     }
 
-    int distance(Vector3Int start, Vector3Int end)
+    static int distance(Vector3Int start, Vector3Int end)
     {
         Vector3Int tempVec = start - end;
         return Mathf.Max(Mathf.Abs(tempVec.x), Mathf.Abs(tempVec.y), Mathf.Abs(tempVec.z));
@@ -197,8 +227,10 @@ public class Gameplay_Controler : MonoBehaviour
     {
         GameObject temp = Instantiate(unit, location.transform.position, unit.transform.rotation);
         temp.transform.SetParent(location.transform);
-        players[playerID].allUnits.Add(temp.GetComponent<Unit>());
-        location.unitOnTile = temp.GetComponent<Unit>();
+        Unit tempUnit = temp.GetComponent<Unit>();
+        tempUnit.initUnit(players[playerID]);
+        players[playerID].allUnits.Add(tempUnit);
+        location.unitOnTile = tempUnit;
         location.block = true;
     }
 
@@ -209,10 +241,16 @@ public class Gameplay_Controler : MonoBehaviour
         cityTile.resources = location.resources;
         players[playerID].allCities.Add(cityTile);
 
-       
-        foreach (Tile tile in findTilesInRange(location, 1))
+        Tile[] tiles = findTilesInRange(location, 1);
+        foreach (Tile tile in tiles)
         {
             cityTile.cityResouces += tile.resources;
+            tile.owner = players[playerID];
+        }
+        tiles = findTilesInRange(location, 2);
+        foreach(Tile tile in tiles)
+        {
+            tile.updateBorderState();
         }
         Destroy(grid_Controler.tiles[location.position.x, location.position.y].gameObject);
 

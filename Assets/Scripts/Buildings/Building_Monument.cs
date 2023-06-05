@@ -6,8 +6,4 @@ public class Building_Monument : Building
 {
 
 
-    public override void build(Tile_City city)
-    {
-        base.build(city);
-    }
 }

@@ -16,11 +16,12 @@ public class Grid_Controler : MonoBehaviour
     [SerializeField] List<GameObject> tileMountain;
     [SerializeField] List<GameObject> tileSpecialDesert;
     [SerializeField] List<GameObject> tileSpecialPlains;
+
+    public GameObject[] borders;
     [Header("Settings: ")]
     [SerializeField] Transform grid;
-    [SerializeField] int column =10;
-    [SerializeField] int row = 5;
-    float tileSize = 0.5f;
+    public int column =10;
+    public int row = 5;
 
 
     public Vector2Int noiseOffset;
@@ -149,18 +150,16 @@ public class Grid_Controler : MonoBehaviour
         {
             case >= 0.5f:
                 return 2;
-                break;
+
             case >= 0.4f:
                 return 1;
-                break;
+
             case < 0.4f:
                 return 0;
-                break;
+
             default:
                 return 0;
-                break;
         }
-        return 0;
          
     }
 

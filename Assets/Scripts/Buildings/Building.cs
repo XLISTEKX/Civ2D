@@ -1,19 +1,28 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class Building : MonoBehaviour, IProduct
 {
     public int buildCost;
-    public Vector3 resources;
+    public Vector4 resources;
     public bool isTile;
     public Sprite buildingSprite;
 
-    public virtual void build(Tile_City city)
+    public int getBuildCost()
     {
-        city.cityResouces += new ResourcesTile((short)resources.x, (short)resources.y, (short)resources.z);
-        city.buildingsBuild.Add(gameObject);
-        city.possibleBuildings.Remove(gameObject);
-
+        return buildCost;
+    }
+    public Sprite getImage()
+    {
+        return buildingSprite;
+    }
+    public virtual void construct(Tile_City city)
+    {
+        city.cityResouces += new ResourcesTile((short)resources.x, (short)resources.y, (short)resources.z, (short) resources.w);
+    }
+    public int type()
+    {
+        return 0;
     }
 
 }
