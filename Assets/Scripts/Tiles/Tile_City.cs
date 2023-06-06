@@ -8,16 +8,19 @@ public class Tile_City : Tile, IPointerClickHandler
 {
 
     public string cityName;
+    public int population = 1;
 
     public ResourcesTile cityResouces = new ResourcesTile(0,0,0,0);
     public List<GameObject> buildingsBuild = new List<GameObject>();
     public List<GameObject> productionQueue = new List<GameObject>();
     public List<GameObject> possibleBuildings, possibleUnits;
+
     Gameplay_Controler gameplay_Controler;
     [SerializeField] TMP_Text text_cityName;
     [SerializeField] Image constructionImage,panelColor;
     [SerializeField] Sprite gearImage;
     [SerializeField] TMP_Text constructionTurnLeft;
+
     public int buildingProgress;
     public int buildProduction;
 
@@ -83,7 +86,7 @@ public class Tile_City : Tile, IPointerClickHandler
 
     public void removeFromQueue(int ID)
     {
-        if (productionQueue[ID].TryGetComponent<Building>(out Building building))
+        if (productionQueue[ID].TryGetComponent(out Building building))
         {
             possibleBuildings.Add(productionQueue[ID]);
             productionQueue.RemoveAt(ID);

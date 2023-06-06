@@ -54,18 +54,18 @@ public class UI_Controler : MonoBehaviour
 
     public void openCloseToolbar()
     {
-        Vector3 pos = toolbar.position;
+        Vector3 pos = toolbar.anchoredPosition;
 
         if (toolBarState)
         {
-            pos.x = -toolbar.sizeDelta.x / 4;
-            toolbar.position = pos;
+            pos.x = -toolbar.sizeDelta.x / 2;
+            toolbar.anchoredPosition = pos;
             toolBarState = false;
             return;
         }
 
-        pos.x = toolbar.sizeDelta.x / 4;
-        toolbar.position = pos;
+        pos.x = toolbar.sizeDelta.x / 2;
+        toolbar.anchoredPosition = pos;
         toolBarState = true;
     }
 

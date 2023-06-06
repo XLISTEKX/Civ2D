@@ -20,6 +20,8 @@ public class Gameplay_Controler : MonoBehaviour
 
     public int turn = 0;
 
+    static Vector3Int[] cubeDirections = { new Vector3Int(1, 0, -1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
+
     public void startNewTurn()
     {
         turn++;
@@ -50,7 +52,7 @@ public class Gameplay_Controler : MonoBehaviour
         }
         else
         {
-            if(!newSelected.block)
+            if(!newSelected.block && newSelected.owner == null)
                 cheats_panel.SetActive(true);
             selectNewTile(newSelected);
         }
@@ -69,7 +71,7 @@ public class Gameplay_Controler : MonoBehaviour
             selectedTile.GetComponent<SpriteRenderer>().color = lastColor;
 
         selectedTile = newSelected;
-        if (newSelected.block)
+        if (newSelected.block || newSelected.owner != null)
             cheats_panel.SetActive(false);
         lastColor = selectedTile.GetComponent<SpriteRenderer>().color;
 
@@ -188,9 +190,8 @@ public class Gameplay_Controler : MonoBehaviour
     {
         List<Tile> returnValues = new List<Tile>();
         Vector3Int cubeLocation = axisToCube(start.position);
-        Vector3Int[] directions = { new Vector3Int(1,0,-1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
         
-        foreach(Vector3Int vector in directions)
+        foreach(Vector3Int vector in cubeDirections)
         {
             Vector3Int newLocation = cubeLocation + vector;
             Vector2Int output = cubeToAxis(newLocation);
@@ -227,7 +228,39 @@ public class Gameplay_Controler : MonoBehaviour
         Vector3Int tempVec = start - end;
         return Mathf.Max(Mathf.Abs(tempVec.x), Mathf.Abs(tempVec.y), Mathf.Abs(tempVec.z));
     }
-     
+
+
+    public Tile[] cubeRing(Tile startTile, int distance)
+    {
+        List<Tile> returnTiles = new List<Tile>();
+        Vector3Int cubeLocation = axisToCube(startTile.position);
+        if(distance <= 0)
+        {
+            returnTiles.Add(startTile);
+            return returnTiles.ToArray();
+        }
+        Vector3Int hex = new Vector3Int(-1, 1, 0) * distance + cubeLocation;
+        
+        for(int i = 0; i < 6; i++)
+        {
+            for(int j = 0; j < distance; j++)
+            {
+                Vector2Int position = cubeToAxis(hex);
+
+                if (position.x < 0 || position.x > grid_Controler.column - 1 || position.y < 0 || position.y > grid_Controler.row - 1)
+                {
+                    continue;
+                }
+                returnTiles.Add(grid_Controler.tiles[position.x, position.y]);
+
+                hex += cubeDirections[i];
+            }
+        }
+        return returnTiles.ToArray();
+
+    } 
+
+
     public void spawnUnit(GameObject unit, Tile location, int playerID = 0) 
     {
         GameObject temp = Instantiate(unit, location.transform.position, unit.transform.rotation);
