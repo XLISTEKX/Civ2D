@@ -77,6 +77,18 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             tempLocation = cubeLocation + directions[i];
             Vector2Int pos = Gameplay_Controler.cubeToAxis(tempLocation);
 
+            if(pos.x < 0 || pos.x > grid.column || pos.y < 0 || pos.y > grid.row)
+            {
+                GameObject temp = Instantiate(grid.borders[i], transform);
+
+                border.Add(temp);
+
+                temp.GetComponent<SpriteRenderer>().color = owner.color;
+                continue;
+            }
+
+
+
             if (grid.tiles[pos.x, pos.y].owner != owner)
             {
                 GameObject temp = Instantiate(grid.borders[i], transform);

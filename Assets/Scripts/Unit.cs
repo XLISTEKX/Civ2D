@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Unit : MonoBehaviour, IProduct, IDamageable
 {
     public int health;
+    public int maxHealth;
     public int damage;
 
     public int movementRange;

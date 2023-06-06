@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class Gameplay_Controler : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class Gameplay_Controler : MonoBehaviour
     [SerializeField] Grid_Controler grid_Controler;
     [SerializeField] GameObject cheats_panel;
     [SerializeField] UI_Controler uI_Controler;
+    [SerializeField] UI_Selected selectUnitUI;
     Color lastColor;
 
     Tile[] unitMoves;
@@ -80,6 +80,9 @@ public class Gameplay_Controler : MonoBehaviour
     }
     void initUnitMove()
     {
+        selectUnitUI.gameObject.SetActive(true);
+        selectUnitUI.updateUI(selectedTile.unitOnTile);
+
         moving = true;
         unitMoves = findMovesInRange(selectedTile, selectedTile.unitOnTile.movementLeft);
 
@@ -99,7 +102,9 @@ public class Gameplay_Controler : MonoBehaviour
     }
     void removeInitUnitMove()
     {
-        foreach(Tile tile in unitMoves)
+        selectUnitUI.gameObject.SetActive(false);
+
+        foreach (Tile tile in unitMoves)
         {
             tile.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
         }
@@ -156,7 +161,7 @@ public class Gameplay_Controler : MonoBehaviour
     public Tile[] findMovesInRange(Tile startTile, int range)
     {
         List<Tile> visitedTiles = new List<Tile>();
-        visitedTiles.Add(startTile);
+        //visitedTiles.Add(startTile);
 
         List<List<Tile>> fringes = new List<List<Tile>>();
         fringes.Add(new List<Tile> { startTile });
