@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 {
     public Unit unitOnTile;
     public ResourcesTile resources;
+    public int tileCost;
     public int[] maxResources = new int[4];
     public int[] minResources = new int[4];
     public Vector2Int position;

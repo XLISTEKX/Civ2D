@@ -246,14 +246,12 @@ public class Gameplay_Controler : MonoBehaviour
             for(int j = 0; j < distance; j++)
             {
                 Vector2Int position = cubeToAxis(hex);
-
+                hex += cubeDirections[i];
                 if (position.x < 0 || position.x > grid_Controler.column - 1 || position.y < 0 || position.y > grid_Controler.row - 1)
                 {
                     continue;
                 }
                 returnTiles.Add(grid_Controler.tiles[position.x, position.y]);
-
-                hex += cubeDirections[i];
             }
         }
         return returnTiles.ToArray();

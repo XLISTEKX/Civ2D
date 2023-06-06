@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_City_Controler : MonoBehaviour
 {
     [SerializeField]
-    GameObject slotPrefab, slotQueuePrefab;
+    GameObject slotPrefab, slotQueuePrefab, slotBuyPrefab;
     [SerializeField]
     Transform spawnSlot,spawnUnitSlot, spawnQueue;
     [SerializeField]
@@ -18,6 +18,10 @@ public class UI_City_Controler : MonoBehaviour
     List<UI_Slot> slots = new List<UI_Slot>();
     List<UI_Slot> slotsQueue = new List<UI_Slot>();
     List<UI_Slot> slotsUnits = new List<UI_Slot>();
+
+
+    bool isBuyTileOpen = false;
+    List<GameObject> buySlots = new List<GameObject>();
 
     public Tile_City city;
 
@@ -30,8 +34,14 @@ public class UI_City_Controler : MonoBehaviour
     }
     private void OnDisable()
     {
+        if (isBuyTileOpen)
+        {
+            openBuyTileMenu();
+        }
+        
         city = null;
         destroyUI();
+        
     }
 
     void updateUI()
@@ -131,5 +141,50 @@ public class UI_City_Controler : MonoBehaviour
     {
         city.removeFromQueue(ID);
         updateUI();
+    }
+
+    public void openBuyTileMenu()
+    {
+
+        if (isBuyTileOpen)
+        {
+            for(int i = 0; i < buySlots.Count; i++)
+            {
+                Destroy(buySlots[i]);
+            }
+            buySlots.Clear();
+            isBuyTileOpen = false;
+        }
+        else
+        {
+            updateBuyTile();
+            isBuyTileOpen = true;
+        }
+        
+    }
+
+    public void updateBuyTile()
+    {
+        if(buySlots.Count > 0)
+        {
+            foreach(GameObject gObject in buySlots)
+            {
+                Destroy(gObject);
+            }
+        }
+        Gameplay_Controler _Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
+        Tile[] tempTiles;
+        tempTiles = _Controler.cubeRing(city, city.currentRange);
+
+        for (int i = 0; i < tempTiles.Length; i++)
+        {
+            if (tempTiles[i].owner == null)
+            {
+                buySlots.Add(Instantiate(slotBuyPrefab, tempTiles[i].transform));
+                buySlots[buySlots.Count - 1].GetComponent<BuyTileSlot>().initSlot(tempTiles[i]);
+            }
+
+        }
+
     }
 }

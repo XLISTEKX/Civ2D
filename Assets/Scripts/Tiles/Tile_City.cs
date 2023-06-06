@@ -9,6 +9,7 @@ public class Tile_City : Tile, IPointerClickHandler
 
     public string cityName;
     public int population = 1;
+    public int currentRange = 2;
 
     public ResourcesTile cityResouces = new ResourcesTile(0,0,0,0);
     public List<GameObject> buildingsBuild = new List<GameObject>();

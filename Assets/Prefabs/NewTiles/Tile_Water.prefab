@@ -100,11 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitOnTile: {fileID: 0}
+  tileCost: 100
   maxResources: 00000000000000000200000000000000
   minResources: 00000000000000000100000000000000
   position: {x: 0, y: 0}
   biom: 1
   block: 1
+  owner: {fileID: 0}
 --- !u!60 &7470030525140699103
 PolygonCollider2D:
   m_ObjectHideFlags: 0

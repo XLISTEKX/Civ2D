@@ -2349,7 +2349,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 686125474}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1118246050}
+        m_TargetAssemblyTypeName: UI_City_Controler, Assembly-CSharp
+        m_MethodName: openBuyTileMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &686125474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4237,6 +4249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 4870592236559267681, guid: a16c5885eaa686443853a8820ea968e1, type: 3}
   slotQueuePrefab: {fileID: 6108858367521348225, guid: 8ea342cb3a784754199eb6c4cfdc9f7f, type: 3}
+  slotBuyPrefab: {fileID: 383662749230037894, guid: f8353a140183970458abdf04486d646b, type: 3}
   spawnSlot: {fileID: 2073529636}
   spawnUnitSlot: {fileID: 1625150526}
   spawnQueue: {fileID: 1505447551}
@@ -7179,7 +7192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7146dbd1f538ebb49a6c9c2174e9060f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.68485904, b: 1, a: 0.5882353}
+  color: {r: 0, g: 0.68485904, b: 1, a: 1}
   money: 0
   science: 0
   ID: 0
