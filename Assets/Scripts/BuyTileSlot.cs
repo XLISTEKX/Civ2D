@@ -6,11 +6,12 @@ public class BuyTileSlot : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TMP_Text cost;
     Tile tile;
+    Tile_City city;
 
-    public void initSlot(Tile tile)
+    public void initSlot(Tile tile, Tile_City city)
     {
         this.tile = tile;
-
+        this.city = city;
         cost.text = tile.tileCost.ToString();
         cost.color = ColorsInfo.getColorByGold( GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().money, tile.tileCost);
     }
@@ -31,7 +32,11 @@ public class BuyTileSlot : MonoBehaviour, IPointerClickHandler
             {
                 tiles.updateBorderState();
             }
-            GameObject.Find("City_Menu").GetComponent<UI_City_Controler>().updateBuyTile();
+            city.cityResouces += tile.resources;
+            UI_City_Controler ui_city = GameObject.Find("City_Menu").GetComponent<UI_City_Controler>();
+
+            ui_city.updateBuyTile();
+            ui_city.updateUI();
         }
         
 

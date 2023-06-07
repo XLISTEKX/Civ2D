@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad950b017229ee847acbfa98f870a41a
+guid: 887c2b115e1ca6e429c79fa65bb2b0d9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: iso-icons-default_0
+      name: Sprites-Tile-Desert_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 16
-        height: 16
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7eadfd1b8c32fdf4980eaa5acd1f7c21
-      internalID: -1648759526
+      spriteID: 1ca3fd320b69c804da21cc24fd1ddcb5
+      internalID: -753800517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_1
+      name: Sprites-Tile-Desert_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 16
-        height: 16
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 69b97be8ad015604fbe0a57e3407527e
-      internalID: 1456454796
+      spriteID: 1dc5edc7b7eb03f4583c4790a6953cb7
+      internalID: 1801366853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_2
+      name: Sprites-Tile-Desert_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
-        width: 16
-        height: 16
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,20 +173,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e02ffcf76c775443aab88daaa8a7342
-      internalID: 1864924984
+      spriteID: 8e7a75a70bf0ccf41b06122d0759eb8b
+      internalID: -878421915
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_3
+      name: Sprites-Tile-Desert_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce8fc2c9497f10743bd929a4217db158
+      internalID: -443853779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites-Tile-Desert_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a50a38d3697ef384f9fbfc68cb97ea64
-      internalID: 1829583763
+      spriteID: 337b16af069d2914b822258ab336f532
+      internalID: 760609339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_4
+      name: Sprites-Tile-Desert_5
       rect:
         serializedVersion: 2
-        x: 16
+        x: 64
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,20 +236,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38c8d4b222216d6459a5df82433bd8f4
-      internalID: -1936191632
+      spriteID: 25bc3989e5215df43a9af3221862295f
+      internalID: -218314086
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: iso-icons-default_5
+      name: Sprites-Tile-Desert_6
       rect:
         serializedVersion: 2
-        x: 32
+        x: 128
         y: 0
-        width: 16
-        height: 16
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,8 +257,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b28c4662e1fc7be4ab43f694de1937a2
-      internalID: -763339146
+      spriteID: 50acaa3a0eddd524fb4877eb02423ce6
+      internalID: -1518281398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites-Tile-Desert_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd9899845ad31784d8752ba25f164f17
+      internalID: -1617910366
       vertices: []
       indices: 
       edges: []
@@ -253,12 +295,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      iso-icons-default_0: -1648759526
-      iso-icons-default_1: 1456454796
-      iso-icons-default_2: 1864924984
-      iso-icons-default_3: 1829583763
-      iso-icons-default_4: -1936191632
-      iso-icons-default_5: -763339146
+      Sprites-Tile-Desert_0: -753800517
+      Sprites-Tile-Desert_1: 1801366853
+      Sprites-Tile-Desert_2: -878421915
+      Sprites-Tile-Desert_3: -443853779
+      Sprites-Tile-Desert_4: 760609339
+      Sprites-Tile-Desert_5: -218314086
+      Sprites-Tile-Desert_6: -1518281398
+      Sprites-Tile-Desert_7: -1617910366
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

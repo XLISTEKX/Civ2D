@@ -71,7 +71,13 @@ public class UI_Controler : MonoBehaviour
 
     void updateUI()
     {
-        resourcesText[0].text = player.money.ToString();
+        int money_gain = 0;
+        foreach (Tile_City city in player.allCities)
+        {
+            money_gain += city.cityResouces.cash;
+        }
+
+        resourcesText[0].text = player.money.ToString() + "+" + money_gain.ToString();
         resourcesText[1].text = player.science.ToString();
 
     }

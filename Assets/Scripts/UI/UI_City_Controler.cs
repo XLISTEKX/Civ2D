@@ -44,7 +44,7 @@ public class UI_City_Controler : MonoBehaviour
         
     }
 
-    void updateUI()
+    public void updateUI()
     {
         destroyUI();
 
@@ -181,7 +181,7 @@ public class UI_City_Controler : MonoBehaviour
             if (tempTiles[i].owner == null)
             {
                 buySlots.Add(Instantiate(slotBuyPrefab, tempTiles[i].transform));
-                buySlots[buySlots.Count - 1].GetComponent<BuyTileSlot>().initSlot(tempTiles[i]);
+                buySlots[buySlots.Count - 1].GetComponent<BuyTileSlot>().initSlot(tempTiles[i], city);
             }
 
         }
