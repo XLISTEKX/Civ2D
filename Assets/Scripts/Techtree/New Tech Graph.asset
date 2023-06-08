@@ -1,0 +1,426 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8222640092462630516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 424, y: 8}
+  ports:
+    keys:
+    - IN
+    - OUT
+    values:
+    - _fieldName: IN
+      _node: {fileID: -8222640092462630516}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: OUT
+        node: {fileID: 3182539099851780838}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: OUT
+      _node: {fileID: -8222640092462630516}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 5
+  techName: Tomek
+  unlocked: 0
+  icon: {fileID: 21300000, guid: a8bbd0d429e16a94dac14e50d43383dd, type: 3}
+  techProgress: 0
+  techCost: 0
+--- !u!114 &-7412047500155453982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 376, y: -216}
+  ports:
+    keys:
+    - OUT
+    - IN
+    values:
+    - _fieldName: OUT
+      _node: {fileID: -7412047500155453982}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: IN
+      _node: {fileID: -7412047500155453982}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: OUT
+        node: {fileID: -17909838784435983}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 3
+  techName: sd
+  unlocked: 0
+  icon: {fileID: -1936191632, guid: ad950b017229ee847acbfa98f870a41a, type: 3}
+  techProgress: 0
+  techCost: 5
+--- !u!114 &-4449775365802738569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 440.0293, y: 305.17908}
+  ports:
+    keys:
+    - IN
+    - OUT
+    values:
+    - _fieldName: IN
+      _node: {fileID: -4449775365802738569}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: OUT
+        node: {fileID: 3182539099851780838}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: OUT
+      _node: {fileID: -4449775365802738569}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 6
+  techName: XY
+  unlocked: 0
+  icon: {fileID: 1864924984, guid: ad950b017229ee847acbfa98f870a41a, type: 3}
+  techProgress: 0
+  techCost: 10
+--- !u!114 &-2872054919096270259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 360, y: -456}
+  ports:
+    keys:
+    - OUT
+    - IN
+    values:
+    - _fieldName: OUT
+      _node: {fileID: -2872054919096270259}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: IN
+      _node: {fileID: -2872054919096270259}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: OUT
+        node: {fileID: -17909838784435983}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 2
+  techName: Kom
+  unlocked: 0
+  icon: {fileID: 21300000, guid: c609204676aee2844909c3367ad1ae10, type: 3}
+  techProgress: 0
+  techCost: 1000
+--- !u!114 &-321057576989014596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -248, y: -72}
+  ports:
+    keys:
+    - OUT
+    - IN
+    values:
+    - _fieldName: OUT
+      _node: {fileID: -321057576989014596}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: IN
+        node: {fileID: -17909838784435983}
+        reroutePoints: []
+      - fieldName: IN
+        node: {fileID: 3182539099851780838}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: IN
+      _node: {fileID: -321057576989014596}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 0
+  techName: Mana
+  unlocked: 1
+  icon: {fileID: -763339146, guid: ad950b017229ee847acbfa98f870a41a, type: 3}
+  techProgress: 0
+  techCost: 0
+--- !u!114 &-17909838784435983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 104, y: -328}
+  ports:
+    keys:
+    - OUT
+    - IN
+    values:
+    - _fieldName: OUT
+      _node: {fileID: -17909838784435983}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: IN
+        node: {fileID: -2872054919096270259}
+        reroutePoints: []
+      - fieldName: IN
+        node: {fileID: -7412047500155453982}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: IN
+      _node: {fileID: -17909838784435983}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: OUT
+        node: {fileID: -321057576989014596}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 1
+  techName: Ship
+  unlocked: 0
+  icon: {fileID: 21300000, guid: 33f87bd3e81abda46b55256d7a2096a0, type: 3}
+  techProgress: 0
+  techCost: 700
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7130ae625476b6c4b8a778952deba3c9, type: 3}
+  m_Name: New Tech Graph
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -321057576989014596}
+  - {fileID: -17909838784435983}
+  - {fileID: -2872054919096270259}
+  - {fileID: -7412047500155453982}
+  - {fileID: 3182539099851780838}
+  - {fileID: -8222640092462630516}
+  - {fileID: -4449775365802738569}
+  - {fileID: 8313080419790501525}
+  current: {fileID: -321057576989014596}
+--- !u!114 &3182539099851780838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 56, y: 168}
+  ports:
+    keys:
+    - IN
+    - OUT
+    values:
+    - _fieldName: IN
+      _node: {fileID: 3182539099851780838}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: OUT
+        node: {fileID: -321057576989014596}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: OUT
+      _node: {fileID: 3182539099851780838}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: IN
+        node: {fileID: -8222640092462630516}
+        reroutePoints: []
+      - fieldName: IN
+        node: {fileID: -4449775365802738569}
+        reroutePoints: []
+      - fieldName: IN
+        node: {fileID: 8313080419790501525}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 4
+  techName: Howk
+  unlocked: 0
+  icon: {fileID: 21300000, guid: 6ac7da1a62bc54b4ab7bf461e14eed10, type: 3}
+  techProgress: 0
+  techCost: 999
+--- !u!114 &8313080419790501525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bf5340aec1664c428959d574da2c9b6, type: 3}
+  m_Name: Tech
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 440, y: 552}
+  ports:
+    keys:
+    - IN
+    - OUT
+    values:
+    - _fieldName: IN
+      _node: {fileID: 8313080419790501525}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: OUT
+        node: {fileID: 3182539099851780838}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: OUT
+      _node: {fileID: 8313080419790501525}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  IN: 0
+  OUT: 0
+  ID: 7
+  techName: Krowa
+  unlocked: 0
+  icon: {fileID: 21300000, guid: f85626e59764b0143881db7cf0fa79e2, type: 3}
+  techProgress: 0
+  techCost: 0
