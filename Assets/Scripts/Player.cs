@@ -15,18 +15,25 @@ public class Player : MonoBehaviour
     public List<GameObject> possibleBuildings;
     public List<GameObject> possibleUnits;
 
+    public Techtree techtree;
     public void startNextRound()
     {
         foreach (Unit unit in allUnits)
         {
             unit.nextRound();
         }
+
+        int tempScience = 0;
         foreach (Tile_City city in allCities)
         {
             money += city.cityResouces.cash;
-            science += city.cityResouces.science;
+            tempScience += city.cityResouces.science;
             city.nextTurn();
         }
+        
+        science = tempScience;
+
+        techtree.nextTurn(science);
     }
 
 }

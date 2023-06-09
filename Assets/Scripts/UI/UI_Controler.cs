@@ -78,7 +78,7 @@ public class UI_Controler : MonoBehaviour
         }
 
         resourcesText[0].text = player.money.ToString() + "+" + money_gain.ToString();
-        resourcesText[1].text = player.science.ToString();
+        resourcesText[1].text = "+" + player.science.ToString();
 
     }
     public void nextTurn(int turn)

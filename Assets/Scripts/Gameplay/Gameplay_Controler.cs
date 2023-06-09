@@ -283,6 +283,8 @@ public class Gameplay_Controler : MonoBehaviour
             cityTile.cityResouces += tile.resources;
             tile.owner = players[playerID];
         }
+        
+
         tiles = findTilesInRange(location, 2);
         foreach(Tile tile in tiles)
         {

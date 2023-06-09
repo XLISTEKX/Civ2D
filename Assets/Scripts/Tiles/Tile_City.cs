@@ -39,6 +39,8 @@ public class Tile_City : Tile, IPointerClickHandler
         updateUI();
         text_cityName.text = cityName;
         panelColor.color = owner.color;
+
+        
     }
 
     public override void OnPointerClick(PointerEventData eventData)

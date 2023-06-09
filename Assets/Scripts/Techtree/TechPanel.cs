@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TechPanel : MonoBehaviour
+public class TechPanel : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TMP_Text textName, textProgressbar;
     [SerializeField] Image icon;
@@ -19,7 +20,8 @@ public class TechPanel : MonoBehaviour
         textName.text = techNode.techName;
         icon.sprite = techNode.icon;
 
-        textProgressbar.text = "0/" + techNode.techCost.ToString();
+        textProgressbar.text = tech.techProgress + "/" + techNode.techCost;
+        progressbar.value = (float)tech.techProgress / techNode.techCost;
 
         if (techNode.unlocked)
         {
@@ -28,13 +30,22 @@ public class TechPanel : MonoBehaviour
         }
     }
 
+    public void changeColor(Color color)
+    {
+        textName.color = color;
+    }
+
     public void turnCover()
     {
         cover.SetActive(false);
     }
 
-    public void clickOnPanel()
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log(tech.techName);
+        if (tech.research && !tech.unlocked)
+        {
+            GetComponentInParent<Techtree>().changeResearch(tech);
+        }
     }
 }

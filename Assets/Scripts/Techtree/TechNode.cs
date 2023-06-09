@@ -13,6 +13,7 @@ public class TechNode : Node
     
     public string techName;
     public bool unlocked;
+    public bool research;
     public Sprite icon;
 
     public int techProgress;

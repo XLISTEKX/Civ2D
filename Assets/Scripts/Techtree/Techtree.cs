@@ -9,9 +9,11 @@ using XNode;
 
 public class Techtree : MonoBehaviour
 {
-    [SerializeField] TechGraph graph;
+    public TechGraph graph;
 
     [SerializeField] TechPanel[] panels;
+
+    TechNode currentResearch;
 
     private void Start()
     {
@@ -32,16 +34,68 @@ public class Techtree : MonoBehaviour
             panels[techNode.ID].updateNode(techNode);
         }
 
-        foreach(TechNode tech in getNextNodes(graph.current))
-        {
-            panels[tech.ID].turnCover();
-        }
+        unlockNewResearch(graph.current);
     }
 
 
-    public void techComplete(int ID)
+    public bool nextTurn(int science) //can next turn?
     {
+        if (currentResearch == null)
+            return false;
 
+        currentResearch.techProgress += science;
+
+        if(currentResearch.techProgress >= currentResearch.techCost)
+        {
+            techComplete(currentResearch);
+            return true;
+        }
+        panels[currentResearch.ID].updateNode(currentResearch);
+        return true;
+    }
+    public void techComplete(TechNode tech)
+    {
+        tech.unlocked = true;
+
+        unlockNewResearch(tech);
+
+        panels[tech.ID].updateNode(tech);
+
+        changeResearch(null);
+    }
+
+    void unlockNewResearch(TechNode tech)
+    {
+        foreach(TechNode techNode in getNextNodes(tech))
+        {
+            techNode.research = true;
+            panels[techNode.ID].turnCover();
+        }
+    }
+
+    public void changeResearch(TechNode tech)
+    {
+        if(tech == null)
+        {
+            if (currentResearch != null)
+            {
+                panels[currentResearch.ID].changeColor(Color.white);
+                currentResearch = null;
+                return;
+            }
+
+        }
+        if(currentResearch == null)
+        {
+            panels[tech.ID].changeColor(Color.red);
+            currentResearch = tech;
+            return;
+        }
+        panels[currentResearch.ID].changeColor(Color.white);
+        currentResearch = tech;
+        panels[currentResearch.ID].changeColor(Color.red);
+
+        
     }
 
     TechNode[] getNextNodes(TechNode curNode)
@@ -54,7 +108,7 @@ public class Techtree : MonoBehaviour
 
                 if (count <= 0)
                 {
-                    return null;
+                    return new TechNode[0];
                 }
 
                 TechNode[] returnValues = new TechNode[count];
@@ -68,6 +122,6 @@ public class Techtree : MonoBehaviour
             }
             
         }
-        return null;
+        return new TechNode[0];
     }
 }

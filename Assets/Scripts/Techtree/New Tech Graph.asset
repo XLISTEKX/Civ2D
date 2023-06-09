@@ -45,6 +45,7 @@ MonoBehaviour:
   ID: 5
   techName: Tomek
   unlocked: 0
+  research: 0
   icon: {fileID: 21300000, guid: a8bbd0d429e16a94dac14e50d43383dd, type: 3}
   techProgress: 0
   techCost: 0
@@ -93,6 +94,7 @@ MonoBehaviour:
   ID: 3
   techName: sd
   unlocked: 0
+  research: 0
   icon: {fileID: -1936191632, guid: ad950b017229ee847acbfa98f870a41a, type: 3}
   techProgress: 0
   techCost: 5
@@ -141,6 +143,7 @@ MonoBehaviour:
   ID: 6
   techName: XY
   unlocked: 0
+  research: 0
   icon: {fileID: 1864924984, guid: ad950b017229ee847acbfa98f870a41a, type: 3}
   techProgress: 0
   techCost: 10
@@ -189,6 +192,7 @@ MonoBehaviour:
   ID: 2
   techName: Kom
   unlocked: 0
+  research: 0
   icon: {fileID: 21300000, guid: c609204676aee2844909c3367ad1ae10, type: 3}
   techProgress: 0
   techCost: 1000
@@ -240,6 +244,7 @@ MonoBehaviour:
   ID: 0
   techName: Mana
   unlocked: 1
+  research: 0
   icon: {fileID: -763339146, guid: ad950b017229ee847acbfa98f870a41a, type: 3}
   techProgress: 0
   techCost: 0
@@ -294,8 +299,9 @@ MonoBehaviour:
   ID: 1
   techName: Ship
   unlocked: 0
+  research: 1
   icon: {fileID: 21300000, guid: 33f87bd3e81abda46b55256d7a2096a0, type: 3}
-  techProgress: 0
+  techProgress: 62
   techCost: 700
 --- !u!114 &11400000
 MonoBehaviour:
@@ -373,9 +379,10 @@ MonoBehaviour:
   ID: 4
   techName: Howk
   unlocked: 0
+  research: 1
   icon: {fileID: 21300000, guid: 6ac7da1a62bc54b4ab7bf461e14eed10, type: 3}
-  techProgress: 0
-  techCost: 999
+  techProgress: 208
+  techCost: 300
 --- !u!114 &8313080419790501525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +428,7 @@ MonoBehaviour:
   ID: 7
   techName: Krowa
   unlocked: 0
+  research: 0
   icon: {fileID: 21300000, guid: f85626e59764b0143881db7cf0fa79e2, type: 3}
   techProgress: 0
   techCost: 0
