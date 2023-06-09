@@ -8693,7 +8693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7146dbd1f538ebb49a6c9c2174e9060f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.68485904, b: 1, a: 1}
+  color: {r: 0, g: 0.5529412, b: 1, a: 1}
   money: 0
   science: 0
   ID: 0
@@ -8704,6 +8704,9 @@ MonoBehaviour:
   - {fileID: 3311417924963137917, guid: 9d80c27ed7087104d94e4c2f3ef55d7b, type: 3}
   possibleUnits:
   - {fileID: 7754086547817741617, guid: 2baea72a45bea10409623280af17e43e, type: 3}
+  - {fileID: 7754086547817741617, guid: 480ea33bf0edf3b47ac9f3fb7f2b70ef, type: 3}
+  - {fileID: 7754086547817741617, guid: d683090171b69664db8829a86f6c079e, type: 3}
+  - {fileID: 7754086547817741617, guid: 7a81a4d5cff908f4d9c8616bca1ac4b0, type: 3}
   techtree: {fileID: 1493877301}
 --- !u!4 &1902818579
 Transform:

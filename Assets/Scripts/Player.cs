@@ -36,4 +36,22 @@ public class Player : MonoBehaviour
         techtree.nextTurn(science);
     }
 
+
+    public void updateTech(TechNode tech)
+    {
+        foreach(GameObject unit in tech.unlockUnit)
+        {
+            foreach(Tile_City city in allCities)
+            {
+                city.possibleUnits.Add(unit);
+            }
+        }
+        foreach (GameObject building in tech.unlockBuildings)
+        {
+            foreach (Tile_City city in allCities)
+            {
+                city.possibleBuildings.Add(building);
+            }
+        }
+    }
 }

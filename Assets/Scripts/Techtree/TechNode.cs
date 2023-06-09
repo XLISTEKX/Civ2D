@@ -19,6 +19,9 @@ public class TechNode : Node
     public int techProgress;
     public int techCost;
 
+    public List<GameObject> unlockUnit;
+    public List<GameObject> unlockBuildings;
+
     public override object GetValue(NodePort port)
     {
         return null;

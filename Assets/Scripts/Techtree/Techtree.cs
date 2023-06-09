@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using XNode;
 
 public class Techtree : MonoBehaviour
@@ -56,6 +50,17 @@ public class Techtree : MonoBehaviour
     public void techComplete(TechNode tech)
     {
         tech.unlocked = true;
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        foreach(GameObject unit in tech.unlockUnit)
+        {
+            player.possibleUnits.Add(unit);
+        }
+        foreach (GameObject building in tech.unlockBuildings)
+        {
+            player.possibleBuildings.Add(building);
+        }
+
+        player.updateTech(tech);
 
         unlockNewResearch(tech);
 
@@ -124,4 +129,6 @@ public class Techtree : MonoBehaviour
         }
         return new TechNode[0];
     }
+
+
 }
