@@ -13,7 +13,7 @@ public class UI_City_Controler : MonoBehaviour
     [SerializeField]
     RectTransform layout;
     [SerializeField]
-    List<TMP_Text> cityTexts; // 0 - food, 1 - cash, 2 - production
+    List<TMP_Text> cityTexts; // 0 - food, 1 - cash, 2 - production, 3 - science, 4 - name
 
     List<UI_Slot> slots = new List<UI_Slot>();
     List<UI_Slot> slotsQueue = new List<UI_Slot>();
@@ -28,8 +28,8 @@ public class UI_City_Controler : MonoBehaviour
     private void OnEnable()
     {
         updateUI();
-        cityTexts[3].text = city.cityName;
-        cityTexts[3].color = city.owner.color;
+        cityTexts[4].text = city.cityName;
+        cityTexts[4].color = city.owner.color;
 
     }
     private void OnDisable()
@@ -48,9 +48,10 @@ public class UI_City_Controler : MonoBehaviour
     {
         destroyUI();
 
-        cityTexts[0].text = city.cityResouces.food.ToString();
-        cityTexts[1].text = city.cityResouces.cash.ToString();
-        cityTexts[2].text = city.cityResouces.production.ToString();
+        cityTexts[0].text = "+" + city.cityResouces.food.ToString();
+        cityTexts[1].text = "+" + city.cityResouces.cash.ToString();
+        cityTexts[2].text = "+" + city.cityResouces.production.ToString();
+        cityTexts[3].text = "+" + city.cityResouces.science.ToString();
 
         int i = 0;
         foreach (GameObject buildingGO in city.possibleBuildings)
@@ -60,7 +61,7 @@ public class UI_City_Controler : MonoBehaviour
             float time = City.turnsToBuild(city.cityResouces.production, building.buildCost);
 
             UI_Slot slot = Instantiate(slotPrefab, spawnSlot).GetComponent<UI_Slot>();
-            slot.initSlot(building.buildingSprite, time.ToString() + "turns");
+            slot.initSlot(building.buildingSprite, time.ToString());
             int temp = i;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlot(temp));
             slots.Add(slot);
@@ -75,7 +76,7 @@ public class UI_City_Controler : MonoBehaviour
 
             float time = City.turnsToBuild(city.cityResouces.production, unit.productionCost);
 
-            slot.initSlot(unit.unitSprite, time.ToString() + "turns");
+            slot.initSlot(unit.unitSprite, time.ToString());
             int temp = j;
             slot.GetComponent<Button>().onClick.AddListener(() => clickUnitSlot(temp));
             slotsUnits.Add(slot);
@@ -103,8 +104,9 @@ public class UI_City_Controler : MonoBehaviour
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlotQueue(temp));
             slotsQueue.Add(slot);
         }
-        
-        LayoutRebuilder.ForceRebuildLayoutImmediate(layout);
+
+        layout.gameObject.SetActive(false);
+        layout.gameObject.SetActive(true);
     }
     void destroyUI()
     {
