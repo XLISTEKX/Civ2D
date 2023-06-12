@@ -13,10 +13,8 @@ public class Gameplay_Controler : MonoBehaviour
     [SerializeField] GameObject cheats_panel;
     [SerializeField] UI_Controler uI_Controler;
     [SerializeField] UI_Selected selectUnitUI;
-    Color lastColor;
 
     Tile[] unitMoves;
-    bool moving = false;
 
     public int turn = 0;
 
@@ -34,58 +32,69 @@ public class Gameplay_Controler : MonoBehaviour
 
     public void selectTile(Tile newSelected)
     {
+        cheats_panel.SetActive(false);
 
-        if (moving)
+        if(selectedTile != null)
         {
-            cheats_panel.SetActive(false);
-            if (unitMoves.Contains(newSelected) && selectedTile != newSelected)
+            if (selectedTile.getType() == 1)
             {
-                moveUnit(selectedTile, newSelected);
-                selectedTile.GetComponent<SpriteRenderer>().color = lastColor;
+                uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+                selectedTile = null;
+                return;
             }
-            else
+
+            if (selectedTile == newSelected)
             {
+                selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+
+                if (unitMoves != null)
+                    removeInitUnitMove();
+
+                selectedTile = null;
+                return;
+            }
+
+            if (selectedTile.unitOnTile != null)
+            {
+                if (unitMoves.Contains(newSelected))
+                {
+                    moveUnit(selectedTile, newSelected);
+                    selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                    return;
+                }
                 removeInitUnitMove();
-                moving = false;
                 selectNewTile(newSelected);
+                return;
             }
         }
-        else
-        {
-            if(!newSelected.block && newSelected.owner == null)
-                cheats_panel.SetActive(true);
-            selectNewTile(newSelected);
-        }
+        selectNewTile(newSelected);
         
     }
     void selectNewTile(Tile newSelected)
     {
-        if (selectedTile == newSelected)
-        {
-            selectedTile.GetComponent<SpriteRenderer>().color = lastColor;
-            selectedTile = null;
-            cheats_panel.SetActive(false);
-            return;
-        }
         if (selectedTile != null)
-            selectedTile.GetComponent<SpriteRenderer>().color = lastColor;
+            selectedTile.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
 
         selectedTile = newSelected;
-        if (newSelected.block || newSelected.owner != null)
-            cheats_panel.SetActive(false);
-        lastColor = selectedTile.GetComponent<SpriteRenderer>().color;
+        if (selectedTile.getType() == 1)
+        {
+            uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+            return;
+        }
+        if (!newSelected.block && newSelected.owner == null)
+            cheats_panel.SetActive(true);
 
-        selectedTile.GetComponent<SpriteRenderer>().color = Color.red;
+        selectedTile.GetComponent<SpriteRenderer>().color = new Color(1,0,0,0.7f);
 
         if (selectedTile.unitOnTile != null)
             initUnitMove();
+        
     }
     void initUnitMove()
     {
         selectUnitUI.gameObject.SetActive(true);
         selectUnitUI.updateUI(selectedTile.unitOnTile);
 
-        moving = true;
         unitMoves = findMovesInRange(selectedTile, selectedTile.unitOnTile.movementLeft);
 
         foreach (Tile tile in unitMoves)
@@ -106,6 +115,8 @@ public class Gameplay_Controler : MonoBehaviour
     {
         selectUnitUI.gameObject.SetActive(false);
 
+        Debug.Log(unitMoves.Length);
+
         foreach (Tile tile in unitMoves)
         {
             tile.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
@@ -122,7 +133,6 @@ public class Gameplay_Controler : MonoBehaviour
         start.block = false;
         destination.block = true;
         removeInitUnitMove();
-        moving = false;
 
     }
 

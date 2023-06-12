@@ -37,7 +37,7 @@ public class UI_Controler : MonoBehaviour
         ID = id;
     }
 
-    public void openCloseCity(Tile_City city, bool isOpen = true)
+    public void openCloseCity(Tile_City city)
     {
         if (ID == 2)
         {

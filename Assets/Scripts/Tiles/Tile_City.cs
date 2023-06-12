@@ -43,11 +43,16 @@ public class Tile_City : Tile, IPointerClickHandler
         
     }
 
+    public override int getType()
+    {
+        return 1;
+    }
+
     public override void OnPointerClick(PointerEventData eventData)
     {
         if (canClick)
         {
-            gameplay_Controler.openCity(this);
+            GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().selectTile(this);
         }
             
     }

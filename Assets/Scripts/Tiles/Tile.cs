@@ -21,6 +21,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     List<GameObject> border = new List<GameObject>();
 
+    public virtual int getType()
+    {
+        return 0;
+    }
 
     public virtual void initTile(Vector2Int position)
     {

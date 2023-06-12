@@ -93,7 +93,7 @@ public class Grid_Controler : MonoBehaviour
                 Tile temp = Instantiate(spawn, offset + rightOffset * j, spawn.transform.rotation).GetComponent<Tile>();
                 temp.transform.SetParent(grid);
                 temp.initTile(new Vector2Int(j, i));
-                //temp.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
+                
 
                 tiles[j, i] = temp;
             }
@@ -148,13 +148,13 @@ public class Grid_Controler : MonoBehaviour
 
         switch (perlin_clamped)
         {
-            case >= 0.5f:
+            case >= 0.45f:
                 return 2;
 
-            case >= 0.4f:
+            case >= 0.35f:
                 return 1;
 
-            case < 0.4f:
+            case < 0.35f:
                 return 0;
 
             default:

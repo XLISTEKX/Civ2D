@@ -9655,6 +9655,7 @@ MonoBehaviour:
   - {fileID: 7754086547817741617, guid: 480ea33bf0edf3b47ac9f3fb7f2b70ef, type: 3}
   - {fileID: 7754086547817741617, guid: d683090171b69664db8829a86f6c079e, type: 3}
   - {fileID: 7754086547817741617, guid: 7a81a4d5cff908f4d9c8616bca1ac4b0, type: 3}
+  - {fileID: 7754086547817741617, guid: 700c6c3d1119309468837f9106ebfa4b, type: 3}
   techtree: {fileID: 1493877301}
 --- !u!4 &1902818579
 Transform:
