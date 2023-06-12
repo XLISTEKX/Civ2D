@@ -38,8 +38,49 @@ public class Gameplay_Controler : MonoBehaviour
         {
             if (selectedTile.getType() == 1)
             {
-                uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
-                selectedTile = null;
+                if (selectedTile.unitOnTile != null && newSelected == selectedTile)
+                {
+                    if (unitMoves != null)
+                    {
+                        removeInitUnitMove();
+                    }
+                    else
+                    {
+                        initUnitMove();
+                    }
+                    uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+                    
+                }
+                else
+                {
+                    if(selectedTile.unitOnTile != null)
+                    {
+                        if (unitMoves == null)
+                        {
+                            uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+                            selectedTile = null;
+                            return;
+                        }
+                        if (unitMoves.Contains(newSelected))
+                        {
+                            moveUnit(selectedTile, newSelected);
+                            selectedTile = null;
+                        }
+                        else
+                        {
+                            removeInitUnitMove();
+                            selectNewTile(newSelected);
+                        }
+                        
+                        return;
+                    }
+                    if (unitMoves != null)
+                        removeInitUnitMove();
+
+                    uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+                    selectedTile = null;
+                }
+                
                 return;
             }
 
@@ -114,8 +155,6 @@ public class Gameplay_Controler : MonoBehaviour
     void removeInitUnitMove()
     {
         selectUnitUI.gameObject.SetActive(false);
-
-        Debug.Log(unitMoves.Length);
 
         foreach (Tile tile in unitMoves)
         {
@@ -284,6 +323,8 @@ public class Gameplay_Controler : MonoBehaviour
     {
         Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
         cityTile.initCityTile(location.position, players[playerID]);
+        cityTile.transform.SetParent(GameObject.Find("Grid").transform);
+
         cityTile.resources = location.resources;
         players[playerID].allCities.Add(cityTile);
 

@@ -1080,7 +1080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 226606856}
   m_Layer: 0
-  m_Name: Gird
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5872,6 +5872,7 @@ MonoBehaviour:
   toolbar: {fileID: 775754017}
   turnTxt: {fileID: 1983114011}
   slotPrefab: {fileID: 0}
+  ID: 0
 --- !u!1 &1118246048
 GameObject:
   m_ObjectHideFlags: 0
@@ -7348,6 +7349,9 @@ MonoBehaviour:
   - {fileID: 4987648294411891025, guid: d85c29c31359b0e46bd803e4e940e62b, type: 3}
   tileWoods:
   - {fileID: 4189087679363254717, guid: 1f31e6bbc8641044892389401d5a860c, type: 3}
+  tileFireWoods:
+  - {fileID: 8655810179212108740, guid: 192a9bf3bee65b04ab4c8f1edca756b1, type: 3}
+  - {fileID: 8655810179212108740, guid: c665cab757dada24dbf215ebfb3680ab, type: 3}
   tileMountain:
   - {fileID: 8792473253122616644, guid: e9e986d396c4289498ecf2c1fd90c68b, type: 3}
   - {fileID: 7585893062098410694, guid: e79eed1f55def2949b6c59f7db2cbbb7, type: 3}

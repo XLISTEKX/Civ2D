@@ -21,7 +21,7 @@ public class UI_Controler : MonoBehaviour
 
     Player player;
 
-    int ID = 0;
+    public int ID = 0;
 
 
     private void Start()

@@ -13,6 +13,7 @@ public class Grid_Controler : MonoBehaviour
     [SerializeField] List<GameObject> tileDesert;
     [SerializeField] List<GameObject> tilePlains;
     [SerializeField] List<GameObject> tileWoods;
+    [SerializeField] List<GameObject> tileFireWoods;
     [SerializeField] List<GameObject> tileMountain;
     [SerializeField] List<GameObject> tileSpecialDesert;
     [SerializeField] List<GameObject> tileSpecialPlains;
@@ -26,7 +27,7 @@ public class Grid_Controler : MonoBehaviour
 
     public Vector2Int noiseOffset;
     float magnitudeOffset = 10f;
-    int biomsCount = 4;
+    int biomsCount = 5;
 
     Vector2 biomsOffset;
     float magnitudeBiom;
@@ -53,7 +54,7 @@ public class Grid_Controler : MonoBehaviour
         noiseOffset = new Vector2Int(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
         magnitudeOffset = Random.Range(5f, 7f);
         biomsOffset = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
-        magnitudeBiom = Random.Range(8f, 12f);
+        magnitudeBiom = Random.Range(17.5f, 19f);
 
 
         tiles = new Tile[column, row];
@@ -133,8 +134,11 @@ public class Grid_Controler : MonoBehaviour
             case 4:
                 temp = Random.Range(0, tileWoods.Count);
                 return tileWoods[temp];
-
             case 5:
+                temp = Random.Range(0, tileFireWoods.Count);
+                return tileFireWoods[temp];
+
+            case 6:
                 temp = Random.Range(0, tileMountain.Count);
                 return tileMountain[temp];
         }
@@ -151,10 +155,10 @@ public class Grid_Controler : MonoBehaviour
             case >= 0.45f:
                 return 2;
 
-            case >= 0.35f:
+            case >= 0.40f:
                 return 1;
 
-            case < 0.35f:
+            case < 0.4f:
                 return 0;
 
             default:
@@ -219,15 +223,19 @@ public class Grid_Controler : MonoBehaviour
         perlinNoise *= biomsCount;
 
         switch(perlinNoise)
-        {
-            case <= 1f:
+        {                       // 0 - Desert; 1 - Plains; 2 - Woods; 3 - FireWoods; 4 - Mountains;
+            case <= 0.75f:
                 return 0;
-            case <= 2.25f:
+            case <= 2f:
                 return 1;
-            case <= 3.5f:
+            case <= 2.75f:
                 return 2;
-            case <= 4:
+            case <= 3f:
+                return 1;
+            case <= 4.25f:
                 return 3;
+            case <= 5:
+                return 4;
         }
         return 0;
     }

@@ -67,12 +67,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
     {
         Gameplay_Controler gameplay_Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
 
-        List<Tile> tiles = gameplay_Controler.findMovesInRange(city, 1).ToList();
-        tiles.Remove(city);
-
-        int random = Random.Range(0, tiles.Count);
-
-        gameplay_Controler.spawnUnit(gameObject, tiles[random], city.owner.ID);
+        gameplay_Controler.spawnUnit(gameObject, city, city.owner.ID);
     }
     public int type()
     {

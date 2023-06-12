@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5a0f41f573a521545b03a4ef92dcf652
+guid: 3988f23ff25a06747ae34fd66f8a9bbc
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_0
+      name: Sprites_Tile_Plains_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42196ed3ad5721f44bf97a1fcc2c8a1c
-      internalID: 1159478998
+      spriteID: 7ea90e612bcccc9489177f8ebd554d18
+      internalID: -669585070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_1
+      name: Sprites_Tile_Plains_1
       rect:
         serializedVersion: 2
         x: 32
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d739bec32725d434395b2e1cf80afacc
-      internalID: -1297725181
+      spriteID: 5a115ab3c9cf25644a41accec16112ce
+      internalID: 1704043717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_2
+      name: Sprites_Tile_Plains_2
       rect:
         serializedVersion: 2
         x: 64
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a136663809246d4aa59c70de6f72ae6
-      internalID: -748802784
+      spriteID: 2771851f99bbc384081c3ca7dd76ade3
+      internalID: -1420696170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_3
+      name: Sprites_Tile_Plains_3
       rect:
         serializedVersion: 2
         x: 96
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5258845f36f1fd42ab6fbf7d7ee07b3
-      internalID: 1755499026
+      spriteID: 0db946ca37113e047a597970b9b0b308
+      internalID: -635014469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_4
+      name: Sprites_Tile_Plains_4
       rect:
         serializedVersion: 2
         x: 0
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50a1a9b037633644298e262d86216c1f
-      internalID: 292334800
+      spriteID: 0bb2e60e28da9964293f83a20993d2e5
+      internalID: 1922721000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_5
+      name: Sprites_Tile_Plains_5
       rect:
         serializedVersion: 2
         x: 32
@@ -236,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5dc959c686da9f9449d423c5bdc47770
-      internalID: 1899195238
+      spriteID: 9d871c7870cdf53439c7419e6da21f10
+      internalID: 839893027
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_6
+      name: Sprites_Tile_Plains_6
       rect:
         serializedVersion: 2
         x: 64
@@ -257,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1820ef252d24d414bb0a951f352ab9fb
-      internalID: -942767077
+      spriteID: bce23cfc1cf20cb48ab14629f06f173e
+      internalID: 1360139145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprites_Tile_Desert_7
+      name: Sprites_Tile_Plains_7
       rect:
         serializedVersion: 2
         x: 96
@@ -278,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95d847a63d8b0e44fbc133a06a953411
-      internalID: 1529413067
+      spriteID: de18d4c955755a94daeafce1c1499c11
+      internalID: 1407319569
       vertices: []
       indices: 
       edges: []
@@ -295,14 +295,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprites_Tile_Desert_0: 1159478998
-      Sprites_Tile_Desert_1: -1297725181
-      Sprites_Tile_Desert_2: -748802784
-      Sprites_Tile_Desert_3: 1755499026
-      Sprites_Tile_Desert_4: 292334800
-      Sprites_Tile_Desert_5: 1899195238
-      Sprites_Tile_Desert_6: -942767077
-      Sprites_Tile_Desert_7: 1529413067
+      Sprites_Tile_Plains_0: -669585070
+      Sprites_Tile_Plains_1: 1704043717
+      Sprites_Tile_Plains_2: -1420696170
+      Sprites_Tile_Plains_3: -635014469
+      Sprites_Tile_Plains_4: 1922721000
+      Sprites_Tile_Plains_5: 839893027
+      Sprites_Tile_Plains_6: 1360139145
+      Sprites_Tile_Plains_7: 1407319569
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -465,7 +465,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 804f74f3087a63741ad8d2a370805d97, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9386b7fb782f5c48b04fc7270814b75, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -494,7 +494,7 @@ MonoBehaviour:
   movementRange: 3
   movementLeft: 3
   productionCost: 10
-  unitSprite: {fileID: 21300000, guid: 804f74f3087a63741ad8d2a370805d97, type: 3}
+  unitSprite: {fileID: 21300000, guid: e9386b7fb782f5c48b04fc7270814b75, type: 3}
   unitColors:
   - {fileID: 7461628661926273538}
   - {fileID: 7644687424921083698}
