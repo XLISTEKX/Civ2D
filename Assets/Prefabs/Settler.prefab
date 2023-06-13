@@ -346,7 +346,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
@@ -400,7 +402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1555054181660894265}
   - component: {fileID: 256943294409034726}
-  - component: {fileID: 6508763222420559208}
+  - component: {fileID: 3777762608703786774}
   m_Layer: 0
   m_Name: Settler
   m_TagString: Untagged
@@ -476,7 +478,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6508763222420559208
+--- !u!114 &3777762608703786774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,12 +487,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7754086547817741617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 240a89db7b3768140939bdf5270b5ce5, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b10db2dca37bcc4d97081a612fc487d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
   maxHealth: 20
-  damage: 0
+  damage: 2
   movementRange: 3
   movementLeft: 3
   productionCost: 10
@@ -500,3 +502,21 @@ MonoBehaviour:
   - {fileID: 7644687424921083698}
   textHP: {fileID: 6786695866821136542}
   owner: {fileID: 0}
+  actions:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3777762608703786774}
+        m_TargetAssemblyTypeName: Unit_Settlers, Assembly-CSharp
+        m_MethodName: createCity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  actionsIcons:
+  - {fileID: -1503084192, guid: 0daf27dd48d573d41896c1d2739ab56d, type: 3}
+  city: {fileID: 8982488041898318113, guid: 2932c726db144b34999cc3c2935e9c9f, type: 3}

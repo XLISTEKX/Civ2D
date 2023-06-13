@@ -69,16 +69,18 @@ public class UI_Controler : MonoBehaviour
         toolBarState = true;
     }
 
-    void updateUI()
+    public void updateUI()
     {
         int money_gain = 0;
+        int science = 0;
         foreach (Tile_City city in player.allCities)
         {
             money_gain += city.cityResouces.cash;
+            science += city.cityResouces.science;
         }
 
-        resourcesText[0].text = player.money.ToString() + "+" + money_gain.ToString();
-        resourcesText[1].text = "+" + player.science.ToString();
+        resourcesText[0].text = player.money + "+" + money_gain;
+        resourcesText[1].text = "+" + science.ToString();
 
     }
     public void nextTurn(int turn)

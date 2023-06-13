@@ -39,7 +39,6 @@ public class Tile_City : Tile, IPointerClickHandler
         updateUI();
         text_cityName.text = cityName;
         panelColor.color = owner.color;
-
         
     }
 
@@ -111,6 +110,7 @@ public class Tile_City : Tile, IPointerClickHandler
         }
 
         updateUI();
+        
     }
     public void nextTurn()
     {

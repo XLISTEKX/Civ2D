@@ -7,9 +7,14 @@ public class UI_Slot : MonoBehaviour
     public TMP_Text counter;
     public Image image;
 
-    public void initSlot(Sprite image, string text)
+    public void initSlot(Sprite image, string text = null)
     {
         this.image.sprite = image;
-        counter.text = text;
+
+        if(text != null)
+        {
+            counter.text = text;
+        }
+        
     }
 }

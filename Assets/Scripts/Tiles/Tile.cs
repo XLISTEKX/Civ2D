@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +13,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Vector2Int position;
     public TileBiom biom;
     public bool block;
+
+    bool hidden = false;
 
     [DoNotSerialize] public Player owner;
 
@@ -34,6 +35,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
         maxResources = null;
         minResources = null;
+        //changeVisibility(true);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -107,4 +109,20 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
 
     }
+
+    /*public void changeVisibility(bool hide)
+    {
+        if (!hide && hidden)
+        {
+
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+            hidden = false;
+
+        }
+        else if(hide && !hidden)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0.825f, 0.825f, 0.825f);
+            hidden = true;
+        }
+    }*/
 }

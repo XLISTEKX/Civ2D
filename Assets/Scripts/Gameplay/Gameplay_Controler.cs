@@ -32,6 +32,8 @@ public class Gameplay_Controler : MonoBehaviour
 
     public void selectTile(Tile newSelected)
     {
+
+
         cheats_panel.SetActive(false);
 
         if(selectedTile != null)
@@ -117,6 +119,11 @@ public class Gameplay_Controler : MonoBehaviour
             selectedTile.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
 
         selectedTile = newSelected;
+
+        if (newSelected == null)
+        {
+            return;
+        }
         if (selectedTile.getType() == 1)
         {
             uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
@@ -174,6 +181,8 @@ public class Gameplay_Controler : MonoBehaviour
         removeInitUnitMove();
 
     }
+
+
 
     public Tile[] findTilesInRange(Tile selected, int range)
     {
@@ -344,7 +353,7 @@ public class Gameplay_Controler : MonoBehaviour
         Destroy(grid_Controler.tiles[location.position.x, location.position.y].gameObject);
 
         grid_Controler.tiles[location.position.x, location.position.y] = cityTile;
-
+        uI_Controler.updateUI();
     }
 
     public void openCity(Tile_City city)
