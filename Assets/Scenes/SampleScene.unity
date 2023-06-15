@@ -6021,7 +6021,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 5850292047178209741, guid: 2ee6f7e0c325a2e43b526cd3535f23f1, type: 3}
-  slotQueuePrefab: {fileID: 6108858367521348225, guid: 8ea342cb3a784754199eb6c4cfdc9f7f, type: 3}
   slotBuyPrefab: {fileID: 383662749230037894, guid: f8353a140183970458abdf04486d646b, type: 3}
   spawnSlot: {fileID: 645564131}
   spawnUnitSlot: {fileID: 924334382}
@@ -7486,6 +7485,7 @@ MonoBehaviour:
   uI_Controler: {fileID: 1080828601}
   selectUnitUI: {fileID: 95890477}
   settler: {fileID: 7754086547817741617, guid: 700c6c3d1119309468837f9106ebfa4b, type: 3}
+  canClick: 1
   turn: 0
 --- !u!114 &1301860843
 MonoBehaviour:
@@ -9757,7 +9757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0.5529412, b: 1, a: 1}
-  money: 0
+  money: 900
   science: 0
   ID: 0
   allUnits: []

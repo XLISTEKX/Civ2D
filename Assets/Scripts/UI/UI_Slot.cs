@@ -5,9 +5,10 @@ using UnityEngine.UI;
 public class UI_Slot : MonoBehaviour
 {
     public TMP_Text counter;
-    public Image image;
+    public Image image, border,backgroud;
+    [SerializeField] Sprite[] borderTypes, backgroundTypes;
 
-    public void initSlot(Sprite image, string text = null)
+    public void initSlot(Sprite image, string text = null, int type = 0)
     {
         this.image.sprite = image;
 
@@ -15,6 +16,7 @@ public class UI_Slot : MonoBehaviour
         {
             counter.text = text;
         }
-        
+        border.sprite = borderTypes[type];
+        backgroud.sprite = backgroundTypes[type];
     }
 }

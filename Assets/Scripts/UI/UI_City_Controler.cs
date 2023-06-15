@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_City_Controler : MonoBehaviour
 {
     [SerializeField]
-    GameObject slotPrefab, slotQueuePrefab, slotBuyPrefab;
+    GameObject slotPrefab, slotBuyPrefab;
     [SerializeField]
     Transform spawnSlot,spawnUnitSlot, spawnQueue;
     [SerializeField]
@@ -61,7 +61,7 @@ public class UI_City_Controler : MonoBehaviour
             float time = City.turnsToBuild(city.cityResouces.production, building.buildCost);
 
             UI_Slot slot = Instantiate(slotPrefab, spawnSlot).GetComponent<UI_Slot>();
-            slot.initSlot(building.buildingSprite, time.ToString());
+            slot.initSlot(building.buildingSprite, time.ToString(), 0);
             int temp = i;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlot(temp));
             slots.Add(slot);
@@ -76,7 +76,7 @@ public class UI_City_Controler : MonoBehaviour
 
             float time = City.turnsToBuild(city.cityResouces.production, unit.productionCost);
 
-            slot.initSlot(unit.unitSprite, time.ToString());
+            slot.initSlot(unit.unitSprite, time.ToString(), 1);
             int temp = j;
             slot.GetComponent<Button>().onClick.AddListener(() => clickUnitSlot(temp));
             slotsUnits.Add(slot);
@@ -85,7 +85,9 @@ public class UI_City_Controler : MonoBehaviour
         {
             IProduct product = city.productionQueue[j].GetComponent<IProduct>();
 
-            UI_Slot slot = Instantiate(slotQueuePrefab, spawnQueue).GetComponent<UI_Slot>();
+            UI_Slot slot = Instantiate(slotPrefab, spawnQueue).GetComponent<UI_Slot>();
+
+            slot.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 150);
 
             float time;
 
@@ -99,7 +101,7 @@ public class UI_City_Controler : MonoBehaviour
             }
             
 
-            slot.initSlot(product.getImage(), time.ToString());
+            slot.initSlot(product.getImage(), time.ToString(), product.type());
             int temp = j;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlotQueue(temp));
             slotsQueue.Add(slot);
@@ -178,17 +180,10 @@ public class UI_City_Controler : MonoBehaviour
         }
         Gameplay_Controler _Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
         
-        Tile[] tempTiles;
-        tempTiles = _Controler.cubeRing(city, city.currentRange);
-
-        for (int i = 0; i < tempTiles.Length; i++)
+        foreach (Tile tempTile in _Controler.getTilesBuyExpanse(city, city.currentRange))
         {
-            if (tempTiles[i].owner == null)
-            {
-                buySlots.Add(Instantiate(slotBuyPrefab, tempTiles[i].transform.position, slotBuyPrefab.transform.rotation));
-                buySlots[buySlots.Count - 1].GetComponent<BuyTileSlot>().initSlot(tempTiles[i], city);
-            }
-
+            buySlots.Add(Instantiate(slotBuyPrefab, tempTile.transform.position, slotBuyPrefab.transform.rotation));
+            buySlots[^1].GetComponent<BuyTileSlot>().initSlot(tempTile, city);
         }
 
     }

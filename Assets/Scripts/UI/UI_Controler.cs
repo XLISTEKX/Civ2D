@@ -35,6 +35,8 @@ public class UI_Controler : MonoBehaviour
         UIPanels[id].SetActive(true);
         UIPanels[ID].SetActive(false);
         ID = id;
+        if (id == 0)
+            updateUI();
     }
 
     public void openCloseCity(Tile_City city)

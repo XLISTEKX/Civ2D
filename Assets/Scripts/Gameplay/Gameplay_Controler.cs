@@ -211,12 +211,9 @@ public class Gameplay_Controler : MonoBehaviour
 
     public bool isNeighborOwnerTile(Tile start)
     {
-        Vector3Int pos = axisToCube(start.position);
-
-        foreach(Vector3Int direction in cubeDirections)
+        foreach(Tile neighbor in cube_neighbor(start))
         {
-            Vector2Int outPos = cubeToAxis(direction + pos);
-            if (grid_Controler.tiles[outPos.x, outPos.y].owner != null)
+            if (neighbor.owner != null)
             {
                 return true;
             }
@@ -399,5 +396,26 @@ public class Gameplay_Controler : MonoBehaviour
     public void openCity(Tile_City city)
     {
         uI_Controler.openCloseCity(city);
+    }
+
+    public Tile[] getTilesBuyExpanse(Tile tile, int distance)
+    {
+        List<Tile> returns = new();
+
+        for(int i = 2; i <= distance + 1; i++)
+        {
+            foreach (Tile exp in cubeRing(tile, i))
+            {
+                if (exp.owner == null && isNeighborOwnerTile(exp))
+                {
+                    returns.Add(exp);
+                }
+                    
+            }
+
+        }
+
+        
+        return returns.ToArray();
     }
 }
