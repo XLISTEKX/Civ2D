@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -39,7 +40,8 @@ public class Tile_City : Tile, IPointerClickHandler
         updateUI();
         text_cityName.text = cityName;
         panelColor.color = owner.color;
-        
+
+
     }
 
     public override int getType()
@@ -146,5 +148,5 @@ public class Tile_City : Tile, IPointerClickHandler
             buildProduction = productionQueue[0].GetComponent<IProduct>().getBuildCost();
         }
     }
-    
+   
 }

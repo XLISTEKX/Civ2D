@@ -101,7 +101,6 @@ public class Grid_Controler : MonoBehaviour
 
         }
     }
-
     GameObject getBiomVariant(int Biom)
     {
         int temp;
