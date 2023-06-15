@@ -38,8 +38,7 @@ public class Tile_City : Tile, IPointerClickHandler
         possibleBuildings = new List<GameObject>(owner.possibleBuildings);
         possibleUnits = new List<GameObject>(owner.possibleUnits);
         updateUI();
-        text_cityName.text = cityName;
-        panelColor.color = owner.color;
+        
 
 
     }
@@ -82,8 +81,10 @@ public class Tile_City : Tile, IPointerClickHandler
     }
     void updateUI()
     {
-        
-        if(productionQueue.Count == 0)
+        text_cityName.text = cityName;
+        panelColor.color = owner.color - new Color(0,0,0,0.45f);
+
+        if (productionQueue.Count == 0)
         {
             constructionImage.sprite = gearImage;
             constructionTurnLeft.text = "";

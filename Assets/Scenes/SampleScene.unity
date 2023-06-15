@@ -6650,7 +6650,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1137709417, guid: 0daf27dd48d573d41896c1d2739ab56d, type: 3}
+  m_Sprite: {fileID: -285425464, guid: 0782bc07f0f50b840a4cd9d5885e5151, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7485,6 +7485,7 @@ MonoBehaviour:
   cheats_panel: {fileID: 1806049596}
   uI_Controler: {fileID: 1080828601}
   selectUnitUI: {fileID: 95890477}
+  settler: {fileID: 7754086547817741617, guid: 700c6c3d1119309468837f9106ebfa4b, type: 3}
   turn: 0
 --- !u!114 &1301860843
 MonoBehaviour:

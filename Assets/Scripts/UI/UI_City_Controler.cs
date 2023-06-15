@@ -147,7 +147,7 @@ public class UI_City_Controler : MonoBehaviour
 
     public void openBuyTileMenu()
     {
-
+        Gameplay_Controler _Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
         if (isBuyTileOpen)
         {
             for(int i = 0; i < buySlots.Count; i++)
@@ -156,11 +156,13 @@ public class UI_City_Controler : MonoBehaviour
             }
             buySlots.Clear();
             isBuyTileOpen = false;
+            _Controler.canClick = true;
         }
         else
         {
             updateBuyTile();
             isBuyTileOpen = true;
+            _Controler.canClick = false;
         }
         
     }
@@ -175,6 +177,7 @@ public class UI_City_Controler : MonoBehaviour
             }
         }
         Gameplay_Controler _Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
+        
         Tile[] tempTiles;
         tempTiles = _Controler.cubeRing(city, city.currentRange);
 
@@ -182,7 +185,7 @@ public class UI_City_Controler : MonoBehaviour
         {
             if (tempTiles[i].owner == null)
             {
-                buySlots.Add(Instantiate(slotBuyPrefab, tempTiles[i].transform));
+                buySlots.Add(Instantiate(slotBuyPrefab, tempTiles[i].transform.position, slotBuyPrefab.transform.rotation));
                 buySlots[buySlots.Count - 1].GetComponent<BuyTileSlot>().initSlot(tempTiles[i], city);
             }
 

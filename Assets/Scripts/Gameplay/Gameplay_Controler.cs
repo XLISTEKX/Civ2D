@@ -16,6 +16,7 @@ public class Gameplay_Controler : MonoBehaviour
     [SerializeField] GameObject settler;
     Tile[] unitMoves;
 
+    public bool canClick = true;
     public int turn = 0;
 
     static Vector3Int[] cubeDirections = { new Vector3Int(1, 0, -1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
@@ -59,8 +60,8 @@ public class Gameplay_Controler : MonoBehaviour
 
     public void selectTile(Tile newSelected)
     {
-
-
+        if (!canClick)
+            return;
         cheats_panel.SetActive(false);
 
         if(selectedTile != null)

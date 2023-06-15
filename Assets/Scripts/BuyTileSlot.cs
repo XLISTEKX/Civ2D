@@ -10,14 +10,16 @@ public class BuyTileSlot : MonoBehaviour, IPointerClickHandler
 
     public void initSlot(Tile tile, Tile_City city)
     {
+
         this.tile = tile;
         this.city = city;
         cost.text = tile.tileCost.ToString();
         cost.color = ColorsInfo.getColorByGold( GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().money, tile.tileCost);
     }
 
+
     public void OnPointerClick(PointerEventData eventData)
-    { 
+    {
         
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
