@@ -13,12 +13,39 @@ public class Gameplay_Controler : MonoBehaviour
     [SerializeField] GameObject cheats_panel;
     [SerializeField] UI_Controler uI_Controler;
     [SerializeField] UI_Selected selectUnitUI;
-
+    [SerializeField] GameObject settler;
     Tile[] unitMoves;
 
     public int turn = 0;
 
     static Vector3Int[] cubeDirections = { new Vector3Int(1, 0, -1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
+
+
+    private void Start()
+    {
+        initPlayer(0);
+    }
+
+    void initPlayer(int playerID)
+    {
+        int randX = grid_Controler.column;
+        int randY = grid_Controler.row;
+
+        Tile tile = null;
+        while(tile == null)
+        {
+            int x = Random.Range(0, randX);
+            int y = Random.Range(0, randY);
+
+            tile = grid_Controler.tiles[x, y];
+
+            if (tile.biom == TileBiom.Water)
+                tile = null;
+        }
+
+        spawnUnit(settler, tile, playerID);
+        Camera.main.transform.position += new Vector3(tile.transform.position.x, tile.transform.position.y);
+    }
 
     public void startNewTurn()
     {
@@ -121,9 +148,8 @@ public class Gameplay_Controler : MonoBehaviour
         selectedTile = newSelected;
 
         if (newSelected == null)
-        {
             return;
-        }
+        
         if (selectedTile.getType() == 1)
         {
             uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
@@ -182,7 +208,20 @@ public class Gameplay_Controler : MonoBehaviour
 
     }
 
+    public bool isNeighborOwnerTile(Tile start)
+    {
+        Vector3Int pos = axisToCube(start.position);
 
+        foreach(Vector3Int direction in cubeDirections)
+        {
+            Vector2Int outPos = cubeToAxis(direction + pos);
+            if (grid_Controler.tiles[outPos.x, outPos.y].owner != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public Tile[] findTilesInRange(Tile selected, int range)
     {
