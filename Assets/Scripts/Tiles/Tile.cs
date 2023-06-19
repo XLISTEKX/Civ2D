@@ -13,8 +13,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Vector2Int position;
     public TileBiom biom;
     public bool block;
-
-    bool hidden = false;
+    public bool construction;
 
     [DoNotSerialize] public Player owner;
 
@@ -35,7 +34,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
         maxResources = null;
         minResources = null;
-        //changeVisibility(true);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

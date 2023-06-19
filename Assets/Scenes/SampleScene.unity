@@ -6022,6 +6022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 5850292047178209741, guid: 2ee6f7e0c325a2e43b526cd3535f23f1, type: 3}
   slotBuyPrefab: {fileID: 383662749230037894, guid: f8353a140183970458abdf04486d646b, type: 3}
+  slotBuild: {fileID: 6356874643780499295, guid: 67534a6cfa206e84a8e2ea9c5a1c7f72, type: 3}
   spawnSlot: {fileID: 645564131}
   spawnUnitSlot: {fileID: 924334382}
   spawnQueue: {fileID: 1490769672}
@@ -9765,6 +9766,7 @@ MonoBehaviour:
   possibleBuildings:
   - {fileID: 3311417924963137917, guid: 9d80c27ed7087104d94e4c2f3ef55d7b, type: 3}
   - {fileID: 3311417924963137917, guid: 9d80c27ed7087104d94e4c2f3ef55d7b, type: 3}
+  - {fileID: 6156407240480220766, guid: 6de9e5661da5be54084880df9e7d3c24, type: 3}
   possibleUnits:
   - {fileID: 7754086547817741617, guid: 2baea72a45bea10409623280af17e43e, type: 3}
   - {fileID: 7754086547817741617, guid: 480ea33bf0edf3b47ac9f3fb7f2b70ef, type: 3}

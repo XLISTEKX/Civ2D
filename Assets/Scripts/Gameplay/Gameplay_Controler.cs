@@ -379,10 +379,11 @@ public class Gameplay_Controler : MonoBehaviour
         {
             cityTile.cityResouces += tile.resources;
             tile.owner = players[playerID];
+            cityTile.cityTiles.Add(tile);
         }
-        
+        cityTile.cityTiles.Remove(location);
 
-        tiles = findTilesInRange(location, 2);
+         tiles = findTilesInRange(location, 2);
         foreach(Tile tile in tiles)
         {
             tile.updateBorderState();
@@ -396,6 +397,21 @@ public class Gameplay_Controler : MonoBehaviour
     public void openCity(Tile_City city)
     {
         uI_Controler.openCloseCity(city);
+    }
+
+    public void spawnCityTile(GameObject tile, Tile location, Tile_City city)
+    {
+        Tile spawn = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<Tile>();
+        spawn.transform.SetParent(GameObject.Find("Grid").transform);
+        spawn.owner = city.owner;
+        spawn.initTile(location.position);
+
+        grid_Controler.tiles[location.position.x, location.position.y] = spawn;
+
+        city.cityTiles.Remove(location);
+        city.cityTiles.Add(spawn);
+
+        Destroy(location.gameObject);
     }
 
     public Tile[] getTilesBuyExpanse(Tile tile, int distance)

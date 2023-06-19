@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,9 +12,11 @@ public class Tile_City : Tile, IPointerClickHandler
     public int currentRange = 2;
 
     public ResourcesTile cityResouces = new ResourcesTile(0,0,0,0);
-    public List<GameObject> buildingsBuild = new List<GameObject>();
-    public List<GameObject> productionQueue = new List<GameObject>();
+    public List<GameObject> buildingsBuild = new();
+    public List<GameObject> productionQueue = new();
     public List<GameObject> possibleBuildings, possibleUnits;
+    public List<Tile> buildLocations = new();
+    public List<Tile> cityTiles = new();
 
     Gameplay_Controler gameplay_Controler;
     [SerializeField] TMP_Text text_cityName;
@@ -68,6 +69,9 @@ public class Tile_City : Tile, IPointerClickHandler
             case 1:
                 productionQueue.Add(possibleUnits[id]);
                 break;
+            case 2:
+                productionQueue.Add(possibleBuildings[id]);
+                break;
         }
         
 
@@ -96,7 +100,7 @@ public class Tile_City : Tile, IPointerClickHandler
 
     public void removeFromQueue(int ID)
     {
-        if (productionQueue[ID].TryGetComponent(out Building building))
+        if (productionQueue[ID].GetComponent<IProduct>().type() == 0)
         {
             possibleBuildings.Add(productionQueue[ID]);
             productionQueue.RemoveAt(ID);
@@ -122,7 +126,7 @@ public class Tile_City : Tile, IPointerClickHandler
         }
         int temp = cityResouces.production;
 
-        buildingProgress = buildingProgress + temp;
+        buildingProgress += temp;
 
         if(buildingProgress >= buildProduction)
         {
@@ -136,9 +140,13 @@ public class Tile_City : Tile, IPointerClickHandler
         IProduct product = productionQueue[0].GetComponent<IProduct>();
         product.construct(this);
 
-        if(product.type() == 0)
+        switch (product.type())
         {
-            buildingsBuild.Add(productionQueue[0]);
+            case 0:
+                buildingsBuild.Add(productionQueue[0]);
+                break;
+            case 2:
+                break;
         }
 
         buildingProgress -= buildProduction;

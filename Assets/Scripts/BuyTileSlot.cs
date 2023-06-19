@@ -36,7 +36,7 @@ public class BuyTileSlot : MonoBehaviour, IPointerClickHandler
             }
             city.cityResouces += tile.resources;
             UI_City_Controler ui_city = GameObject.Find("City_Menu").GetComponent<UI_City_Controler>();
-
+            ui_city.city.cityTiles.Add(tile);
             ui_city.updateBuyTile();
             ui_city.updateUI();
         }

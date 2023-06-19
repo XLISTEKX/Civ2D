@@ -7,6 +7,7 @@ public class Building : MonoBehaviour, IProduct
     public Vector4 resources;
     public bool isTile;
     public Sprite buildingSprite;
+    public int typeN;
 
     public int getBuildCost()
     {
@@ -22,7 +23,7 @@ public class Building : MonoBehaviour, IProduct
     }
     public int type()
     {
-        return 0;
+        return typeN;
     }
 
 }

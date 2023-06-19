@@ -43,7 +43,9 @@ public class UI_Controler : MonoBehaviour
     {
         if (ID == 2)
         {
+            
             openPanel(0);
+            UIPanels[2].GetComponent<UI_City_Controler>().destroyBuildTiles();
             return;
         }
         UIPanels[2].GetComponent<UI_City_Controler>().city = city;
