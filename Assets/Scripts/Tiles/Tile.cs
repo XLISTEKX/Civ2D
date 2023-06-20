@@ -13,7 +13,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Vector2Int position;
     public TileBiom biom;
     public bool block;
-    public bool construction;
 
     [DoNotSerialize] public Player owner;
 

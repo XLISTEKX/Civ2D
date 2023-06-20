@@ -137,7 +137,7 @@ public class UI_City_Controler : MonoBehaviour
         {
             foreach(Tile tile in city.cityTiles)
             {
-                if (!tile.block && !tile.construction && tile.getType() != 2)
+                if (!tile.block && tile.getType() == 0)
                 {
                     slotsBuild.Add(Instantiate(slotBuild, tile.transform.position, slotBuild.transform.rotation));
                     SlotTileBuild slot = slotsBuild[^1].GetComponent<SlotTileBuild>();

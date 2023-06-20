@@ -16,10 +16,7 @@ public class Building_Tile : Tile, IProduct
     }
     public void construct(Tile_City city)
     {
-        Gameplay_Controler gameplay =  GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
-        gameplay.spawnCityTile(gameObject, city.buildLocations[0], city);
-
-        city.buildLocations.RemoveAt(0);
+        city.buildLocations[0].Construct();
     }
     public int type()
     {

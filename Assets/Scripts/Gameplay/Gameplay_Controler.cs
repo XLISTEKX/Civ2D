@@ -51,7 +51,8 @@ public class Gameplay_Controler : MonoBehaviour
     public void startNewTurn()
     {
         turn++;
-        foreach(Player player in players)
+        selectTile(null);
+        foreach (Player player in players)
         {
             player.startNextRound();
         }
@@ -399,7 +400,7 @@ public class Gameplay_Controler : MonoBehaviour
         uI_Controler.openCloseCity(city);
     }
 
-    public void spawnCityTile(GameObject tile, Tile location, Tile_City city)
+    public Tile spawnCityTile(GameObject tile, Tile location, Tile_City city, bool destroy = true)
     {
         Tile spawn = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<Tile>();
         spawn.transform.SetParent(GameObject.Find("Grid").transform);
@@ -410,8 +411,11 @@ public class Gameplay_Controler : MonoBehaviour
 
         city.cityTiles.Remove(location);
         city.cityTiles.Add(spawn);
+        
+        if(destroy)
+            Destroy(location.gameObject);
 
-        Destroy(location.gameObject);
+        return spawn;
     }
 
     public Tile[] getTilesBuyExpanse(Tile tile, int distance)

@@ -14,6 +14,7 @@ public class Grid_Controler : MonoBehaviour
     [SerializeField] List<GameObject> tilePlains;
     [SerializeField] List<GameObject> tileWoods;
     [SerializeField] List<GameObject> tileFireWoods;
+    [SerializeField] List<GameObject> tileSnow;
     [SerializeField] List<GameObject> tileMountain;
     [SerializeField] List<GameObject> tileSpecialDesert;
     [SerializeField] List<GameObject> tileSpecialPlains;
@@ -27,7 +28,7 @@ public class Grid_Controler : MonoBehaviour
 
     public Vector2Int noiseOffset;
     float magnitudeOffset = 10f;
-    int biomsCount = 5;
+    int biomsCount = 6;
 
     Vector2 biomsOffset;
     float magnitudeBiom;
@@ -54,7 +55,7 @@ public class Grid_Controler : MonoBehaviour
         noiseOffset = new Vector2Int(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
         magnitudeOffset = Random.Range(5f, 7f);
         biomsOffset = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
-        magnitudeBiom = Random.Range(20f, 22f);
+        magnitudeBiom = Random.Range(40f, 45f);
 
 
         tiles = new Tile[column, row];
@@ -92,6 +93,7 @@ public class Grid_Controler : MonoBehaviour
             {
                 GameObject spawn = getBiomVariant(map[j, i]);
                 Tile temp = Instantiate(spawn, offset + rightOffset * j, spawn.transform.rotation).GetComponent<Tile>();
+                temp.GetComponent<SpriteRenderer>().enabled = false;
                 temp.transform.SetParent(grid);
                 temp.initTile(new Vector2Int(j, i));
                 
@@ -138,6 +140,10 @@ public class Grid_Controler : MonoBehaviour
                 return tileFireWoods[temp];
 
             case 6:
+                temp = Random.Range(0, tileSnow.Count);
+                return tileSnow[temp];
+
+            case 7:
                 temp = Random.Range(0, tileMountain.Count);
                 return tileMountain[temp];
         }
@@ -222,7 +228,7 @@ public class Grid_Controler : MonoBehaviour
         perlinNoise *= biomsCount;
 
         switch(perlinNoise)
-        {                       // 0 - Desert; 1 - Plains; 2 - Woods; 3 - FireWoods; 4 - Mountains;
+        {                       // 0 - Desert; 1 - Plains; 2 - Woods; 3 - FireWoods; 4 - Snow;
             case <= 0.75f:
                 return 0;
             case <= 2f:
@@ -231,10 +237,12 @@ public class Grid_Controler : MonoBehaviour
                 return 2;
             case <= 3f:
                 return 1;
-            case <= 4.25f:
+            case <= 4f:
                 return 3;
-            case <= 5:
+            case <= 5f:
                 return 4;
+            case <= 6:
+                return 5;
         }
         return 0;
     }
@@ -251,4 +259,5 @@ public class Grid_Controler : MonoBehaviour
         }
         return returnMap;
     }
+
 }

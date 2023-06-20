@@ -9,16 +9,15 @@ public class Tile_City : Tile, IPointerClickHandler
 
     public string cityName;
     public int population = 1;
-    public int currentRange = 2;
+    public int currentRange = 1;
 
     public ResourcesTile cityResouces = new ResourcesTile(0,0,0,0);
     public List<GameObject> buildingsBuild = new();
     public List<GameObject> productionQueue = new();
     public List<GameObject> possibleBuildings, possibleUnits;
-    public List<Tile> buildLocations = new();
+    public List<TileConstruction> buildLocations = new();
     public List<Tile> cityTiles = new();
-
-    Gameplay_Controler gameplay_Controler;
+    
     [SerializeField] TMP_Text text_cityName;
     [SerializeField] Image constructionImage,panelColor;
     [SerializeField] Sprite gearImage;
@@ -35,7 +34,6 @@ public class Tile_City : Tile, IPointerClickHandler
         name = "Tile(" + this.position.x + "," + this.position.y + ")";
         cityName = City.randomCityName();
 
-        gameplay_Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
         possibleBuildings = new List<GameObject>(owner.possibleBuildings);
         possibleUnits = new List<GameObject>(owner.possibleUnits);
         updateUI();
@@ -71,6 +69,7 @@ public class Tile_City : Tile, IPointerClickHandler
                 break;
             case 2:
                 productionQueue.Add(possibleBuildings[id]);
+                buildLocations[^1].setConstruction(possibleBuildings[id], this);
                 break;
         }
         
@@ -100,17 +99,31 @@ public class Tile_City : Tile, IPointerClickHandler
 
     public void removeFromQueue(int ID)
     {
-        if (productionQueue[ID].GetComponent<IProduct>().type() == 0)
+        IProduct product = productionQueue[ID].GetComponent<IProduct>();
+
+        switch (product.type()) 
         {
-            possibleBuildings.Add(productionQueue[ID]);
-            productionQueue.RemoveAt(ID);
-        }
-        else
-        {
-            productionQueue.RemoveAt(ID);
+            case 0:
+                possibleBuildings.Add(productionQueue[ID]);
+                
+                break;
+
+            case 2:
+                int newID = 0;
+
+                for(int i = 0; i < ID; i++)
+                {
+                    if (product.type() == 2)
+                        newID++;
+                }
+                buildLocations[newID].AbortConstruction();
+                buildLocations.RemoveAt(newID);
+                break;
         }
 
-        if(ID == 0 && productionQueue.Count != 0)
+        productionQueue.RemoveAt(ID);
+
+        if (ID == 0 && productionQueue.Count != 0)
         {
             buildProduction = productionQueue[0].GetComponent<IProduct>().getBuildCost();
             turnsLeft = Mathf.CeilToInt((buildProduction - buildingProgress) / (float)cityResouces.production);
