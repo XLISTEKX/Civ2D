@@ -31,6 +31,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         this.position = position;
         name = "Tile(" + this.position.x + "," + this.position.y + ")";
 
+        tileCost = ResourcesTile.CalcTileValue(resources);
+
         maxResources = null;
         minResources = null;
     }

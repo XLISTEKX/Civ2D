@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class City 
 {
-    static string[] cityNames = {"Warsaw", "Berlin", "Pekin", "Paris", "Moskau", "Kiev", "Madrid", "Krakow", 
+    static readonly string[] cityNames = {"Warsaw", "Berlin", "Pekin", "Paris", "Moskau", "Kiev", "Madrid", "Krakow", 
         "Lublin", "Dresden", "Frankfurt", "Gdansk", "Sydney", "Tokyo", "Washington", "New York", "London"};
+
+    
 
 
     public static string randomCityName()
@@ -19,4 +21,7 @@ public class City
     {
         return Mathf.CeilToInt(buildingProduction / (float)production);
     }
+
+    
+
 }
