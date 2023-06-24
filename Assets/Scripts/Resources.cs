@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+
 public class ResourcesTile 
 {
     public short food;
@@ -26,5 +28,21 @@ public class ResourcesTile
     public static int CalcTileValue(ResourcesTile resources)
     {
         return resources.food * resourcesValue[0] + resources.production * resourcesValue[1] + resources.cash * resourcesValue[2] + resources.science * resourcesValue[3];
+    }
+
+    public static int[] GetIDs(ResourcesTile resources)
+    {
+        List<int> ints = new();
+
+        if (resources.food != 0)
+            ints.Add(0);
+        if (resources.production != 0)
+            ints.Add(1);
+        if (resources.cash != 0)
+            ints.Add(2);
+        if (resources.science != 0)
+            ints.Add(3);
+
+        return ints.ToArray();
     }
 }

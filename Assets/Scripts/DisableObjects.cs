@@ -21,11 +21,15 @@ public class DisableObjects : MonoBehaviour
     {
         if (collision.TryGetComponent(out Tile _))
         {
+
             collision.GetComponent<SpriteRenderer>().enabled = false;
             if (collision.TryGetComponent(out Animator animator))
             {
                 animator.enabled = false;
             }
         }
+       
     }
+
+    
 }
