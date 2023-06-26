@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Gameplay_Cheats_Controler : MonoBehaviour
 {
-    public GameObject knight;
-    public GameObject city;
+    [SerializeField] GameObject knight, city, enemy;
     Gameplay_Controler gameplay_Controler;
 
     private void Start()
@@ -16,12 +15,18 @@ public class Gameplay_Cheats_Controler : MonoBehaviour
     public void spawnKnight()
     {
         gameplay_Controler.spawnUnit(knight, gameplay_Controler.selectedTile);
-        gameplay_Controler.selectTile(gameplay_Controler.selectedTile);
+        gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
     }
 
     public void spawnCity()
     {
         gameplay_Controler.spawnCity(city, gameplay_Controler.selectedTile);
-        gameplay_Controler.selectTile(gameplay_Controler.selectedTile);
+        gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
+    }
+
+    public void SpawnEnemy()
+    {
+        gameplay_Controler.spawnUnit(enemy, gameplay_Controler.selectedTile, 1);
+        gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
     }
 }

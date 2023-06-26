@@ -16,10 +16,11 @@ public class Player : MonoBehaviour
     public List<GameObject> possibleUnits;
 
     public Techtree techtree;
-    public void startNextRound()
+    public virtual void startNextRound()
     {
         foreach (Unit unit in allUnits)
         {
+            unit.GetComponent<UnitAiBase>().MoveUnit();
             unit.nextRound();
         }
 
@@ -30,11 +31,8 @@ public class Player : MonoBehaviour
             tempScience += city.cityResouces.science;
             city.nextTurn();
         }
-        
-        science = tempScience;
-
-        techtree.nextTurn(science);
     }
+
 
 
     public void updateTech(TechNode tech)

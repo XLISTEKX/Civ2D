@@ -51,7 +51,7 @@ public class Tile_City : Tile, IPointerClickHandler
     {
         if (canClick)
         {
-            GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().selectTile(this);
+            GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().SelectTile(this);
         }
             
     }

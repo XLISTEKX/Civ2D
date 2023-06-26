@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 1555054181660894265}
   - component: {fileID: 256943294409034726}
   - component: {fileID: 3777762608703786774}
+  - component: {fileID: 6699375322151171231}
   m_Layer: 0
   m_Name: Settler
   m_TagString: Untagged
@@ -520,3 +521,15 @@ MonoBehaviour:
   actionsIcons:
   - {fileID: -285425464, guid: 0782bc07f0f50b840a4cd9d5885e5151, type: 3}
   city: {fileID: 8982488041898318113, guid: 2932c726db144b34999cc3c2935e9c9f, type: 3}
+--- !u!114 &6699375322151171231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7754086547817741617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6868a50c2c988b42b74220b00243ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

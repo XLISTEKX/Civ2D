@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
 
     public int movementRange;
     public int movementLeft;
+    public int attackRange;
 
     public int productionCost;
     public Sprite unitSprite;
@@ -33,7 +34,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         movementLeft = movementRange;
     }
 
-    public void initUnit(Player player)
+    public virtual void initUnit(Player player)
     {
         owner = player;
         updateUI();
@@ -85,5 +86,6 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         {
             killUnit();
         }
+        updateUI();
     }
 }

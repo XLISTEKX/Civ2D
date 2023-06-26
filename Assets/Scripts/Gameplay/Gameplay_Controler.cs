@@ -51,7 +51,7 @@ public class Gameplay_Controler : MonoBehaviour
     public void startNewTurn()
     {
         turn++;
-        selectTile(null);
+        SelectTile(null);
         foreach (Player player in players)
         {
             player.startNextRound();
@@ -59,7 +59,7 @@ public class Gameplay_Controler : MonoBehaviour
         uI_Controler.nextTurn(turn);
     }
 
-    public void selectTile(Tile newSelected)
+    public void SelectTile(Tile newSelected)
     {
         if (!canClick)
             return;
@@ -69,22 +69,22 @@ public class Gameplay_Controler : MonoBehaviour
         {
             if (selectedTile.getType() == 1)
             {
-                if (selectedTile.unitOnTile != null && newSelected == selectedTile)
+                if (selectedTile.unitOnTile != null && selectedTile.unitOnTile.owner == players[0] && newSelected == selectedTile)
                 {
                     if (unitMoves != null)
                     {
-                        removeInitUnitMove();
+                        RemoveInitUnitMove();
                     }
                     else
                     {
-                        initUnitMove();
+                        InitUnitMove();
                     }
                     uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
                     
                 }
                 else
                 {
-                    if(selectedTile.unitOnTile != null)
+                    if(selectedTile.unitOnTile != null && selectedTile.unitOnTile.owner == players[0])
                     {
                         if (unitMoves == null)
                         {
@@ -94,19 +94,28 @@ public class Gameplay_Controler : MonoBehaviour
                         }
                         if (unitMoves.Contains(newSelected))
                         {
-                            moveUnit(selectedTile, newSelected);
-                            selectedTile = null;
+                            if(MoveUnit(selectedTile, newSelected))
+                            {
+                                RemoveInitUnitMove();
+                                selectedTile = null;
+                            }
+                            else
+                            {
+                                RemoveInitUnitMove();
+                                InitUnitMove();
+                            }
+                            
                         }
                         else
                         {
-                            removeInitUnitMove();
-                            selectNewTile(newSelected);
+                            RemoveInitUnitMove();
+                            SelectNewTile(newSelected);
                         }
                         
                         return;
                     }
                     if (unitMoves != null)
-                        removeInitUnitMove();
+                        RemoveInitUnitMove();
 
                     uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
                     selectedTile = null;
@@ -120,29 +129,37 @@ public class Gameplay_Controler : MonoBehaviour
                 selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
 
                 if (unitMoves != null)
-                    removeInitUnitMove();
+                    RemoveInitUnitMove();
 
                 selectedTile = null;
                 return;
             }
 
-            if (selectedTile.unitOnTile != null)
+            if (selectedTile.unitOnTile != null && selectedTile.unitOnTile.owner == players[0])
             {
                 if (unitMoves.Contains(newSelected))
                 {
-                    moveUnit(selectedTile, newSelected);
-                    selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                    if(MoveUnit(selectedTile, newSelected))
+                    {
+                        RemoveInitUnitMove();
+                        selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                    }
+                    else
+                    {
+                        RemoveInitUnitMove();
+                        InitUnitMove();
+                    }
                     return;
                 }
-                removeInitUnitMove();
-                selectNewTile(newSelected);
+                RemoveInitUnitMove();
+                SelectNewTile(newSelected);
                 return;
             }
         }
-        selectNewTile(newSelected);
+        SelectNewTile(newSelected);
         
     }
-    void selectNewTile(Tile newSelected)
+    void SelectNewTile(Tile newSelected)
     {
         if (selectedTile != null)
             selectedTile.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
@@ -157,16 +174,16 @@ public class Gameplay_Controler : MonoBehaviour
             uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
             return;
         }
-        if (!newSelected.block && newSelected.owner == null)
+        if (!newSelected.block && newSelected.owner == null && newSelected.unitOnTile == null)
             cheats_panel.SetActive(true);
 
         selectedTile.GetComponent<SpriteRenderer>().color = new Color(1,0,0,0.7f);
 
-        if (selectedTile.unitOnTile != null)
-            initUnitMove();
+        if (selectedTile.unitOnTile != null && selectedTile.unitOnTile.owner == players[0])
+            InitUnitMove();
         
     }
-    void initUnitMove()
+    void InitUnitMove()
     {
         selectUnitUI.gameObject.SetActive(true);
         selectUnitUI.updateUI(selectedTile.unitOnTile);
@@ -175,19 +192,22 @@ public class Gameplay_Controler : MonoBehaviour
 
         foreach (Tile tile in unitMoves)
         {
+            SpriteRenderer renderer = tile.GetComponent<SpriteRenderer>();
+
             if (tile.unitOnTile != null)
             {
-                if (tile.unitOnTile.owner == players[0])
+                if (tile.unitOnTile.owner.ID != 0)
                 {
-                    tile.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.6f);
-                    continue;
+                    renderer.color = new Color(1, 0, 0, 0.9f);
+
                 }
+                continue;
             }
 
-            tile.GetComponent<SpriteRenderer>().color -= new Color(0,0,0, 0.4f);
+            renderer.color -= new Color(0,0,0, 0.4f);
         }
     }
-    void removeInitUnitMove()
+    void RemoveInitUnitMove()
     {
         selectUnitUI.gameObject.SetActive(false);
 
@@ -197,17 +217,26 @@ public class Gameplay_Controler : MonoBehaviour
         }
         unitMoves = null;
     }
-    void moveUnit(Tile start, Tile destination)
+    public static bool MoveUnit(Tile start, Tile destination)
     {
+        Unit firstUnit = start.unitOnTile;
+        int distanceU = distance(axisToCube(start.position), axisToCube(destination.position));
+        if (destination.unitOnTile != null)
+        {
+            if(distanceU <= firstUnit.attackRange)
+            {
+                destination.unitOnTile.takeDamage(firstUnit.damage);
+                firstUnit.movementLeft = 0;
+            }
+            return false;
+        }
 
-        start.unitOnTile.movementLeft -= distance(axisToCube(start.position), axisToCube(destination.position));
-        start.unitOnTile.moveUnit(destination);
-        destination.unitOnTile = start.unitOnTile;
+        firstUnit.movementLeft -= distanceU;
+        firstUnit.moveUnit(destination);
+        destination.unitOnTile = firstUnit;
         start.unitOnTile = null;
-        start.block = false;
-        destination.block = true;
-        removeInitUnitMove();
-
+        return true;
+        
     }
 
     public bool isNeighborOwnerTile(Tile start)
@@ -258,10 +287,10 @@ public class Gameplay_Controler : MonoBehaviour
 
     public Tile[] findMovesInRange(Tile startTile, int range)
     {
-        List<Tile> visitedTiles = new List<Tile>();
+        List<Tile> visitedTiles = new ();
         //visitedTiles.Add(startTile);
 
-        List<List<Tile>> fringes = new List<List<Tile>>();
+        List<List<Tile>> fringes = new();
         fringes.Add(new List<Tile> { startTile });
 
         for(int k = 1; k <= range; k++)
@@ -273,6 +302,15 @@ public class Gameplay_Controler : MonoBehaviour
                 {
                     if(!visitedTiles.Contains(neighbor) && !neighbor.block)
                     {
+                        if(neighbor.unitOnTile != null)
+                        {
+                            if(neighbor.unitOnTile.owner.ID != 0)
+                            {
+                                visitedTiles.Add(neighbor);
+                                fringes[k].Add(neighbor);
+                            }
+                            continue;
+                        }
                         visitedTiles.Add(neighbor);
                         fringes[k].Add(neighbor);
                     }
@@ -363,7 +401,6 @@ public class Gameplay_Controler : MonoBehaviour
         tempUnit.initUnit(players[playerID]);
         players[playerID].allUnits.Add(tempUnit);
         location.unitOnTile = tempUnit;
-        location.block = true;
     }
 
     public void spawnCity(GameObject city, Tile location, int playerID = 0)

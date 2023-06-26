@@ -14,7 +14,7 @@ public class Unit_Settlers : Unit
             return;
 
         gameplay.spawnCity(city, gameplay.selectedTile, owner.ID);
-        gameplay.selectTile(null);
+        gameplay.SelectTile(null);
 
         Destroy(gameObject);
     }
