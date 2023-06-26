@@ -14,19 +14,19 @@ public class Gameplay_Cheats_Controler : MonoBehaviour
 
     public void spawnKnight()
     {
-        gameplay_Controler.spawnUnit(knight, gameplay_Controler.selectedTile);
+        gameplay_Controler.SpawnUnit(knight, gameplay_Controler.selectedTile);
         gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
     }
 
     public void spawnCity()
     {
-        gameplay_Controler.spawnCity(city, gameplay_Controler.selectedTile);
+        gameplay_Controler.SpawnCity(city, gameplay_Controler.selectedTile);
         gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
     }
 
     public void SpawnEnemy()
     {
-        gameplay_Controler.spawnUnit(enemy, gameplay_Controler.selectedTile, 1);
+        gameplay_Controler.SpawnUnit(enemy, gameplay_Controler.selectedTile, 1);
         gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
     }
     public void SpawnCave()

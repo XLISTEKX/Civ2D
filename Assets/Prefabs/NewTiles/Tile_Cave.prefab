@@ -242,6 +242,6 @@ MonoBehaviour:
   biom: 0
   block: 0
   owner: {fileID: 0}
-  cooldown: 3
+  cooldown: 5
   unitPrefabs:
   - {fileID: 7754086547817741617, guid: 3561cb89970b1ae48b5905ab867b68a7, type: 3}

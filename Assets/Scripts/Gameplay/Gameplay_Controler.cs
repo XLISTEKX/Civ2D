@@ -20,12 +20,17 @@ public class Gameplay_Controler : MonoBehaviour
     public bool canClick = true;
     public int turn = 0;
 
-    static Vector3Int[] cubeDirections = { new Vector3Int(1, 0, -1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
+    public static Vector3Int[] cubeDirections = { new Vector3Int(1, 0, -1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
 
 
     private void Start()
     {
         initPlayer(0);
+    }
+
+    public static Gameplay_Controler GetControler()
+    {
+        return GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
     }
 
     void initPlayer(int playerID)
@@ -45,7 +50,7 @@ public class Gameplay_Controler : MonoBehaviour
                 tile = null;
         }
 
-        spawnUnit(settler, tile, playerID);
+        SpawnUnit(settler, tile, playerID);
         Camera.main.transform.position += new Vector3(tile.transform.position.x, tile.transform.position.y);
     }
 
@@ -427,7 +432,7 @@ public class Gameplay_Controler : MonoBehaviour
     } 
 
 
-    public void spawnUnit(GameObject unit, Tile location, int playerID = 0) 
+    public GameObject SpawnUnit(GameObject unit, Tile location, int playerID = 0) 
     {
         GameObject temp = Instantiate(unit, location.transform.position, unit.transform.rotation);
         temp.transform.SetParent(location.transform);
@@ -435,9 +440,17 @@ public class Gameplay_Controler : MonoBehaviour
         tempUnit.initUnit(players[playerID]);
         players[playerID].allUnits.Add(tempUnit);
         location.unitOnTile = tempUnit;
-    }
 
-    public void spawnCity(GameObject city, Tile location, int playerID = 0)
+        return temp;
+    }
+    public void SpawnTile(GameObject tile, Tile location)
+    {
+        Tile tiles = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<Tile>();
+        grid_Controler.tiles[location.position.x, location.position.y] = tiles;
+        tiles.initTile(location.position);
+        Destroy(location.gameObject);
+    }
+    public void SpawnCity(GameObject city, Tile location, int playerID = 0)
     {
         Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
         cityTile.initCityTile(location.position, players[playerID]);

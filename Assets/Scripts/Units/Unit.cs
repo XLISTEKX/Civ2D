@@ -7,23 +7,31 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour, IProduct, IDamageable
 {
-    public int health;
+    [Header("Health System")]
+    
     public int maxHealth;
+    [HideInInspector] public int health;
     public int damage;
 
+    [Space(20)]
+    [Header("Movement System")]
     public int movementRange;
-    public int movementLeft;
+    [HideInInspector] public int movementLeft;
     public int attackRange;
+    [HideInInspector] public bool canAttack = true;
 
+    [Space(20)]
+    [Header("Production:")]
     public int productionCost;
     public Sprite unitSprite;
-
-    public bool canAttack = true;
-
+    [Space(20)]
+    [Header("Settings")]
     [SerializeField] Image[] unitColors; //0 - Out, 1 - In
     [SerializeField] TMP_Text textHP;
-    public Player owner;
+    [HideInInspector] public Player owner;
 
+    [Space(20)]
+    [Header("Actions")]
     public UnityEvent[] actions;
     public Sprite[] actionsIcons;
     public void moveUnit(Tile destination)
@@ -39,6 +47,8 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
 
     public virtual void initUnit(Player player)
     {
+        health = maxHealth;
+        movementLeft = movementRange;
         owner = player;
         updateUI();
     }
@@ -55,7 +65,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         textHP.text = health.ToString();
     }
 
-    void killUnit()
+    public virtual void KillUnit()
     {
         owner.allUnits.Remove(this);
         Destroy(gameObject);
@@ -74,7 +84,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
     {
         Gameplay_Controler gameplay_Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
 
-        gameplay_Controler.spawnUnit(gameObject, city, city.owner.ID);
+        gameplay_Controler.SpawnUnit(gameObject, city, city.owner.ID);
     }
     public int type()
     {
@@ -87,7 +97,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
 
         if(health <= 0)
         {
-            killUnit();
+            KillUnit();
         }
         updateUI();
     }

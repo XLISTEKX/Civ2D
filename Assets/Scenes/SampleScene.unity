@@ -7788,6 +7788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faec73d52c484ae41af4db595e481d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camp: {fileID: 8055800620397872444, guid: 445be63386d33f949b2bc5079c195883, type: 3}
   tileOcean: {fileID: 2652924183118149419, guid: 1d094c0627bb7184eb9f9c9abe8025a1, type: 3}
   tileWater: {fileID: 2652924183118149419, guid: 1d094c0627bb7184eb9f9c9abe8025a1, type: 3}
   tileDesert:
@@ -7815,6 +7816,9 @@ MonoBehaviour:
   tileSpecialPlains:
   - {fileID: 5951085379296312442, guid: 243a4ffa92721564d8b7494311368c96, type: 3}
   - {fileID: 2899213235557728245, guid: 4cf191f6fe5801f4cb89ae7d7b54fa93, type: 3}
+  mountainsRate: 0.005
+  campsRate: 0.002
+  maxMountainsTiles: 6
   borders:
   - {fileID: 1609106463725888694, guid: feacab6d27d2c6246ad2c4f6070b5b53, type: 3}
   - {fileID: 7711548039669834864, guid: a7f3c8f88b9c572438107ed167d3cc26, type: 3}
@@ -7825,6 +7829,7 @@ MonoBehaviour:
   grid: {fileID: 226606856}
   column: 80
   row: 50
+  landTiles: []
   noiseOffset: {x: 0, y: 0}
 --- !u!114 &1301860842
 MonoBehaviour:

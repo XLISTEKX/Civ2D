@@ -13,7 +13,7 @@ public class Unit_Settlers : Unit
         if (gameplay.isNeighborOwnerTile(gameplay.selectedTile))
             return;
 
-        gameplay.spawnCity(city, gameplay.selectedTile, owner.ID);
+        gameplay.SpawnCity(city, gameplay.selectedTile, owner.ID);
         gameplay.SelectTile(null);
 
         Destroy(gameObject);
