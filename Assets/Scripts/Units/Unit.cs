@@ -18,6 +18,8 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
     public int productionCost;
     public Sprite unitSprite;
 
+    public bool canAttack = true;
+
     [SerializeField] Image[] unitColors; //0 - Out, 1 - In
     [SerializeField] TMP_Text textHP;
     public Player owner;
@@ -32,6 +34,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
     public void nextRound()
     {
         movementLeft = movementRange;
+        canAttack = true;
     }
 
     public virtual void initUnit(Player player)

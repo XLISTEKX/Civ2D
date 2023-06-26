@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gameplay_Cheats_Controler : MonoBehaviour
 {
-    [SerializeField] GameObject knight, city, enemy;
+    [SerializeField] GameObject knight, city, enemy, cave;
     Gameplay_Controler gameplay_Controler;
 
     private void Start()
@@ -27,6 +27,11 @@ public class Gameplay_Cheats_Controler : MonoBehaviour
     public void SpawnEnemy()
     {
         gameplay_Controler.spawnUnit(enemy, gameplay_Controler.selectedTile, 1);
+        gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
+    }
+    public void SpawnCave()
+    {
+        gameplay_Controler.SpawnCamp(cave, gameplay_Controler.selectedTile, 1);
         gameplay_Controler.SelectTile(gameplay_Controler.selectedTile);
     }
 }

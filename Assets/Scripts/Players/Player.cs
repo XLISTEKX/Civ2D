@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public List<GameObject> possibleUnits;
 
     public Techtree techtree;
-    public virtual void startNextRound()
+    public virtual void StartNextRound()
     {
         foreach (Unit unit in allUnits)
         {
@@ -27,9 +27,10 @@ public class Player : MonoBehaviour
         int tempScience = 0;
         foreach (Tile_City city in allCities)
         {
-            money += city.cityResouces.cash;
-            tempScience += city.cityResouces.science;
-            city.nextTurn();
+            ResourcesTile resources = city.GetResources();
+            money += resources.cash;
+            tempScience += resources.science;
+            city.StartNextTurn();
         }
     }
 

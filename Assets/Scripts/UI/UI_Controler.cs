@@ -77,10 +77,13 @@ public class UI_Controler : MonoBehaviour
     {
         int money_gain = 0;
         int science = 0;
+
         foreach (Tile_City city in player.allCities)
         {
-            money_gain += city.cityResouces.cash;
-            science += city.cityResouces.science;
+            ResourcesTile resources = city.GetResources();
+
+            money_gain += resources.cash;
+            science += resources.science;
         }
 
         resourcesText[0].text = player.money + "+" + money_gain;

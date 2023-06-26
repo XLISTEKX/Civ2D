@@ -47,3 +47,16 @@ public interface IDamageable
     }
 }
 
+public interface ITurnCity
+{
+    public void StartNextTurn()
+    {
+
+    }
+
+    public ResourcesTile GetResources()
+    {
+        return null;
+    }
+}
+

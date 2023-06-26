@@ -53,7 +53,7 @@ public class Grid_Controler : MonoBehaviour
             tiles = null;
         }
         noiseOffset = new Vector2Int(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
-        magnitudeOffset = Random.Range(5f, 7f);
+        magnitudeOffset = Random.Range(7f, 9f);
         biomsOffset = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
         magnitudeBiom = Random.Range(40f, 45f);
 

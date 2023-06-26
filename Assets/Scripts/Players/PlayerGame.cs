@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGame : Player
 {
-    public override void startNextRound()
+    public override void StartNextRound()
     {
         foreach (Unit unit in allUnits)
         {
@@ -14,9 +14,10 @@ public class PlayerGame : Player
         int tempScience = 0;
         foreach (Tile_City city in allCities)
         {
-            money += city.cityResouces.cash;
-            tempScience += city.cityResouces.science;
-            city.nextTurn();
+            ResourcesTile resources = city.GetResources();
+            money += resources.cash;
+            tempScience += resources.science;
+            city.StartNextTurn();
         }
 
         science = tempScience;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class Gameplay_Controler : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class Gameplay_Controler : MonoBehaviour
         SelectTile(null);
         foreach (Player player in players)
         {
-            player.startNextRound();
+            player.StartNextRound();
         }
         uI_Controler.nextTurn(turn);
     }
@@ -189,6 +190,14 @@ public class Gameplay_Controler : MonoBehaviour
         selectUnitUI.updateUI(selectedTile.unitOnTile);
 
         unitMoves = findMovesInRange(selectedTile, selectedTile.unitOnTile.movementLeft);
+        
+        if(selectedTile.unitOnTile.canAttack)
+        {
+            Tile[] temp = GetUnitsInRange(selectedTile.unitOnTile);
+
+            if (temp != null)
+                unitMoves = unitMoves.Concat(temp).ToArray();
+        }
 
         foreach (Tile tile in unitMoves)
         {
@@ -227,6 +236,7 @@ public class Gameplay_Controler : MonoBehaviour
             {
                 destination.unitOnTile.takeDamage(firstUnit.damage);
                 firstUnit.movementLeft = 0;
+                firstUnit.canAttack = false;
             }
             return false;
         }
@@ -237,6 +247,30 @@ public class Gameplay_Controler : MonoBehaviour
         start.unitOnTile = null;
         return true;
         
+    }
+
+    Tile[] GetUnitsInRange(Unit unit)
+    {
+
+        if(unit.movementLeft >= unit.attackRange)
+            return null;
+
+        Tile startTile = unit.GetComponentInParent<Tile>();
+        List<Tile> returns = new();
+
+        for (int i = unit.movementLeft; i <= unit.attackRange; i++)
+        {
+            foreach(Tile tile in cubeRing(startTile, i))
+            {
+                if(tile.unitOnTile != null)
+                {
+                    if (tile.unitOnTile.owner != unit.owner)
+                        returns.Add(tile);
+                }
+            }
+        }
+
+        return returns.ToArray();
     }
 
     public bool isNeighborOwnerTile(Tile start)
@@ -427,8 +461,23 @@ public class Gameplay_Controler : MonoBehaviour
             tile.updateBorderState();
         }
         Destroy(grid_Controler.tiles[location.position.x, location.position.y].gameObject);
-
+        
         grid_Controler.tiles[location.position.x, location.position.y] = cityTile;
+        uI_Controler.updateUI();
+    }
+
+    public void SpawnCamp(GameObject camp, Tile location, int playerID = 1)
+    {
+        TileCamp campTile = Instantiate(camp, location.transform.position, camp.transform.rotation).GetComponent<TileCamp>();
+        campTile.initTile(location.position);
+        campTile.transform.SetParent(GameObject.Find("Grid").transform);
+        campTile.owner = players[playerID];
+        campTile.resources = location.resources;
+        players[playerID].gameObject.GetComponent<PlayerNeutral>().camps.Add(campTile);
+
+        Destroy(grid_Controler.tiles[location.position.x, location.position.y].gameObject);
+
+        grid_Controler.tiles[location.position.x, location.position.y] = campTile;
         uI_Controler.updateUI();
     }
 

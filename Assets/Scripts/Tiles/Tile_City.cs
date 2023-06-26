@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Tile_City : Tile, IPointerClickHandler
+public class Tile_City : Tile, IPointerClickHandler, ITurnCity
 {
 
     public string cityName;
@@ -132,7 +132,7 @@ public class Tile_City : Tile, IPointerClickHandler
         updateUI();
         
     }
-    public void nextTurn()
+    public void StartNextTurn()
     {
         if (productionQueue.Count == 0) {
             return;
@@ -147,6 +147,10 @@ public class Tile_City : Tile, IPointerClickHandler
         }
         turnsLeft = Mathf.CeilToInt((buildProduction - buildingProgress) / (float)cityResouces.production);
         updateUI();
+    }
+    public ResourcesTile GetResources()
+    {
+        return cityResouces;
     }
     void constructionComplete()
     {
