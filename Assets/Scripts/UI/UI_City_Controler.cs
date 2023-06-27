@@ -58,11 +58,11 @@ public class UI_City_Controler : MonoBehaviour
         {
             IProduct product = city.possibleBuildings[i].GetComponent<IProduct>();
 
-            float time = City.turnsToBuild(city.cityResouces.production, product.getBuildCost());
+            float time = City.turnsToBuild(city.cityResouces.production, product.GetBuildCost());
 
 
                 UI_Slot slot = Instantiate(slotPrefab, spawnSlot).GetComponent<UI_Slot>();
-                slot.initSlot(product.getImage(), time.ToString(), product.type());
+                slot.initSlot(product.GetImage(), time.ToString(), product.type());
                 int temp = i;
                 slot.GetComponent<Button>().onClick.AddListener(() => clickSlot(temp, product.type()));
                 slots.Add(slot);
@@ -98,11 +98,11 @@ public class UI_City_Controler : MonoBehaviour
             }
             else
             {
-                time = City.turnsToBuild(city.cityResouces.production, product.getBuildCost());
+                time = City.turnsToBuild(city.cityResouces.production, product.GetBuildCost());
             }
             
 
-            slot.initSlot(product.getImage(), time.ToString(), product.type());
+            slot.initSlot(product.GetImage(), time.ToString(), product.type());
             int temp = j;
             slot.GetComponent<Button>().onClick.AddListener(() => clickSlotQueue(temp));
             slotsQueue.Add(slot);

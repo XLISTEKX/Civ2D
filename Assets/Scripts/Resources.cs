@@ -21,6 +21,10 @@ public class ResourcesTile
     {
         return new ResourcesTile(x.food + y.food, x.production + y.production, x.cash + y.cash, x.science + y.science);
     }
+    public static ResourcesTile operator *(ResourcesTile x, int y)
+    {
+        return new ResourcesTile(x.food * y, x.production * y, x.cash * y, x.science * y);
+    }
     public static ResourcesTile operator -(ResourcesTile x, ResourcesTile y)
     {
         return new ResourcesTile(x.food - y.food, x.production - y.production, x.cash - y.cash, x.science - y.science);

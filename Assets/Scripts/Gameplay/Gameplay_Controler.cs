@@ -233,13 +233,16 @@ public class Gameplay_Controler : MonoBehaviour
     }
     public static bool MoveUnit(Tile start, Tile destination)
     {
+        if (start == destination)
+            return false;
+
         Unit firstUnit = start.unitOnTile;
-        int distanceU = distance(axisToCube(start.position), axisToCube(destination.position));
+        int distanceU = Distance(axisToCube(start.position), axisToCube(destination.position));
         if (destination.unitOnTile != null)
         {
             if(distanceU <= firstUnit.attackRange)
             {
-                destination.unitOnTile.takeDamage(firstUnit.damage);
+                destination.unitOnTile.TakeDamage(firstUnit.damage);
                 firstUnit.movementLeft = 0;
                 firstUnit.canAttack = false;
             }
@@ -247,7 +250,7 @@ public class Gameplay_Controler : MonoBehaviour
         }
 
         firstUnit.movementLeft -= distanceU;
-        firstUnit.moveUnit(destination);
+        firstUnit.MoveUnit(destination);
         destination.unitOnTile = firstUnit;
         start.unitOnTile = null;
         return true;
@@ -265,7 +268,7 @@ public class Gameplay_Controler : MonoBehaviour
 
         for (int i = unit.movementLeft; i <= unit.attackRange; i++)
         {
-            foreach(Tile tile in cubeRing(startTile, i))
+            foreach(Tile tile in CubeRing(startTile, i))
             {
                 if(tile.unitOnTile != null)
                 {
@@ -396,14 +399,14 @@ public class Gameplay_Controler : MonoBehaviour
         return new Vector2Int(x,y);
     }
 
-    static int distance(Vector3Int start, Vector3Int end)
+    static int Distance(Vector3Int start, Vector3Int end)
     {
         Vector3Int tempVec = start - end;
         return Mathf.Max(Mathf.Abs(tempVec.x), Mathf.Abs(tempVec.y), Mathf.Abs(tempVec.z));
     }
 
 
-    public Tile[] cubeRing(Tile startTile, int distance)
+    public Tile[] CubeRing(Tile startTile, int distance)
     {
         List<Tile> returnTiles = new List<Tile>();
         Vector3Int cubeLocation = axisToCube(startTile.position);
@@ -437,19 +440,34 @@ public class Gameplay_Controler : MonoBehaviour
         GameObject temp = Instantiate(unit, location.transform.position, unit.transform.rotation);
         temp.transform.SetParent(location.transform);
         Unit tempUnit = temp.GetComponent<Unit>();
-        tempUnit.initUnit(players[playerID]);
+        tempUnit.InitUnit(players[playerID]);
         players[playerID].allUnits.Add(tempUnit);
         location.unitOnTile = tempUnit;
 
         return temp;
     }
-    public void SpawnTile(GameObject tile, Tile location)
+    public Tile SpawnTile(GameObject tile, Tile location)
     {
         Tile tiles = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<Tile>();
         grid_Controler.tiles[location.position.x, location.position.y] = tiles;
-        tiles.initTile(location.position);
+        tiles.transform.SetParent(GameObject.Find("Grid").transform);
+        tiles.InitTile(location.position);
         Destroy(location.gameObject);
+
+        return tiles;
     }
+
+    public TileResource SpawnTileResource(GameObject tile, Tile location)
+    {
+        TileResource tiles = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<TileResource>();
+        grid_Controler.tiles[location.position.x, location.position.y] = tiles;
+        tiles.transform.SetParent(GameObject.Find("Grid").transform);
+        tiles.InitTile(location.position);
+        Destroy(location.gameObject);
+
+        return tiles;
+    }
+
     public void SpawnCity(GameObject city, Tile location, int playerID = 0)
     {
         Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
@@ -479,10 +497,10 @@ public class Gameplay_Controler : MonoBehaviour
         uI_Controler.updateUI();
     }
 
-    public void SpawnCamp(GameObject camp, Tile location, int playerID = 1)
+    public TileCamp SpawnCamp(GameObject camp, Tile location, int playerID = 1)
     {
         TileCamp campTile = Instantiate(camp, location.transform.position, camp.transform.rotation).GetComponent<TileCamp>();
-        campTile.initTile(location.position);
+        campTile.InitTile(location.position);
         campTile.transform.SetParent(GameObject.Find("Grid").transform);
         campTile.owner = players[playerID];
         campTile.resources = location.resources;
@@ -492,6 +510,8 @@ public class Gameplay_Controler : MonoBehaviour
 
         grid_Controler.tiles[location.position.x, location.position.y] = campTile;
         uI_Controler.updateUI();
+
+        return campTile;
     }
 
     public void openCity(Tile_City city)
@@ -504,7 +524,7 @@ public class Gameplay_Controler : MonoBehaviour
         Tile spawn = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<Tile>();
         spawn.transform.SetParent(GameObject.Find("Grid").transform);
         spawn.owner = city.owner;
-        spawn.initTile(location.position);
+        spawn.InitTile(location.position);
 
         grid_Controler.tiles[location.position.x, location.position.y] = spawn;
 
@@ -523,7 +543,7 @@ public class Gameplay_Controler : MonoBehaviour
 
         for(int i = 2; i <= distance + 1; i++)
         {
-            foreach (Tile exp in cubeRing(tile, i))
+            foreach (Tile exp in CubeRing(tile, i))
             {
                 if (exp.owner == null && isNeighborOwnerTile(exp))
                 {

@@ -7,11 +7,11 @@ public class DisableObjects : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Tile _))
+        if (collision.TryGetComponent(out IRenderable renderable))
         {
-            collision.GetComponent<SpriteRenderer>().enabled = true;
+            renderable.TurnRender(true);
 
-            if(collision.TryGetComponent(out Animator animator))
+            if (collision.TryGetComponent(out Animator animator))
             {
                 animator.enabled = true;
             }
@@ -19,10 +19,10 @@ public class DisableObjects : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Tile _))
+        if (collision.TryGetComponent(out IRenderable renderable))
         {
 
-            collision.GetComponent<SpriteRenderer>().enabled = false;
+            renderable.TurnRender(false);
             if (collision.TryGetComponent(out Animator animator))
             {
                 animator.enabled = false;

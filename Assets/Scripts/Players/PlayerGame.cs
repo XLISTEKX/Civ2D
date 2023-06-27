@@ -8,7 +8,7 @@ public class PlayerGame : Player
     {
         foreach (Unit unit in allUnits)
         {
-            unit.nextRound();
+            unit.NextRound();
         }
 
         int tempScience = 0;

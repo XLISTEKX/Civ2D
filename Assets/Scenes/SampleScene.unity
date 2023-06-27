@@ -931,13 +931,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146168091}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1892628172}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &146168094
 MonoBehaviour:
@@ -7789,6 +7789,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camp: {fileID: 8055800620397872444, guid: 445be63386d33f949b2bc5079c195883, type: 3}
+  resourcesWater: {fileID: 6668165939853098774, guid: 2ca43fd7937a4854095eed2343630cff, type: 3}
+  resourcesPlains: {fileID: 6668165939853098774, guid: 6934d1adafddff24fbb4f03c00402754, type: 3}
+  resourcesDesert: {fileID: 6668165939853098774, guid: 51bdd28c5b890b346ac782d42112d997, type: 3}
+  resourcesWoods: {fileID: 6668165939853098774, guid: 993477e6163ff2a409eb432eb0e333bc, type: 3}
+  resourcesFireWood: {fileID: 6668165939853098774, guid: 641e2a7a08bf1c74d8babd38a2625b53, type: 3}
+  resourcesSnow: {fileID: 6668165939853098774, guid: 1df05e612b5151948bd8f903c088efd3, type: 3}
   tileOcean: {fileID: 2652924183118149419, guid: 1d094c0627bb7184eb9f9c9abe8025a1, type: 3}
   tileWater: {fileID: 2652924183118149419, guid: 1d094c0627bb7184eb9f9c9abe8025a1, type: 3}
   tileDesert:
@@ -7812,12 +7818,13 @@ MonoBehaviour:
   - {fileID: 7585893062098410694, guid: e79eed1f55def2949b6c59f7db2cbbb7, type: 3}
   tileSpecialDesert:
   - {fileID: 2060848758444193242, guid: e9d24b0459ee0df46b7c0deaea408aeb, type: 3}
-  - {fileID: 6668165939853098774, guid: 51bdd28c5b890b346ac782d42112d997, type: 3}
   tileSpecialPlains:
   - {fileID: 5951085379296312442, guid: 243a4ffa92721564d8b7494311368c96, type: 3}
   - {fileID: 2899213235557728245, guid: 4cf191f6fe5801f4cb89ae7d7b54fa93, type: 3}
+  resourcesRate: 0.02
   mountainsRate: 0.005
   campsRate: 0.002
+  magnitudeBioms: {x: 25, y: 25}
   maxMountainsTiles: 6
   borders:
   - {fileID: 1609106463725888694, guid: feacab6d27d2c6246ad2c4f6070b5b53, type: 3}
@@ -10375,6 +10382,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843433279}
   m_CullTransparentMesh: 1
+--- !u!1 &1892628171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1892628172}
+  m_Layer: 0
+  m_Name: Players
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1892628172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892628171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1902818579}
+  - {fileID: 146168093}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1902445765
 GameObject:
   m_ObjectHideFlags: 0
@@ -10483,13 +10523,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902818577}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 1892628172}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1902818580
 MonoBehaviour:

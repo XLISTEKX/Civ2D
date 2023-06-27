@@ -11,7 +11,7 @@ public class PlayerNeutral : Player
         foreach (Unit unit in allUnits)
         {
             unit.GetComponent<UnitAiBase>().MoveUnit();
-            unit.nextRound();
+            unit.NextRound();
         }
         foreach (TileCamp camp in camps)
         {

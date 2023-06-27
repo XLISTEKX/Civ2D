@@ -9,6 +9,12 @@ public class Grid_Controler : MonoBehaviour
     public Tile[,] tiles;
     [Header("Special Tiles")]
     [SerializeField] GameObject camp;
+    [SerializeField] GameObject resourcesWater;
+    [SerializeField] GameObject resourcesPlains;
+    [SerializeField] GameObject resourcesDesert;
+    [SerializeField] GameObject resourcesWoods;
+    [SerializeField] GameObject resourcesFireWood;
+    [SerializeField] GameObject resourcesSnow;
     [Space(20)]
     [Header("Tiles: ")]
     [SerializeField] GameObject tileOcean;
@@ -23,8 +29,10 @@ public class Grid_Controler : MonoBehaviour
     [SerializeField] GameObject[] tileSpecialPlains;
     [Space(10)]
     [Header("Map Generation Settings")]
-    [SerializeField] [Range(0, 1)] float mountainsRate;
-    [SerializeField] [Range(0, 1)] float campsRate;
+    [SerializeField] [Range(0, 0.2f)] float resourcesRate;
+    [SerializeField] [Range(0, 0.2f)] float mountainsRate;
+    [SerializeField] [Range(0, 0.2f)] float campsRate;
+    [SerializeField] Vector2 magnitudeBioms;
     [SerializeField] int maxMountainsTiles;
     [Space(10)]
     public GameObject[] borders;
@@ -66,7 +74,7 @@ public class Grid_Controler : MonoBehaviour
         noiseOffset = new Vector2Int(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
         magnitudeOffset = Random.Range(7f, 9f);
         biomsOffset = new Vector2(Random.Range(-1000, 1000), Random.Range(-1000, 1000));
-        magnitudeBiom = Random.Range(40f, 45f);
+        magnitudeBiom = Random.Range(magnitudeBioms.x, magnitudeBioms.y);
 
 
         tiles = new Tile[column, row];
@@ -83,9 +91,9 @@ public class Grid_Controler : MonoBehaviour
         }
         landTiles = tilesPH.ToArray();
         positions = null;
-
-        SpawnCamps();
         SpawnMountains();
+        SpawnCamps();
+        SpawnResources();
     }
 
     void createGrid()
@@ -117,7 +125,7 @@ public class Grid_Controler : MonoBehaviour
                 Tile temp = Instantiate(spawn, offset + rightOffset * j, spawn.transform.rotation).GetComponent<Tile>();
                 temp.GetComponent<SpriteRenderer>().enabled = false;
                 temp.transform.SetParent(grid);
-                temp.initTile(new Vector2Int(j, i));
+                temp.InitTile(new Vector2Int(j, i));
                 
 
                 tiles[j, i] = temp;
@@ -136,9 +144,12 @@ public class Grid_Controler : MonoBehaviour
 
         for(int i = 0; i < tilesCount; i++)
         {
-            Tile location = landTiles[Random.Range(0, landTiles.Length)];
+            int id = Random.Range(0, landTiles.Length);
+            Tile location = landTiles[id];
 
-            gameplay.SpawnCamp(camp, location);
+            TileCamp tile = gameplay.SpawnCamp(camp, location);
+            tile.TurnRender(false);
+            landTiles[id] = tile;
         }
     }
 
@@ -162,7 +173,7 @@ public class Grid_Controler : MonoBehaviour
                     Vector3Int direction = directions[Random.Range(0, directions.Count)];
                     Vector2Int destination = Gameplay_Controler.cubeToAxis(direction + startPoint);
 
-                    if(destination.x < 0 || destination.x > column || destination.y < 0 || destination.y > row)
+                    if(destination.x < 0 || destination.x > column - 1 || destination.y < 0 || destination.y > row - 1)
                     {
                         directions.Remove(direction);
                         continue;
@@ -172,7 +183,7 @@ public class Grid_Controler : MonoBehaviour
                     if (returnTile.biom != TileBiom.Water && !fringle.Contains(returnTile.position))
                     {
                         fringle.Add(returnTile.position);
-                        gameplay.SpawnTile(tileMountain[Random.Range(0, tileMountain.Length)], returnTile);
+                        gameplay.SpawnTile(tileMountain[Random.Range(0, tileMountain.Length)], returnTile).TurnRender(false);
                         break;
                     }
                     directions.Remove(direction);
@@ -182,14 +193,46 @@ public class Grid_Controler : MonoBehaviour
 
     }
 
+    void SpawnResources()
+    {
+        int tilesCount = Mathf.FloorToInt(column * row * resourcesRate);
+
+        Gameplay_Controler gameplay = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
+
+        for (int i = 0; i < tilesCount; i++)
+        {
+            Vector2Int pos = new(Random.Range(0, column), Random.Range(0, row));
+            Tile location = tiles[pos.x, pos.y];
+
+            if(location.biom != TileBiom.Mountain && location.biom != TileBiom.None)
+            {
+                gameplay.SpawnTileResource(GetResourcePrefabByBiom(location.biom), location).TurnRender(false);
+                continue;
+            }
+            i--;
+        }
+    }
+
+
+    GameObject GetResourcePrefabByBiom(TileBiom biom)
+    {
+        return biom switch
+        {
+            TileBiom.Water => resourcesWater,
+            TileBiom.Desert => resourcesDesert,
+            TileBiom.Woods => resourcesWoods,
+            TileBiom.Plains => resourcesPlains,
+            TileBiom.Snow => resourcesSnow,
+            TileBiom.FireWood => resourcesFireWood,
+            _ => null,
+        };
+    }
+
     GameObject getBiomVariant(int Biom)
     {
         int temp;
         switch(Biom)
         {
-            case -1:
-                return null;
-
             case 0:
                 return tileOcean;
             case 1:
@@ -236,21 +279,13 @@ public class Grid_Controler : MonoBehaviour
         float perlin = Mathf.PerlinNoise((x + noiseOffset.x) / magnitudeOffset, (y + noiseOffset.y) / magnitudeOffset);
         float perlin_clamped = Mathf.Clamp(perlin, 0f, 1f);
 
-        switch (perlin_clamped)
+        return perlin_clamped switch
         {
-            case >= 0.45f:
-                return 2;
-
-            case >= 0.40f:
-                return 1;
-
-            case < 0.4f:
-                return 0;
-
-            default:
-                return 0;
-        }
-         
+            >= 0.45f => 2,
+            >= 0.40f => 1,
+            < 0.4f => 0,
+            _ => 0,
+        };
     }
 
     int[,] generateLandMap(int col, int row)
@@ -319,22 +354,16 @@ public class Grid_Controler : MonoBehaviour
 
         perlinNoise *= biomsCount;
 
-        switch(perlinNoise)
+        return perlinNoise switch
         {                       // 0 - Desert; 1 - Plains; 2 - Woods; 3 - FireWoods; 4 - Snow;
-            case <= 0.75f:
-                return 0;
-            case <= 2f:
-                return 1;
-            case <= 2.75f:
-                return 2;
-            case <= 3f:
-                return 1;
-            case <= 4f:
-                return 3;
-            case <= 5f:
-                return 4;
-        }
-        return 0;
+            <= 0.85f => 0,
+            <= 1.5f => 1,
+            <= 2.25f => 2,
+            <= 2.50f => 1,
+            <= 3.25f => 3,
+            <= 5f => 4,
+            _ => 0,
+        };
     }
 
     int[,] addMaps(int[,] item1, int[,] item2)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileCamp: Tile, ITurnCity
+public class TileCamp: Tile, ITurnCity, IRenderable
 {
     public int cooldown = 1;
     public int maxMobs = 1;
@@ -43,11 +43,15 @@ public class TileCamp: Tile, ITurnCity
         return new(0, 0, 0, 0);
     }
 
-    public override void initTile(Vector2Int position)
+    public override void InitTile(Vector2Int position)
     {
-        base.initTile(position);
+        base.InitTile(position);
 
         maxCooldown = cooldown;
     }
-
+    public override void TurnRender(bool turn)
+    {
+        GetComponent<SpriteRenderer>().enabled = turn;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = turn;
+    }
 }

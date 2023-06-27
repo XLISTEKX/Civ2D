@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public interface ISelectable
+public interface IRenderable
 {
-    public void select()
+    public void TurnRender(bool turn)
     {
 
     }
@@ -10,15 +10,15 @@ public interface ISelectable
 
 public interface IProduct
 {
-    public int getBuildCost()
+    public int GetBuildCost()
     {
         return 0;
     }
-    public Sprite getImage()
+    public Sprite GetImage()
     {
         return null;
     }
-    public void construct(Tile_City city)
+    public void Construct(Tile_City city)
     {
 
     }
@@ -31,17 +31,20 @@ public interface IProduct
 
 public enum TileBiom
 {
+    None,
     Ocean,
     Water,
     Desert,
     Woods,
     Plains,
+    Snow,
+    FireWood,
     Mountain,
 }
 
 public interface IDamageable
 {
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
 
     }

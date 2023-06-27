@@ -9,15 +9,15 @@ public class Building : MonoBehaviour, IProduct
     public Sprite buildingSprite;
     public int typeN;
 
-    public int getBuildCost()
+    public int GetBuildCost()
     {
         return buildCost;
     }
-    public Sprite getImage()
+    public Sprite GetImage()
     {
         return buildingSprite;
     }
-    public virtual void construct(Tile_City city)
+    public virtual void Construct(Tile_City city)
     {
         city.cityResouces += new ResourcesTile((short)resources.x, (short)resources.y, (short)resources.z, (short) resources.w);
     }

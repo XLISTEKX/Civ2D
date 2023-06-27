@@ -77,7 +77,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
         if(productionQueue.Count == 1)
         {
             
-            buildProduction = productionQueue[0].GetComponent<IProduct>().getBuildCost();
+            buildProduction = productionQueue[0].GetComponent<IProduct>().GetBuildCost();
             turnsLeft = Mathf.CeilToInt((buildProduction - buildingProgress) / (float)cityResouces.production);
         }
         updateUI();
@@ -93,7 +93,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
             constructionTurnLeft.text = "";
             return;
         }
-        constructionImage.sprite = productionQueue[0].GetComponent<IProduct>().getImage();
+        constructionImage.sprite = productionQueue[0].GetComponent<IProduct>().GetImage();
         constructionTurnLeft.text = turnsLeft.ToString();
     }
 
@@ -125,7 +125,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
 
         if (ID == 0 && productionQueue.Count != 0)
         {
-            buildProduction = productionQueue[0].GetComponent<IProduct>().getBuildCost();
+            buildProduction = productionQueue[0].GetComponent<IProduct>().GetBuildCost();
             turnsLeft = Mathf.CeilToInt((buildProduction - buildingProgress) / (float)cityResouces.production);
         }
 
@@ -155,7 +155,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
     void constructionComplete()
     {
         IProduct product = productionQueue[0].GetComponent<IProduct>();
-        product.construct(this);
+        product.Construct(this);
 
         switch (product.type())
         {
@@ -171,7 +171,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
 
         if(productionQueue.Count != 0)
         {
-            buildProduction = productionQueue[0].GetComponent<IProduct>().getBuildCost();
+            buildProduction = productionQueue[0].GetComponent<IProduct>().GetBuildCost();
         }
     }
    

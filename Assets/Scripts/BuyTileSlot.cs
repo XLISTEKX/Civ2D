@@ -30,7 +30,7 @@ public class BuyTileSlot : MonoBehaviour, IPointerClickHandler
             Gameplay_Controler gameplay = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
             tile.owner = player;
             tile.updateBorderState();
-            foreach (Tile tiles in gameplay.cubeRing(tile, 1))
+            foreach (Tile tiles in gameplay.CubeRing(tile, 1))
             {
                 tiles.updateBorderState();
             }

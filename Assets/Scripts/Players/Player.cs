@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         foreach (Unit unit in allUnits)
         {
             unit.GetComponent<UnitAiBase>().MoveUnit();
-            unit.nextRound();
+            unit.NextRound();
         }
 
         int tempScience = 0;

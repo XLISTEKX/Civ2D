@@ -26,43 +26,41 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
     public Sprite unitSprite;
     [Space(20)]
     [Header("Settings")]
-    [SerializeField] Image[] unitColors; //0 - Out, 1 - In
-    [SerializeField] TMP_Text textHP;
+    [SerializeField] Image unitIcon;
+    [SerializeField] Slider healthBar;
     [HideInInspector] public Player owner;
 
     [Space(20)]
     [Header("Actions")]
     public UnityEvent[] actions;
     public Sprite[] actionsIcons;
-    public void moveUnit(Tile destination)
+    public void MoveUnit(Tile destination)
     {
         transform.SetParent(destination.transform);
         transform.localPosition = Vector3.zero;
     }
-    public void nextRound()
+    public void NextRound()
     {
         movementLeft = movementRange;
         canAttack = true;
     }
 
-    public virtual void initUnit(Player player)
+    public virtual void InitUnit(Player player)
     {
         health = maxHealth;
         movementLeft = movementRange;
         owner = player;
-        updateUI();
+        UpdateUI();
     }
 
-    void updateUI()
+    void UpdateUI()
     {
         Color color = owner.color;
-        color.a = 1f;
 
-        unitColors[0].color = color;
-        color.a = 0.75f;
-        unitColors[1].color = color;
+        unitIcon.color = color;
 
-        textHP.text = health.ToString();
+        healthBar.value = health / (float) maxHealth;
+        healthBar.fillRect.GetComponent<Image>().color = ColorsInfo.GetColorByHealth(health, maxHealth);
     }
 
     public virtual void KillUnit()
@@ -72,15 +70,15 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
 
     }
 
-    public int getBuildCost()
+    public int GetBuildCost()
     {
         return productionCost;
     }
-    public Sprite getImage()
+    public Sprite GetImage()
     {
         return unitSprite;
     }
-    public void construct(Tile_City city)
+    public void Construct(Tile_City city)
     {
         Gameplay_Controler gameplay_Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
 
@@ -91,7 +89,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         return 1;
     }
 
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
 
@@ -99,6 +97,6 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         {
             KillUnit();
         }
-        updateUI();
+        UpdateUI();
     }
 }

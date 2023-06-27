@@ -103,7 +103,7 @@ MonoBehaviour:
   maxResources: 03000000020000000000000001000000
   minResources: 01000000000000000000000001000000
   position: {x: 0, y: 0}
-  biom: 3
+  biom: 5
   block: 0
   owner: {fileID: 0}
 --- !u!60 &1971211204860624893

@@ -6,15 +6,15 @@ public class Building_Tile : Tile, IProduct
 {
     public int buildingCost;
 
-    public int getBuildCost()
+    public int GetBuildCost()
     {
         return buildingCost;
     }
-    public Sprite getImage()
+    public Sprite GetImage()
     {
         return GetComponent<SpriteRenderer>().sprite;
     }
-    public void construct(Tile_City city)
+    public void Construct(Tile_City city)
     {
         city.buildLocations[0].Construct();
     }
@@ -27,7 +27,7 @@ public class Building_Tile : Tile, IProduct
     {
         return 2;
     }
-    public override void initTile(Vector2Int position)
+    public override void InitTile(Vector2Int position)
     {
         this.position = position;
         name = "Tile(" + this.position.x + "," + this.position.y + ")";

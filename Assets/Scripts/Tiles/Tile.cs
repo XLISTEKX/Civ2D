@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IRenderable
 {
     public Unit unitOnTile;
     public ResourcesTile resources;
@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         return 0;
     }
 
-    public virtual void initTile(Vector2Int position)
+    public virtual void InitTile(Vector2Int position)
     {
         resources = new ResourcesTile(Random.Range(minResources[0], maxResources[0] + 1), Random.Range(minResources[1], maxResources[1] + 1), Random.Range(minResources[2], maxResources[2] + 1), Random.Range(minResources[3], maxResources[3] + 1));
         this.position = position;
@@ -107,6 +107,11 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
         }
 
+    }
+
+    public virtual void TurnRender(bool turn)
+    {
+        GetComponent<SpriteRenderer>().enabled = turn;
     }
 
     /*public void changeVisibility(bool hide)

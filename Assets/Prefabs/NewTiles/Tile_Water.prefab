@@ -101,10 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitOnTile: {fileID: 0}
   tileCost: 100
-  maxResources: 00000000000000000200000000000000
-  minResources: 00000000000000000100000000000000
+  maxResources: 03000000000000000200000000000000
+  minResources: 01000000000000000100000000000000
   position: {x: 0, y: 0}
-  biom: 1
+  biom: 2
   block: 1
   owner: {fileID: 0}
 --- !u!60 &7470030525140699103
