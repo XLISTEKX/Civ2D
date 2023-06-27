@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 public class Gameplay_Controler : MonoBehaviour
 {
@@ -471,7 +470,7 @@ public class Gameplay_Controler : MonoBehaviour
     public void SpawnCity(GameObject city, Tile location, int playerID = 0)
     {
         Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
-        cityTile.initCityTile(location.position, players[playerID]);
+        cityTile.InitCityTile(location.position, players[playerID]);
         cityTile.transform.SetParent(GameObject.Find("Grid").transform);
 
         cityTile.resources = location.resources;

@@ -18,7 +18,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
     public List<TileConstruction> buildLocations = new();
     public List<Tile> cityTiles = new();
     
-    [SerializeField] TMP_Text text_cityName;
+    [SerializeField] TMP_Text text_cityName, text_pop;
     [SerializeField] Image constructionImage,panelColor;
     [SerializeField] Sprite gearImage;
     [SerializeField] TMP_Text constructionTurnLeft;
@@ -26,8 +26,11 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
     public int buildingProgress;
     public int buildProduction;
 
+    public int popProgress;
+    int popProgressMax = 50;
+
     public int turnsLeft;
-    public void initCityTile(Vector2Int position, Player owner)
+    public void InitCityTile(Vector2Int position, Player owner)
     {
         this.owner = owner;
         this.position = position;
@@ -36,7 +39,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
 
         possibleBuildings = new List<GameObject>(owner.possibleBuildings);
         possibleUnits = new List<GameObject>(owner.possibleUnits);
-        updateUI();
+        UpdateUI();
         
 
 
@@ -56,7 +59,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
             
     }
 
-    public void addToQueue(int id, int listID)
+    public void AddToQueue(int id, int listID)
     {
         switch (listID)
         {
@@ -80,12 +83,13 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
             buildProduction = productionQueue[0].GetComponent<IProduct>().GetBuildCost();
             turnsLeft = Mathf.CeilToInt((buildProduction - buildingProgress) / (float)cityResouces.production);
         }
-        updateUI();
+        UpdateUI();
     }
-    void updateUI()
+    void UpdateUI()
     {
         text_cityName.text = cityName;
         panelColor.color = owner.color - new Color(0,0,0,0.45f);
+        text_pop.text = population.ToString();
 
         if (productionQueue.Count == 0)
         {
@@ -97,7 +101,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
         constructionTurnLeft.text = turnsLeft.ToString();
     }
 
-    public void removeFromQueue(int ID)
+    public void RemoveFromQueue(int ID)
     {
         IProduct product = productionQueue[ID].GetComponent<IProduct>();
 
@@ -129,30 +133,60 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
             turnsLeft = Mathf.CeilToInt((buildProduction - buildingProgress) / (float)cityResouces.production);
         }
 
-        updateUI();
+        UpdateUI();
         
     }
     public void StartNextTurn()
     {
-        if (productionQueue.Count == 0) {
+        UpdatePopulation();
+
+        if (productionQueue.Count == 0)
+        {
+            UpdateUI();
             return;
         }
+            
+
         int temp = cityResouces.production;
 
         buildingProgress += temp;
 
         if(buildingProgress >= buildProduction)
         {
-            constructionComplete();
+            ConstructionComplete();
         }
         turnsLeft = Mathf.CeilToInt((buildProduction - buildingProgress) / (float)cityResouces.production);
-        updateUI();
+        UpdateUI();
     }
+
+    public void UpdatePopulation()
+    {
+        popProgress += cityResouces.food;
+
+        if(popProgress >= popProgressMax)
+        {
+            GrowPopulation(1);
+            popProgress = 0;
+        }
+        else if(popProgress <= -popProgressMax)
+        {
+            GrowPopulation(-1);
+            popProgress = 0;
+        }
+    }
+
+    public void GrowPopulation(int ammount)
+    {
+        population += ammount;
+
+        cityResouces.food -= (short)(ammount * City.GetPopCost());
+    }
+
     public ResourcesTile GetResources()
     {
         return cityResouces;
     }
-    void constructionComplete()
+    void ConstructionComplete()
     {
         IProduct product = productionQueue[0].GetComponent<IProduct>();
         product.Construct(this);

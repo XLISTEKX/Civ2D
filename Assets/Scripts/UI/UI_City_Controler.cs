@@ -48,13 +48,15 @@ public class UI_City_Controler : MonoBehaviour
     {
         destroyUI();
 
-        cityTexts[0].text = "+" + city.cityResouces.food.ToString();
-        cityTexts[1].text = "+" + city.cityResouces.cash.ToString();
-        cityTexts[2].text = "+" + city.cityResouces.production.ToString();
-        cityTexts[3].text = "+" + city.cityResouces.science.ToString();
+        string[] strings = City.GetUIResourceValue(city.cityResouces);
+
+        cityTexts[0].text = strings[0];
+        cityTexts[1].text = strings[1];
+        cityTexts[2].text = strings[2];
+        cityTexts[3].text = strings[3];
 
 
-        for(int i = 0; i < city.possibleBuildings.Count; i++)
+        for (int i = 0; i < city.possibleBuildings.Count; i++)
         {
             IProduct product = city.possibleBuildings[i].GetComponent<IProduct>();
 
@@ -150,7 +152,7 @@ public class UI_City_Controler : MonoBehaviour
             return;
         }
 
-        city.addToQueue(ID, type);
+        city.AddToQueue(ID, type);
         updateUI();
     }
 
@@ -167,7 +169,7 @@ public class UI_City_Controler : MonoBehaviour
     }
     public void clickSlotQueue(int ID)
     {
-        city.removeFromQueue(ID);
+        city.RemoveFromQueue(ID);
         updateUI();
     }
 

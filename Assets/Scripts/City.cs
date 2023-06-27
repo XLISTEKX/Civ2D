@@ -22,6 +22,30 @@ public class City
         return Mathf.CeilToInt(buildingProduction / (float)production);
     }
 
-    
+    public static int GetPopCost()
+    {
+        return 8;
+    }
+
+    public static string[] GetUIResourceValue(ResourcesTile resources)
+    {
+        string[] output = new string[4];
+
+        output[0] = resources.food.ToString();
+        output[1] = resources.production.ToString();
+        output[2] = resources.cash.ToString();
+        output[3] = resources.science.ToString();
+
+        if (resources.food > 0)
+            output[0] = "+" + output[0];
+        if (resources.production > 0)
+            output[1] = "+" + output[1];
+        if (resources.cash > 0)
+            output[2] = "+" + output[2];
+        if (resources.science > 0)
+            output[3] = "+" + output[3];
+
+        return output;
+    }
 
 }

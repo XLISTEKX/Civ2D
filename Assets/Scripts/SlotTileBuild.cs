@@ -17,7 +17,7 @@ public class SlotTileBuild : MonoBehaviour, IPointerClickHandler
         tile.gameObject.SetActive(false);
 
         UIcity.city.buildLocations.Add(construction);
-        UIcity.city.addToQueue(ID, 2);
+        UIcity.city.AddToQueue(ID, 2);
         UIcity.destroyBuildTiles();
         UIcity.updateUI();
     }

@@ -924,7 +924,6 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   biom: 0
   block: 0
-  construction: 0
   owner: {fileID: 0}
   cityName: 
   population: 1
@@ -936,12 +935,14 @@ MonoBehaviour:
   buildLocations: []
   cityTiles: []
   text_cityName: {fileID: 3608062275466041972}
+  text_pop: {fileID: 2885844459317178918}
   constructionImage: {fileID: 7310221684770355252}
   panelColor: {fileID: 7820700612105480638}
   gearImage: {fileID: 21300000, guid: f42127f1ef156ea4c879048fe1164ad4, type: 3}
   constructionTurnLeft: {fileID: 2445228309123563362}
   buildingProgress: 0
   buildProduction: 0
+  popProgress: 0
   turnsLeft: 0
 --- !u!60 &2505334959887570829
 PolygonCollider2D:
