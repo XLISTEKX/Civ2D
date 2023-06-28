@@ -137,23 +137,33 @@ public class UI_City_Controler : MonoBehaviour
     {
         if(type == 2)
         {
-            foreach(Tile tile in city.cityTiles)
-            {
-                if (!tile.block && tile.getType() == 0)
-                {
-                    slotsBuild.Add(Instantiate(slotBuild, tile.transform.position, slotBuild.transform.rotation));
-                    SlotTileBuild slot = slotsBuild[^1].GetComponent<SlotTileBuild>();
-                    slot.tile = tile;
-                    slot.UIcity = this;
-                    slot.ID = ID;
-                }
-            }
+            OpenBuildTile(ID);
             
             return;
         }
 
         city.AddToQueue(ID, type);
         updateUI();
+    }
+    void OpenBuildTile(int ID)
+    {
+        if (slotsBuild.Count > 0)
+            return;
+        Gameplay_Controler gameplay = Gameplay_Controler.GetControler();
+        foreach (Tile tile in city.cityTiles)
+        {
+            if (!gameplay.IsNeighborCityTile(tile))
+                continue;
+
+            if (!tile.block && tile.getType() == 0)
+            {
+                slotsBuild.Add(Instantiate(slotBuild, tile.transform.position, slotBuild.transform.rotation));
+                SlotTileBuild slot = slotsBuild[^1].GetComponent<SlotTileBuild>();
+                slot.tile = tile;
+                slot.UIcity = this;
+                slot.ID = ID;
+            }
+        }
     }
 
     public void destroyBuildTiles()
@@ -205,8 +215,15 @@ public class UI_City_Controler : MonoBehaviour
             }
         }
         Gameplay_Controler _Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
-        
-        foreach (Tile tempTile in _Controler.getTilesBuyExpanse(city, city.currentRange))
+        Tile[] tiles = _Controler.GetTilesBuyExpanse(city, city.currentRange);
+
+        if(tiles.Length == 0)
+        {
+            city.currentRange++;
+            tiles = _Controler.GetTilesBuyExpanse(city, city.currentRange);
+        }
+            
+        foreach (Tile tempTile in tiles)
         {
             buySlots.Add(Instantiate(slotBuyPrefab, tempTile.transform.position, slotBuyPrefab.transform.rotation));
             buySlots[^1].GetComponent<BuyTileSlot>().initSlot(tempTile, city);

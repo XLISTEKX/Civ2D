@@ -22,7 +22,7 @@ public class UI_Selected : MonoBehaviour
         texts[0].text = unit.movementLeft.ToString() + "/" + unit.movementRange.ToString();
         texts[1].text = unit.damage.ToString();
 
-        healthBar.value =  unit.health / (float) unit.maxHealth;
+        //healthBar.value =  unit.health / (float) unit.maxHealth;
 
         icon.sprite = unit.unitSprite;
 

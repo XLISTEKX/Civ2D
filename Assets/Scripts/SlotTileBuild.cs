@@ -11,7 +11,7 @@ public class SlotTileBuild : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        TileConstruction construction = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().spawnCityTile(prefabConstruction, tile, UIcity.city, false).GetComponent<TileConstruction>();
+        TileConstruction construction = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().SpawnCityConstructionTile(prefabConstruction, tile, UIcity.city, false).GetComponent<TileConstruction>();
         construction.InitConstruction(tile.position, tile);
 
         tile.gameObject.SetActive(false);

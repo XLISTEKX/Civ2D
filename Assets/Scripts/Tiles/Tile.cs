@@ -14,6 +14,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public TileBiom biom;
     public bool block;
 
+    public bool discovered;
+
     [DoNotSerialize] public Player owner;
 
     protected bool canClick = true;
@@ -111,7 +113,20 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     public virtual void TurnRender(bool turn)
     {
-        GetComponent<SpriteRenderer>().enabled = turn;
+        if (discovered)
+        {
+            GetComponent<SpriteRenderer>().enabled = turn;
+        }
+        else
+        {
+
+        }
+        
+    }
+
+    public void DiscoverTile()
+    {
+
     }
 
     /*public void changeVisibility(bool hide)

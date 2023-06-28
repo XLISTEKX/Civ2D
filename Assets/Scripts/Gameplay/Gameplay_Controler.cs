@@ -22,17 +22,12 @@ public class Gameplay_Controler : MonoBehaviour
     public static Vector3Int[] cubeDirections = { new Vector3Int(1, 0, -1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
 
 
-    private void Start()
-    {
-        initPlayer(0);
-    }
-
     public static Gameplay_Controler GetControler()
     {
         return GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
     }
 
-    void initPlayer(int playerID)
+    public void InitPlayer(int playerID)
     {
         int randX = grid_Controler.column;
         int randY = grid_Controler.row;
@@ -55,6 +50,8 @@ public class Gameplay_Controler : MonoBehaviour
 
     public void startNewTurn()
     {
+        Tile lastSelected = selectedTile;
+
         turn++;
         SelectTile(null);
         foreach (Player player in players)
@@ -62,6 +59,7 @@ public class Gameplay_Controler : MonoBehaviour
             player.StartNextRound();
         }
         uI_Controler.nextTurn(turn);
+        SelectTile(lastSelected);
     }
 
     public void SelectTile(Tile newSelected)
@@ -103,6 +101,7 @@ public class Gameplay_Controler : MonoBehaviour
                             {
                                 RemoveInitUnitMove();
                                 selectedTile = null;
+                                SelectNewTile(newSelected);
                             }
                             else
                             {
@@ -148,6 +147,7 @@ public class Gameplay_Controler : MonoBehaviour
                     {
                         RemoveInitUnitMove();
                         selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                        SelectNewTile(newSelected);
                     }
                     else
                     {
@@ -513,12 +513,33 @@ public class Gameplay_Controler : MonoBehaviour
         return campTile;
     }
 
-    public void openCity(Tile_City city)
+    public void OpenCity(Tile_City city)
     {
         uI_Controler.openCloseCity(city);
     }
 
-    public Tile spawnCityTile(GameObject tile, Tile location, Tile_City city, bool destroy = true)
+    public Tile SpawnCityTile(GameObject tile, Tile location, Tile_City city, bool destroy = true)
+    {
+        Building_Tile spawn = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<Building_Tile>();
+        spawn.transform.SetParent(GameObject.Find("Grid").transform);
+        spawn.owner = city.owner;
+        spawn.InitTile(location.position);
+        
+
+        grid_Controler.tiles[location.position.x, location.position.y] = spawn;
+
+        city.cityResouces += spawn.resources;
+        spawn.SetTile(location.resources);
+
+        city.cityTiles.Remove(location);
+        city.cityTiles.Add(spawn);
+        
+        if(destroy)
+            Destroy(location.gameObject);
+
+        return spawn;
+    }
+    public Tile SpawnCityConstructionTile(GameObject tile, Tile location, Tile_City city, bool destroy = true)
     {
         Tile spawn = Instantiate(tile, location.transform.position, tile.transform.rotation).GetComponent<Tile>();
         spawn.transform.SetParent(GameObject.Find("Grid").transform);
@@ -529,14 +550,14 @@ public class Gameplay_Controler : MonoBehaviour
 
         city.cityTiles.Remove(location);
         city.cityTiles.Add(spawn);
-        
-        if(destroy)
+
+        if (destroy)
             Destroy(location.gameObject);
 
         return spawn;
     }
 
-    public Tile[] getTilesBuyExpanse(Tile tile, int distance)
+    public Tile[] GetTilesBuyExpanse(Tile tile, int distance)
     {
         List<Tile> returns = new();
 
@@ -555,5 +576,15 @@ public class Gameplay_Controler : MonoBehaviour
 
         
         return returns.ToArray();
+    }
+    public bool IsNeighborCityTile(Tile tile)
+    {
+        foreach(Tile tile1 in cube_neighbor(tile))
+        {
+            int type = tile1.getType();
+            if (type == 1 || type == 2)
+                return true;
+        }
+        return false;
     }
 }

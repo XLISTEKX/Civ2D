@@ -94,6 +94,8 @@ public class Grid_Controler : MonoBehaviour
         SpawnMountains();
         SpawnCamps();
         SpawnResources();
+
+        GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().InitPlayer(0);
     }
 
     void createGrid()
@@ -123,7 +125,7 @@ public class Grid_Controler : MonoBehaviour
             {
                 GameObject spawn = getBiomVariant(map[j, i]);
                 Tile temp = Instantiate(spawn, offset + rightOffset * j, spawn.transform.rotation).GetComponent<Tile>();
-                temp.GetComponent<SpriteRenderer>().enabled = false;
+                temp.TurnRender(false);
                 temp.transform.SetParent(grid);
                 temp.InitTile(new Vector2Int(j, i));
                 

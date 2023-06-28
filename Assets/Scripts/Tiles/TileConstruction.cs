@@ -34,7 +34,7 @@ public class TileConstruction : Tile
     public void Construct()
     {
         Gameplay_Controler gameplay = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
-        gameplay.spawnCityTile(spawn, this, city);
+        gameplay.SpawnCityTile(spawn, this, city);
 
 
         city.buildLocations.RemoveAt(0);

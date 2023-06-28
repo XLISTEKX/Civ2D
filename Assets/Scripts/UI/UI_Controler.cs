@@ -49,7 +49,8 @@ public class UI_Controler : MonoBehaviour
             return;
         }
         UIPanels[2].GetComponent<UI_City_Controler>().city = city;
-
+        Vector3 position = city.transform.position;
+        Camera.main.transform.position = new(position.x, position.y + 0.5f, Camera.main.transform.position.z);
         openPanel(2);
 
         

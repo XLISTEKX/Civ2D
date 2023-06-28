@@ -39,6 +39,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
 
         possibleBuildings = new List<GameObject>(owner.possibleBuildings);
         possibleUnits = new List<GameObject>(owner.possibleUnits);
+
         UpdateUI();
         
 

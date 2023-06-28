@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Building_Tile : Tile, IProduct
 {
+    public Vector4 resource;
     public int buildingCost;
 
     public int GetBuildCost()
@@ -32,5 +33,11 @@ public class Building_Tile : Tile, IProduct
         this.position = position;
         name = "Tile(" + this.position.x + "," + this.position.y + ")";
         updateBorderState();
+        resources = new((int)resource.x, (int)resource.y, (int)resource.z, (int)resource.w);
+    }
+
+    public virtual void SetTile(ResourcesTile resources)
+    {
+        this.resources += resources;
     }
 }

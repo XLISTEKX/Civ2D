@@ -105,8 +105,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   biom: 0
   block: 0
-  construction: 0
   owner: {fileID: 0}
+  resource: {x: 0, y: 10, z: 10, w: 0}
   buildingCost: 100
 --- !u!60 &2550379652331706830
 PolygonCollider2D:

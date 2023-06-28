@@ -927,7 +927,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   cityName: 
   population: 1
-  currentRange: 2
+  currentRange: 1
   buildingsBuild: []
   productionQueue: []
   possibleBuildings: []
