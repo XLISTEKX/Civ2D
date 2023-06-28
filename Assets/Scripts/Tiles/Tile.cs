@@ -119,14 +119,20 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
         else
         {
-
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<TileFog>().TurnFog(turn);
         }
         
     }
 
     public void DiscoverTile()
     {
+        if (discovered)
+            return;
 
+        discovered = true;
+        GetComponent<TileFog>().UnCoverFog();
+        TurnRender(true);
     }
 
     /*public void changeVisibility(bool hide)

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7585893062098410695}
   - component: {fileID: 5459608558435866750}
   - component: {fileID: 6598827141994384579}
+  - component: {fileID: -7394509982276299207}
   m_Layer: 6
   m_Name: Tile_Mountain_0
   m_TagString: Untagged
@@ -105,6 +106,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   biom: 8
   block: 1
+  discovered: 0
   owner: {fileID: 0}
 --- !u!60 &6598827141994384579
 PolygonCollider2D:
@@ -157,3 +159,16 @@ PolygonCollider2D:
       - {x: 0.485, y: -0.015043855}
       - {x: 0.49, y: 0.17}
   m_UseDelaunayMesh: 0
+--- !u!114 &-7394509982276299207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7585893062098410694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b3e588d7c067a42a6e355383dd365f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogTile: {fileID: 2059091169794067245, guid: 8104a6558ceeece489b5288a15ce4292, type: 3}

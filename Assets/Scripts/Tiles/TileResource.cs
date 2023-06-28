@@ -26,8 +26,18 @@ public class TileResource : Tile
 
     public override void TurnRender(bool turn)
     {
-        base.TurnRender(turn);
-        slot.TurnVisibility(turn);
+        if (discovered)
+        {
+            GetComponent<SpriteRenderer>().enabled = turn;
+            slot.TurnVisibility(turn);
+        }
+        else
+        {
+            slot.TurnVisibility(false);
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<TileFog>().TurnFog(turn);
+        }
+        
     }
 
     void UpdateUI()

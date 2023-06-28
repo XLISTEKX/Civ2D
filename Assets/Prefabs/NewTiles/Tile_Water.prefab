@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 455981763726259091}
   - component: {fileID: 7470030525140699103}
   - component: {fileID: 3899393341251816527}
+  - component: {fileID: 3227390791796711197}
   m_Layer: 6
   m_Name: Tile_Water
   m_TagString: Untagged
@@ -106,6 +107,7 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   biom: 2
   block: 1
+  discovered: 0
   owner: {fileID: 0}
 --- !u!60 &7470030525140699103
 PolygonCollider2D:
@@ -179,3 +181,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3227390791796711197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652924183118149419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b3e588d7c067a42a6e355383dd365f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogTile: {fileID: 2059091169794067245, guid: 8104a6558ceeece489b5288a15ce4292, type: 3}

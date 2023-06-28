@@ -5,15 +5,21 @@ using UnityEngine;
 public class TileFog : MonoBehaviour
 {
     public GameObject fogTile;
+    GameObject tile;
 
-    public void SetFog()
+    public void SpawnFog()
     {
-        fogTile = Instantiate(fogTile, transform);
+        tile = Instantiate(fogTile, transform);
+    }
+
+    public void TurnFog(bool turn)
+    {
+        tile.SetActive(turn);
     }
 
     public void UnCoverFog()
     {
-        Destroy(fogTile);
+        Destroy(tile);
         Destroy(this);
     }
 }

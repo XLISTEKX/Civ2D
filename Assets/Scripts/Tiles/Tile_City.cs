@@ -32,6 +32,8 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
     public int turnsLeft;
     public void InitCityTile(Vector2Int position, Player owner)
     {
+        discovered = true;
+
         this.owner = owner;
         this.position = position;
         name = "Tile(" + this.position.x + "," + this.position.y + ")";

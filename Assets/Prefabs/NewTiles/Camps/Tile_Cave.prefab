@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6105061624143896403}
   - component: {fileID: 138090057066335794}
   - component: {fileID: 2898211442956712727}
+  - component: {fileID: 2418565396177277443}
   m_Layer: 6
   m_Name: Tile_Cave
   m_TagString: Untagged
@@ -242,11 +243,25 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   biom: 0
   block: 0
+  discovered: 0
   owner: {fileID: 0}
   cooldown: 5
   maxMobs: 1
   unitPrefabs:
   - {fileID: 7754086547817741617, guid: 3561cb89970b1ae48b5905ab867b68a7, type: 3}
+--- !u!114 &2418565396177277443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8055800620397872444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b3e588d7c067a42a6e355383dd365f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogTile: {fileID: 2059091169794067245, guid: 8104a6558ceeece489b5288a15ce4292, type: 3}
 --- !u!1001 &1484503871537470505
 PrefabInstance:
   m_ObjectHideFlags: 0

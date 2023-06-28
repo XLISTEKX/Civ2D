@@ -51,7 +51,16 @@ public class TileCamp: Tile, ITurnCity, IRenderable
     }
     public override void TurnRender(bool turn)
     {
-        GetComponent<SpriteRenderer>().enabled = turn;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = turn;
+        if (discovered)
+        {
+            GetComponent<SpriteRenderer>().enabled = turn;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = turn;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<TileFog>().TurnFog(turn);
+        }
     }
 }

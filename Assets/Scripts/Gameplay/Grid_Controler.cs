@@ -125,11 +125,11 @@ public class Grid_Controler : MonoBehaviour
             {
                 GameObject spawn = getBiomVariant(map[j, i]);
                 Tile temp = Instantiate(spawn, offset + rightOffset * j, spawn.transform.rotation).GetComponent<Tile>();
-                temp.TurnRender(false);
+                
                 temp.transform.SetParent(grid);
                 temp.InitTile(new Vector2Int(j, i));
-                
-
+                temp.GetComponent<TileFog>().SpawnFog();
+                temp.TurnRender(false);
                 tiles[j, i] = temp;
             }
 
@@ -150,6 +150,7 @@ public class Grid_Controler : MonoBehaviour
             Tile location = landTiles[id];
 
             TileCamp tile = gameplay.SpawnCamp(camp, location);
+            tile.GetComponent<TileFog>().SpawnFog();
             tile.TurnRender(false);
             landTiles[id] = tile;
         }
@@ -185,7 +186,10 @@ public class Grid_Controler : MonoBehaviour
                     if (returnTile.biom != TileBiom.Water && !fringle.Contains(returnTile.position))
                     {
                         fringle.Add(returnTile.position);
-                        gameplay.SpawnTile(tileMountain[Random.Range(0, tileMountain.Length)], returnTile).TurnRender(false);
+
+                        Tile tile = gameplay.SpawnTile(tileMountain[Random.Range(0, tileMountain.Length)], returnTile);
+                        tile.GetComponent<TileFog>().SpawnFog();
+                        tile.TurnRender(false);
                         break;
                     }
                     directions.Remove(direction);
@@ -208,7 +212,10 @@ public class Grid_Controler : MonoBehaviour
 
             if(location.biom != TileBiom.Mountain && location.biom != TileBiom.None)
             {
-                gameplay.SpawnTileResource(GetResourcePrefabByBiom(location.biom), location).TurnRender(false);
+                Tile tile = gameplay.SpawnTileResource(GetResourcePrefabByBiom(location.biom), location);
+                
+                tile.GetComponent<TileFog>().SpawnFog();
+                tile.TurnRender(false);
                 continue;
             }
             i--;

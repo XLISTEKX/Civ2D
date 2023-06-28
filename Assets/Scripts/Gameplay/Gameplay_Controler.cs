@@ -99,6 +99,7 @@ public class Gameplay_Controler : MonoBehaviour
                         {
                             if(MoveUnit(selectedTile, newSelected))
                             {
+                                DiscoverTiles(newSelected, 2);
                                 RemoveInitUnitMove();
                                 selectedTile = null;
                                 SelectNewTile(newSelected);
@@ -146,6 +147,7 @@ public class Gameplay_Controler : MonoBehaviour
                     if(MoveUnit(selectedTile, newSelected))
                     {
                         RemoveInitUnitMove();
+                        DiscoverTiles(newSelected, 2);
                         selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                         SelectNewTile(newSelected);
                     }
@@ -252,6 +254,7 @@ public class Gameplay_Controler : MonoBehaviour
         firstUnit.MoveUnit(destination);
         destination.unitOnTile = firstUnit;
         start.unitOnTile = null;
+
         return true;
         
     }
@@ -443,6 +446,9 @@ public class Gameplay_Controler : MonoBehaviour
         players[playerID].allUnits.Add(tempUnit);
         location.unitOnTile = tempUnit;
 
+        if(playerID == 0)
+            DiscoverTiles(location, 2);
+
         return temp;
     }
     public Tile SpawnTile(GameObject tile, Tile location)
@@ -490,10 +496,12 @@ public class Gameplay_Controler : MonoBehaviour
         {
             tile.updateBorderState();
         }
-        Destroy(grid_Controler.tiles[location.position.x, location.position.y].gameObject);
+        DiscoverTiles(location, 3);
+        Destroy(location.gameObject);
         
         grid_Controler.tiles[location.position.x, location.position.y] = cityTile;
         uI_Controler.updateUI();
+        
     }
 
     public TileCamp SpawnCamp(GameObject camp, Tile location, int playerID = 1)
@@ -576,6 +584,18 @@ public class Gameplay_Controler : MonoBehaviour
 
         
         return returns.ToArray();
+    }
+
+    public void DiscoverTiles(Tile start, int range)
+    {
+        start.DiscoverTile();
+        for(int i = 1; i <= range; i++)
+        {
+            foreach(Tile tile in CubeRing(start, i))
+            {
+                tile.DiscoverTile();
+            }
+        }
     }
     public bool IsNeighborCityTile(Tile tile)
     {

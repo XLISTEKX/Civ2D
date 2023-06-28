@@ -18,6 +18,8 @@ public class TileConstruction : Tile
 
     public void InitConstruction(Vector2Int position, Tile tile)
     {
+        discovered = true;
+
         this.position = position;
         this.tile = tile;
         name = "Tile(" + this.position.x + "," + this.position.y + ")";
