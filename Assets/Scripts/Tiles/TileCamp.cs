@@ -20,9 +20,9 @@ public class TileCamp: Tile, ITurnCity, IRenderable
             if(unitSpawned.Count < maxMobs)
             {
                 SpawnUnit();
-                cooldown = maxCooldown;
+                
             }
-            
+            cooldown = maxCooldown;
         }
     }
 

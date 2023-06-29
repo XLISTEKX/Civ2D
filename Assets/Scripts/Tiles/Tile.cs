@@ -5,22 +5,28 @@ using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IRenderable
 {
-    public Unit unitOnTile;
-    public ResourcesTile resources;
-    public int tileCost;
-    public int[] maxResources = new int[4];
-    public int[] minResources = new int[4];
+    [Header("Tile Properties")]
     public Vector2Int position;
     public TileBiom biom;
+    public Unit unitOnTile;
+
+    [HideInInspector] public ResourcesTile resources;
+    [HideInInspector] public int tileCost;
+
+    [Header("Tile Settings")]
+    public int[] maxResources = new int[4];
+    public int[] minResources = new int[4];
+    
     public bool block;
 
     public bool discovered;
+    public bool visiblity;
 
     [DoNotSerialize] public Player owner;
 
     protected bool canClick = true;
 
-    List<GameObject> border = new List<GameObject>();
+    List<GameObject> border = new ();
 
     public virtual int getType()
     {
@@ -133,6 +139,25 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         discovered = true;
         GetComponent<TileFog>().UnCoverFog();
         TurnRender(true);
+    }
+
+    public virtual void TurnVisibility(bool turn)
+    {
+        if (turn == visiblity)
+            return;
+
+        if (turn)
+        {
+            if (!discovered)
+                DiscoverTile();
+
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0.825f, 0.825f, 0.825f);
+        }
+        
     }
 
     /*public void changeVisibility(bool hide)

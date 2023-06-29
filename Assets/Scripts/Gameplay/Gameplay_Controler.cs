@@ -588,12 +588,12 @@ public class Gameplay_Controler : MonoBehaviour
 
     public void DiscoverTiles(Tile start, int range)
     {
-        start.DiscoverTile();
+        start.TurnVisibility(true);
         for(int i = 1; i <= range; i++)
         {
             foreach(Tile tile in CubeRing(start, i))
             {
-                tile.DiscoverTile();
+                tile.TurnVisibility(true);
             }
         }
     }
