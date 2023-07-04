@@ -6,30 +6,32 @@ using UnityEngine.UI;
 
 public class Tile_City : Tile, IPointerClickHandler, ITurnCity
 {
-
+    [Header("City Settings")]
     public string cityName;
     public int population = 1;
     public int currentRange = 1;
-
-    public ResourcesTile cityResouces = new ResourcesTile(0,0,0,0);
-    public List<GameObject> buildingsBuild = new();
-    public List<GameObject> productionQueue = new();
-    public List<GameObject> possibleBuildings, possibleUnits;
-    public List<TileConstruction> buildLocations = new();
-    public List<Tile> cityTiles = new();
-    
-    [SerializeField] TMP_Text text_cityName, text_pop;
+    [Space(20)]
+    [HideInInspector] public ResourcesTile cityResouces = new (0,0,0,0);
+    [HideInInspector] public List<GameObject> buildingsBuild = new();
+    [HideInInspector] public List<GameObject> productionQueue = new();
+    [HideInInspector] public List<GameObject> possibleBuildings, possibleUnits;
+    [HideInInspector] public List<TileConstruction> buildLocations = new();
+    [HideInInspector] public List<Tile> cityTiles = new();
+    [Header("City UI")]
+    [SerializeField] TMP_Text text_cityName;
+    [SerializeField] TMP_Text text_pop;
     [SerializeField] Image constructionImage,panelColor;
     [SerializeField] Sprite gearImage;
     [SerializeField] TMP_Text constructionTurnLeft;
-
+    [Space(20)]
+    [Header("City Progress")]
     public int buildingProgress;
     public int buildProduction;
 
     public int popProgress;
     int popProgressMax = 50;
 
-    public int turnsLeft;
+    [HideInInspector] public int turnsLeft;
     public void InitCityTile(Vector2Int position, Player owner)
     {
         discovered = true;

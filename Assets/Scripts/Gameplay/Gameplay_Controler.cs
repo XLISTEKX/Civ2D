@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using XGeneric;
+using XGeneric.Collections;
 
 public class Gameplay_Controler : MonoBehaviour
 {
@@ -99,7 +101,6 @@ public class Gameplay_Controler : MonoBehaviour
                         {
                             if(MoveUnit(selectedTile, newSelected))
                             {
-                                DiscoverTiles(newSelected, 2);
                                 RemoveInitUnitMove();
                                 selectedTile = null;
                                 SelectNewTile(newSelected);
@@ -131,7 +132,7 @@ public class Gameplay_Controler : MonoBehaviour
 
             if (selectedTile == newSelected)
             {
-                selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                selectedTile.UpdateSelectColor(false);
 
                 if (unitMoves != null)
                     RemoveInitUnitMove();
@@ -147,8 +148,7 @@ public class Gameplay_Controler : MonoBehaviour
                     if(MoveUnit(selectedTile, newSelected))
                     {
                         RemoveInitUnitMove();
-                        DiscoverTiles(newSelected, 2);
-                        selectedTile.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                        selectedTile.UpdateSelectColor(false); ;
                         SelectNewTile(newSelected);
                     }
                     else
@@ -169,7 +169,10 @@ public class Gameplay_Controler : MonoBehaviour
     void SelectNewTile(Tile newSelected)
     {
         if (selectedTile != null)
-            selectedTile.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
+        {
+            selectedTile.UpdateSelectColor(false);
+        }
+            
 
         selectedTile = newSelected;
 
@@ -184,7 +187,7 @@ public class Gameplay_Controler : MonoBehaviour
         if (!newSelected.block && newSelected.owner == null && newSelected.unitOnTile == null)
             cheats_panel.SetActive(true);
 
-        selectedTile.GetComponent<SpriteRenderer>().color = new Color(1,0,0,0.7f);
+        selectedTile.UpdateSelectColor(true);
 
         if (selectedTile.unitOnTile != null && selectedTile.unitOnTile.owner == players[0])
             InitUnitMove();
@@ -213,13 +216,15 @@ public class Gameplay_Controler : MonoBehaviour
             {
                 if (tile.unitOnTile.owner.ID != 0)
                 {
-                    renderer.color = new Color(1, 0, 0, 0.9f);
-
+                    if(tile.visiblity)
+                        renderer.color = new Color(1, 0, 0, 0.9f);
+                    else
+                        tile.TurnMoveTile(true);
                 }
                 continue;
             }
 
-            renderer.color -= new Color(0,0,0, 0.4f);
+            tile.TurnMoveTile(true);
         }
     }
     void RemoveInitUnitMove()
@@ -228,35 +233,53 @@ public class Gameplay_Controler : MonoBehaviour
 
         foreach (Tile tile in unitMoves)
         {
-            tile.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+            tile.TurnMoveTile(false);
         }
         unitMoves = null;
     }
-    public static bool MoveUnit(Tile start, Tile destination)
+
+    public static bool MoveUnit(Tile start, Tile destination) 
     {
         if (start == destination)
             return false;
-
+        Gameplay_Controler gameplay = GetControler();
+        Tile[] path = gameplay.GetPathTiles(start, destination);
         Unit firstUnit = start.unitOnTile;
         int distanceU = Distance(axisToCube(start.position), axisToCube(destination.position));
-        if (destination.unitOnTile != null)
+
+        if(destination.unitOnTile != null && distanceU <= firstUnit.attackRange && destination.visiblity)
         {
-            if(distanceU <= firstUnit.attackRange)
-            {
-                destination.unitOnTile.TakeDamage(firstUnit.damage);
-                firstUnit.movementLeft = 0;
-                firstUnit.canAttack = false;
-            }
+            destination.unitOnTile.TakeDamage(firstUnit.damage);
+            firstUnit.movementLeft = 0;
+            firstUnit.canAttack = false;
             return false;
         }
 
-        firstUnit.movementLeft -= distanceU;
-        firstUnit.MoveUnit(destination);
-        destination.unitOnTile = firstUnit;
-        start.unitOnTile = null;
+        Tile last = start;
+
+        foreach(Tile des in path)
+        {
+            if (des.unitOnTile != null)
+            {
+                if (des.visiblity)
+                {
+                    des.unitOnTile.TakeDamage(firstUnit.damage);
+                    last.unitOnTile.movementLeft = 0;
+                    last.unitOnTile.canAttack = false;
+                }
+                return false;
+            }
+
+            last.unitOnTile.movementLeft -= 1;
+            last.unitOnTile.MoveUnit(des);
+            des.unitOnTile = firstUnit;
+            last.unitOnTile = null;
+            last = des;
+            if (des.unitOnTile.owner.ID == 0)
+                gameplay.DiscoverTiles(des, des.unitOnTile.viewRange);
+        }
 
         return true;
-        
     }
 
     Tile[] GetUnitsInRange(Unit unit)
@@ -295,9 +318,9 @@ public class Gameplay_Controler : MonoBehaviour
         return false;
     }
 
-    public Tile[] findTilesInRange(Tile selected, int range)
+    public Tile[] FindTilesInRange(Tile selected, int range)
     {
-        List<Tile> returnValues = new List<Tile>();
+        List<Tile> returnValues = new ();
 
         Vector3Int cubeLocation = axisToCube(selected.position);
 
@@ -482,7 +505,7 @@ public class Gameplay_Controler : MonoBehaviour
         cityTile.resources = location.resources;
         players[playerID].allCities.Add(cityTile);
 
-        Tile[] tiles = findTilesInRange(location, 1);
+        Tile[] tiles = FindTilesInRange(location, 1);
         foreach (Tile tile in tiles)
         {
             cityTile.cityResouces += tile.resources;
@@ -491,7 +514,7 @@ public class Gameplay_Controler : MonoBehaviour
         }
         cityTile.cityTiles.Remove(location);
 
-         tiles = findTilesInRange(location, 2);
+        tiles = FindTilesInRange(location, 2);
         foreach(Tile tile in tiles)
         {
             tile.updateBorderState();
@@ -588,14 +611,27 @@ public class Gameplay_Controler : MonoBehaviour
 
     public void DiscoverTiles(Tile start, int range)
     {
-        start.TurnVisibility(true);
-        for(int i = 1; i <= range; i++)
+        Unit unit = start.unitOnTile;
+
+        foreach(Tile tile in unit.tilesInRange)
         {
-            foreach(Tile tile in CubeRing(start, i))
-            {
-                tile.TurnVisibility(true);
-            }
+            tile.seeUnits.Remove(unit);
+            if(tile.seeUnits.Count > 0)
+                continue;
+            
+            tile.TurnVisibility(false);
         }
+
+
+        start.TurnVisibility(true);
+        Tile[] tilesInRange = FindTilesInRange(start, range);
+
+        foreach (Tile tile in tilesInRange)
+        {
+            tile.TurnVisibility(true);
+            tile.seeUnits.Add(unit);
+        }
+        unit.tilesInRange = tilesInRange;
     }
     public bool IsNeighborCityTile(Tile tile)
     {
@@ -607,4 +643,37 @@ public class Gameplay_Controler : MonoBehaviour
         }
         return false;
     }
+    #region PathFinding 
+    public Tile[] GetPathTiles(Tile start, Tile destination)
+    {
+        PriorityQueue<Tile> front = new();
+        front.Enqueue(start, 0);
+        Dictionary<Tile, Tile> came_from = new();
+        Dictionary<Tile, int> cost_so_far = new();
+        Vector3Int destinationPosition = axisToCube(destination.position);
+        came_from[start] = null;
+        cost_so_far[start] = 0;
+
+        while(front.Count > 0)
+        {
+            Tile current = front.Dequeue();
+
+            if (current == destination)
+                return XGeneric<Tile>.GetTilesByDictionary(came_from, current);
+
+            foreach(Tile next in cube_neighbor(current))
+            {
+                int new_cost = cost_so_far[current] + 1; // koszt poruszania sie tu
+                if(!cost_so_far.ContainsKey(next) || new_cost < cost_so_far[next])
+                {
+                    cost_so_far[next] = new_cost;
+                    int priority = new_cost + Distance(destinationPosition, axisToCube(next.position));
+                    front.Enqueue(next, priority);
+                    came_from[next] = current;
+                }
+            }
+        }
+        return null;
+    }
+    #endregion
 }

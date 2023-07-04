@@ -103,14 +103,13 @@ MonoBehaviour:
   health: 20
   damage: 2
   movementRange: 3
+  viewRange: 1
   movementLeft: 3
   attackRange: 1
   canAttack: 1
   productionCost: 10
   unitSprite: {fileID: 21300000, guid: e9386b7fb782f5c48b04fc7270814b75, type: 3}
   unitIcon: {fileID: 7216137003126937294}
-  slotPart1: {fileID: 1744592532876882439}
-  slotPart2: {fileID: 1158095327095037363}
   healthBar: {fileID: 8594009887635675315}
   owner: {fileID: 0}
   actions:
@@ -130,6 +129,7 @@ MonoBehaviour:
         m_CallState: 2
   actionsIcons:
   - {fileID: -285425464, guid: 0782bc07f0f50b840a4cd9d5885e5151, type: 3}
+  tilesInRange: []
   city: {fileID: 8982488041898318113, guid: 2932c726db144b34999cc3c2935e9c9f, type: 3}
 --- !u!114 &6699375322151171231
 MonoBehaviour:
@@ -252,33 +252,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
---- !u!114 &1158095327095037363 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4536026662119674666, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
-  m_PrefabInstance: {fileID: 3378075372138663577}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1609944314308433847 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4086733493677168942, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
   m_PrefabInstance: {fileID: 3378075372138663577}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1744592532876882439 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3951728410610302110, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
-  m_PrefabInstance: {fileID: 3378075372138663577}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7216137003126937294 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5387866426843125847, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}

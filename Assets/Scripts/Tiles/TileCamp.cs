@@ -31,6 +31,8 @@ public class TileCamp: Tile, ITurnCity, IRenderable
         int t = Random.Range(0, unitPrefabs.Length);
         unitSpawned.Add(GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().SpawnUnit(unitPrefabs[t], this, 1));
         unitSpawned[^1].GetComponent<UnitCamp>().camp = this;
+
+        unitSpawned[^1].GetComponent<UnitCamp>().TurnVisibility(visiblity);
     }
 
     public void RemoveUnit(GameObject unit)

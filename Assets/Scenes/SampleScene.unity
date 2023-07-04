@@ -2758,7 +2758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  zoomMagnitude: 0.05
+  zoomMagnitude: 0.025
   boxOffset: {x: 2, y: 2, z: 0}
   gameplay_Controler: {fileID: 1301860842}
 --- !u!114 &519420034

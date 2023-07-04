@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
     [Space(20)]
     [Header("Movement System")]
     public int movementRange;
+    public int viewRange;
     [HideInInspector] public int movementLeft;
     public int attackRange;
     [HideInInspector] public bool canAttack = true;
@@ -34,11 +35,24 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
     [Header("Actions")]
     public UnityEvent[] actions;
     public Sprite[] actionsIcons;
-    public void MoveUnit(Tile destination)
+
+    [HideInInspector] public Tile[] tilesInRange;
+    public virtual void MoveUnit(Tile destination)
     {
         transform.SetParent(destination.transform);
         transform.localPosition = Vector3.zero;
+
+        if(owner.ID != 0)
+            GetTilesInRange();
     }
+
+    public void GetTilesInRange()
+    {
+        Gameplay_Controler gameplay = Gameplay_Controler.GetControler();
+        tilesInRange = gameplay.FindTilesInRange(GetComponentInParent<Tile>(), viewRange);
+    }
+
+
     public void NextRound()
     {
         movementLeft = movementRange;
@@ -97,6 +111,14 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         {
             KillUnit();
         }
+        if(GetComponent<SpriteRenderer>().enabled)
+            UpdateUI();
+    }
+
+    public void TurnVisibility(bool turn)
+    {
+        GetComponent<SpriteRenderer>().enabled = turn;
+        transform.GetChild(0).gameObject.SetActive(turn);
         UpdateUI();
     }
 }

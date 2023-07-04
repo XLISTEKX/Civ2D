@@ -103,6 +103,7 @@ MonoBehaviour:
   health: 20
   damage: 8
   movementRange: 2
+  viewRange: 2
   movementLeft: 3
   attackRange: 1
   canAttack: 1
@@ -113,6 +114,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   actions: []
   actionsIcons: []
+  tilesInRange: []
 --- !u!114 &4401444765331145135
 MonoBehaviour:
   m_ObjectHideFlags: 0

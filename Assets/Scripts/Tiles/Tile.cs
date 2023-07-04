@@ -26,8 +26,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     protected bool canClick = true;
 
-    List<GameObject> border = new ();
-
+    GameObject[] border;
+    [HideInInspector] public List<Unit> seeUnits = new();
     public virtual int getType()
     {
         return 0;
@@ -78,15 +78,15 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 Destroy(bord);
             }
-            border.Clear();
+            border = null;
         }
         
         Grid_Controler grid = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Grid_Controler>();
 
-        Vector3Int[] directions = { new Vector3Int(1, 0, -1), new Vector3Int(1, -1, 0), new Vector3Int(0, -1, 1), new Vector3Int(-1, 0, 1), new Vector3Int(-1, 1, 0), new Vector3Int(0, 1, -1) };
+        Vector3Int[] directions = Gameplay_Controler.cubeDirections;
         Vector3Int cubeLocation = Gameplay_Controler.axisToCube(position);
         Vector3Int tempLocation;
-
+        List<GameObject> tempList = new();
         for(int i = 0; i < 6; i++)
         {
             tempLocation = cubeLocation + directions[i];
@@ -96,7 +96,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 GameObject temp = Instantiate(grid.borders[i], transform);
 
-                border.Add(temp);
+                tempList.Add(temp);
 
                 temp.GetComponent<SpriteRenderer>().color = owner.color;
                 continue;
@@ -108,13 +108,13 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             {
                 GameObject temp = Instantiate(grid.borders[i], transform);
 
-                border.Add(temp);
+                tempList.Add(temp);
 
                 temp.GetComponent<SpriteRenderer>().color = owner.color;
             }
 
         }
-
+        border = tempList.ToArray();
     }
 
     public virtual void TurnRender(bool turn)
@@ -150,16 +150,66 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         {
             if (!discovered)
                 DiscoverTile();
-
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = new Color(0.825f, 0.825f, 0.825f);
+            GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
+        }
+        visiblity = turn;
+
+        if (unitOnTile != null)
+            unitOnTile.TurnVisibility(turn);
+    }
+
+    public virtual void TurnMoveTile(bool turn)
+    {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+        if (visiblity)
+        {
+            if (turn)
+            {
+                renderer.color -= new Color(0, 0, 0, 0.4f);
+            }
+            else
+            {
+                renderer.color = Color.white;
+            }
+        }
+        else
+        {
+            if (turn)
+            {
+                renderer.color -= new Color(0, 0, 0, 0.4f);
+            }
+            else
+            {
+                renderer.color = new Color(0.6f, 0.6f, 0.6f);
+            }
         }
         
     }
 
+    public void UpdateSelectColor(bool select)
+    {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        if (select)
+        {
+            renderer.color = new Color(1, 0, 0, 0.7f);
+        }
+        else
+        {
+            if (visiblity)
+            {
+                renderer.color = Color.white;
+            }
+            else
+            {
+                renderer.color = new Color(0.6f, 0.6f, 0.6f);
+            }
+        }
+    }
     /*public void changeVisibility(bool hide)
     {
         if (!hide && hidden)

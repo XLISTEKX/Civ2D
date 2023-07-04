@@ -103,18 +103,18 @@ MonoBehaviour:
   health: 20
   damage: 15
   movementRange: 2
+  viewRange: 2
   movementLeft: 2
   attackRange: 1
   canAttack: 1
   productionCost: 160
   unitSprite: {fileID: 21300000, guid: b7670c260a9018c429e7b982369851b4, type: 3}
   unitIcon: {fileID: 6845955029832885975}
-  slotPart1: {fileID: 2527469512672854558}
-  slotPart2: {fileID: 3113966580734111146}
   healthBar: {fileID: 5503794562661492906}
   owner: {fileID: 0}
   actions: []
   actionsIcons: []
+  tilesInRange: []
 --- !u!114 &-8378554614450466811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,28 +236,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
---- !u!114 &2527469512672854558 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3951728410610302110, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
-  m_PrefabInstance: {fileID: 1568444730180648576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3113966580734111146 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4536026662119674666, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
-  m_PrefabInstance: {fileID: 1568444730180648576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &3274893570151131054 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4086733493677168942, guid: cd8d45b6cc6c42f48ae1abc2b4c1257b, type: 3}
