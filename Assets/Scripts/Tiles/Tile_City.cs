@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Tile_City : Tile, IPointerClickHandler, ITurnCity
+public class Tile_City : Tile, IPointerClickHandler, ITurnCity, ISeeable
 {
     [Header("City Settings")]
     public string cityName;
@@ -32,6 +32,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
     int popProgressMax = 50;
 
     [HideInInspector] public int turnsLeft;
+    public Tile[] tilesInRange;
     public void InitCityTile(Vector2Int position, Player owner)
     {
         discovered = true;
@@ -213,5 +214,14 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity
             buildProduction = productionQueue[0].GetComponent<IProduct>().GetBuildCost();
         }
     }
-   
+
+    public Tile[] GetTilesInRange()
+    {
+        return tilesInRange;
+    }
+
+    public void SetTilesInRange(Tile[] tiles)
+    {
+        tilesInRange = tiles;
+    }
 }

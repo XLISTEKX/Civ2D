@@ -63,3 +63,11 @@ public interface ITurnCity
     }
 }
 
+public interface ISeeable
+{
+    public Tile[] GetTilesInRange();
+
+    public void SetTilesInRange(Tile[] tiles);
+
+}
+

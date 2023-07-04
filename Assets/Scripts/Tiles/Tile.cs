@@ -27,7 +27,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     protected bool canClick = true;
 
     GameObject[] border;
-    [HideInInspector] public List<Unit> seeUnits = new();
+    public List<ISeeable> seeUnits = new();
     public virtual int getType()
     {
         return 0;

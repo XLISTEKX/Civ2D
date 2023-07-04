@@ -519,10 +519,11 @@ public class Gameplay_Controler : MonoBehaviour
         {
             tile.updateBorderState();
         }
-        DiscoverTiles(location, 3);
+       
         Destroy(location.gameObject);
         
         grid_Controler.tiles[location.position.x, location.position.y] = cityTile;
+        DiscoverTiles(cityTile, 2);
         uI_Controler.updateUI();
         
     }
@@ -611,11 +612,22 @@ public class Gameplay_Controler : MonoBehaviour
 
     public void DiscoverTiles(Tile start, int range)
     {
-        Unit unit = start.unitOnTile;
-
-        foreach(Tile tile in unit.tilesInRange)
+        ISeeable see;
+        if (start.gameObject.TryGetComponent(out ISeeable seen))
         {
-            tile.seeUnits.Remove(unit);
+            if(start.unitOnTile == null)
+                see = seen;
+            else
+                see = start.unitOnTile.GetComponent<ISeeable>();
+        }
+        else
+        {
+            see = start.unitOnTile.GetComponent<ISeeable>();
+        }
+
+        foreach(Tile tile in see.GetTilesInRange())
+        {
+            tile.seeUnits.Remove(see);
             if(tile.seeUnits.Count > 0)
                 continue;
             
@@ -629,9 +641,9 @@ public class Gameplay_Controler : MonoBehaviour
         foreach (Tile tile in tilesInRange)
         {
             tile.TurnVisibility(true);
-            tile.seeUnits.Add(unit);
+            tile.seeUnits.Add(see);
         }
-        unit.tilesInRange = tilesInRange;
+        see.SetTilesInRange(tilesInRange);
     }
     public bool IsNeighborCityTile(Tile tile)
     {

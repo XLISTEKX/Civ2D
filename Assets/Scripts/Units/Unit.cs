@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Unit : MonoBehaviour, IProduct, IDamageable
+public class Unit : MonoBehaviour, IProduct, IDamageable, ISeeable
 {
     [Header("Health System")]
     
@@ -43,10 +43,10 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         transform.localPosition = Vector3.zero;
 
         if(owner.ID != 0)
-            GetTilesInRange();
+            GetAITilesInRange();
     }
 
-    public void GetTilesInRange()
+    public void GetAITilesInRange()
     {
         Gameplay_Controler gameplay = Gameplay_Controler.GetControler();
         tilesInRange = gameplay.FindTilesInRange(GetComponentInParent<Tile>(), viewRange);
@@ -121,4 +121,18 @@ public class Unit : MonoBehaviour, IProduct, IDamageable
         transform.GetChild(0).gameObject.SetActive(turn);
         UpdateUI();
     }
+
+    #region Seeable
+
+    public Tile[] GetTilesInRange()
+    {
+        return tilesInRange;
+    }
+
+    public void SetTilesInRange(Tile[] tiles)
+    {
+        tilesInRange = tiles;
+    }
+
+    #endregion
 }
