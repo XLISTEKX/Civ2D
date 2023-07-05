@@ -7635,6 +7635,7 @@ MonoBehaviour:
   resourcesRate: 0.02
   mountainsRate: 0.005
   campsRate: 0.002
+  discoverTiles: 1
   magnitudeBioms: {x: 25, y: 25}
   maxMountainsTiles: 6
   borders:

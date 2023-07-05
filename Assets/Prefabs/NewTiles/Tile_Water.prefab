@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2652924183118149429}
+  - component: {fileID: -2364790760347264494}
   - component: {fileID: 2652924183118149418}
-  - component: {fileID: 455981763726259091}
   - component: {fileID: 7470030525140699103}
   - component: {fileID: 3899393341251816527}
   - component: {fileID: 3227390791796711197}
@@ -36,6 +36,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2364790760347264494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652924183118149419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed7de54fae96174c93cd961e4cb7c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
+  biom: 2
+  unitOnTile: {fileID: 0}
+  tileCost: 0
+  maxResources: 03000000000000000200000001000000
+  minResources: 01000000000000000200000000000000
+  block: 0
+  discovered: 0
+  visiblity: 0
+  owner: {fileID: 0}
 --- !u!212 &2652924183118149418
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,27 +110,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &455981763726259091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2652924183118149419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f54b3026b31c64081b372cca99390f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitOnTile: {fileID: 0}
-  tileCost: 100
-  maxResources: 03000000000000000200000000000000
-  minResources: 01000000000000000100000000000000
-  position: {x: 0, y: 0}
-  biom: 2
-  block: 1
-  discovered: 0
-  owner: {fileID: 0}
 --- !u!60 &7470030525140699103
 PolygonCollider2D:
   m_ObjectHideFlags: 0

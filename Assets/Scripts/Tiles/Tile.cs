@@ -25,7 +25,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     [DoNotSerialize] public Player owner;
 
     protected bool canClick = true;
-
     GameObject[] border;
     public List<ISeeable> seeUnits = new();
     public virtual int getType()
@@ -143,8 +142,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     public virtual void TurnVisibility(bool turn)
     {
-        if (turn == visiblity)
-            return;
 
         if (turn)
         {

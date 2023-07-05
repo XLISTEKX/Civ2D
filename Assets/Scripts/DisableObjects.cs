@@ -10,11 +10,6 @@ public class DisableObjects : MonoBehaviour
         if (collision.TryGetComponent(out IRenderable renderable))
         {
             renderable.TurnRender(true);
-
-            if (collision.TryGetComponent(out Animator animator))
-            {
-                animator.enabled = true;
-            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -23,10 +18,6 @@ public class DisableObjects : MonoBehaviour
         {
 
             renderable.TurnRender(false);
-            if (collision.TryGetComponent(out Animator animator))
-            {
-                animator.enabled = false;
-            }
         }
        
     }

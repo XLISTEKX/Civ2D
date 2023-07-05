@@ -32,6 +32,7 @@ public class Grid_Controler : MonoBehaviour
     [SerializeField] [Range(0, 0.2f)] float resourcesRate;
     [SerializeField] [Range(0, 0.2f)] float mountainsRate;
     [SerializeField] [Range(0, 0.2f)] float campsRate;
+    [SerializeField] bool discoverTiles;
     [SerializeField] Vector2 magnitudeBioms;
     [SerializeField] int maxMountainsTiles;
     [Space(10)]
@@ -125,16 +126,34 @@ public class Grid_Controler : MonoBehaviour
             {
                 GameObject spawn = getBiomVariant(map[j, i]);
                 Tile temp = Instantiate(spawn, offset + rightOffset * j, spawn.transform.rotation).GetComponent<Tile>();
-                
-                temp.transform.SetParent(grid);
-                temp.InitTile(new Vector2Int(j, i));
-                temp.GetComponent<TileFog>().SpawnFog();
-                temp.TurnRender(false);
-                tiles[j, i] = temp;
+
+                InitTile(temp, new Vector2Int(j, i));
             }
 
         }
     }
+
+    void InitTile(Tile tile, Vector2Int position, bool init = true)
+    {
+        if (init)
+        {
+            tile.transform.SetParent(grid);
+            tile.InitTile(position);
+
+            tiles[position.x, position.y] = tile;
+        }
+        if (discoverTiles)
+        {
+            tile.discovered = true;
+        }
+        else
+        {
+            tile.GetComponent<TileFog>().SpawnFog();
+        }
+        tile.TurnRender(false);
+        tile.TurnVisibility(false);
+    }
+
 
     void SpawnCamps()
     {
@@ -150,8 +169,7 @@ public class Grid_Controler : MonoBehaviour
             Tile location = landTiles[id];
 
             TileCamp tile = gameplay.SpawnCamp(camp, location);
-            tile.GetComponent<TileFog>().SpawnFog();
-            tile.TurnRender(false);
+            InitTile(tile, Vector2Int.zero, false);
             landTiles[id] = tile;
         }
     }
@@ -188,8 +206,7 @@ public class Grid_Controler : MonoBehaviour
                         fringle.Add(returnTile.position);
 
                         Tile tile = gameplay.SpawnTile(tileMountain[Random.Range(0, tileMountain.Length)], returnTile);
-                        tile.GetComponent<TileFog>().SpawnFog();
-                        tile.TurnRender(false);
+                        InitTile(tile, Vector2Int.zero, false);
                         break;
                     }
                     directions.Remove(direction);
@@ -213,9 +230,8 @@ public class Grid_Controler : MonoBehaviour
             if(location.biom != TileBiom.Mountain && location.biom != TileBiom.None)
             {
                 Tile tile = gameplay.SpawnTileResource(GetResourcePrefabByBiom(location.biom), location);
-                
-                tile.GetComponent<TileFog>().SpawnFog();
-                tile.TurnRender(false);
+
+                InitTile(tile, Vector2Int.zero, false);
                 continue;
             }
             i--;
