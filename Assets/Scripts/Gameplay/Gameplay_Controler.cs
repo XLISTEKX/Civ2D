@@ -367,7 +367,7 @@ public class Gameplay_Controler : MonoBehaviour
             {
                 foreach(Tile neighbor in cube_neighbor(tile))
                 {
-                    if(!visitedTiles.Contains(neighbor) && !neighbor.block)
+                    if(!visitedTiles.Contains(neighbor) && !neighbor.block && neighbor.biom != TileBiom.Water)
                     {
                         if(neighbor.unitOnTile != null)
                         {
@@ -609,7 +609,7 @@ public class Gameplay_Controler : MonoBehaviour
         
         return returns.ToArray();
     }
-
+    #region Visibility
     public void DiscoverTiles(Tile start, int range)
     {
         ISeeable see;
@@ -645,6 +645,29 @@ public class Gameplay_Controler : MonoBehaviour
         }
         see.SetTilesInRange(tilesInRange);
     }
+
+    public void DiscoverCityTiles(Tile start, Tile_City city)
+    {
+        ISeeable seeObject = city.GetComponent<ISeeable>();
+        List<Tile> newTiles = new();
+
+        foreach(Tile tile in CubeRing(start, 1))
+        {
+            if (tile.visiblity)
+                continue;
+            tile.TurnVisibility(true);
+            tile.seeUnits.Add(seeObject);
+            newTiles.Add(tile);
+        }
+
+        if (newTiles.Count == 0)
+            return;
+        Tile[] tempTiles = seeObject.GetTilesInRange().Concat(newTiles).ToArray();
+
+        seeObject.SetTilesInRange(tempTiles);
+    }
+
+    #endregion
     public bool IsNeighborCityTile(Tile tile)
     {
         foreach(Tile tile1 in cube_neighbor(tile))

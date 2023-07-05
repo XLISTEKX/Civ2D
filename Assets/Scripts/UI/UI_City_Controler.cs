@@ -214,13 +214,21 @@ public class UI_City_Controler : MonoBehaviour
                 Destroy(gObject);
             }
         }
+        if (city.currentRange >= 3)
+            return;
+
         Gameplay_Controler _Controler = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
         Tile[] tiles = _Controler.GetTilesBuyExpanse(city, city.currentRange);
 
         if(tiles.Length == 0)
         {
             city.currentRange++;
+
+            if (city.currentRange >= 3)
+                return;
+
             tiles = _Controler.GetTilesBuyExpanse(city, city.currentRange);
+
         }
             
         foreach (Tile tempTile in tiles)

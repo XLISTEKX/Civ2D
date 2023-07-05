@@ -96,7 +96,7 @@ public class Grid_Controler : MonoBehaviour
         SpawnCamps();
         SpawnResources();
 
-        GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>().InitPlayer(0);
+        Gameplay_Controler.GetControler().InitPlayer(0);
     }
 
     void createGrid()
