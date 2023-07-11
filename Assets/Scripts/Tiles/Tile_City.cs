@@ -10,6 +10,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity, ISeeable
     public string cityName;
     public int population = 1;
     public int currentRange = 1;
+    public bool capital;
     [Space(20)]
     [HideInInspector] public ResourcesTile cityResouces = new (0,0,0,0);
     [HideInInspector] public List<GameObject> buildingsBuild = new();
@@ -20,7 +21,7 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity, ISeeable
     [Header("City UI")]
     [SerializeField] TMP_Text text_cityName;
     [SerializeField] TMP_Text text_pop;
-    [SerializeField] Image constructionImage,panelColor;
+    [SerializeField] Image constructionImage,panelColor, crownImage;
     [SerializeField] Sprite gearImage;
     [SerializeField] TMP_Text constructionTurnLeft;
     [Space(20)]
@@ -93,6 +94,9 @@ public class Tile_City : Tile, IPointerClickHandler, ITurnCity, ISeeable
     }
     void UpdateUI()
     {
+        crownImage.gameObject.SetActive(capital);
+        crownImage.color = owner.color;
+
         text_cityName.text = cityName;
         panelColor.color = owner.color - new Color(0,0,0,0.45f);
         text_pop.text = population.ToString();

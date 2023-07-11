@@ -97,6 +97,7 @@ public class Grid_Controler : MonoBehaviour
         SpawnResources();
 
         Gameplay_Controler.GetControler().InitPlayer(0);
+        Gameplay_Controler.GetControler().InitPlayer(2);
     }
 
     void createGrid()

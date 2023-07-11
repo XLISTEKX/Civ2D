@@ -18,11 +18,15 @@ public class Player : MonoBehaviour
     public Techtree techtree;
     public virtual void StartNextRound()
     {
-        foreach (Unit unit in allUnits)
+        if(allUnits.Count != 0)
         {
-            unit.GetComponent<UnitAiBase>().MoveUnit();
-            unit.NextRound();
+            foreach (Unit unit in allUnits)
+            {
+                unit.GetComponent<UnitAiBase>().MoveUnit();
+                unit.NextRound();
+            }
         }
+        
 
         int tempScience = 0;
         foreach (Tile_City city in allCities)

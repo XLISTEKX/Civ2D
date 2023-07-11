@@ -8,14 +8,27 @@ public class Unit_Settlers : Unit
 
     public void createCity()
     {
-        Gameplay_Controler gameplay = GameObject.FindGameObjectWithTag("Gameplay").GetComponent<Gameplay_Controler>();
-
-        if (gameplay.isNeighborOwnerTile(gameplay.selectedTile))
+        Gameplay_Controler gameplay = Gameplay_Controler.GetControler();
+        Tile tile = GetComponentInParent<Tile>();
+        if (gameplay.isNeighborOwnerTile(tile))
             return;
 
-        gameplay.SpawnCity(city, gameplay.selectedTile, owner.ID);
-        gameplay.SelectTile(null);
+        
 
-        Destroy(gameObject);
+        gameplay.SpawnCity(city, tile, owner.ID);
+        
+        if(owner.ID == 0)
+        {
+            gameplay.SelectTile(null);
+            owner.allUnits.Remove(this);
+            Destroy(gameObject);
+        }
+        else
+        {
+            PlayerAI player = owner.GetComponent<PlayerAI>();
+
+            player.toDestroy.Add(this);
+        }
     }
+
 }

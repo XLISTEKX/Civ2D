@@ -53,7 +53,7 @@ public class Unit : MonoBehaviour, IProduct, IDamageable, ISeeable
     }
 
 
-    public void NextRound()
+    public virtual void NextRound()
     {
         movementLeft = movementRange;
         canAttack = true;

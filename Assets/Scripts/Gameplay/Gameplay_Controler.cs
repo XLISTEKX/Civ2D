@@ -47,7 +47,8 @@ public class Gameplay_Controler : MonoBehaviour
         }
 
         SpawnUnit(settler, tile, playerID);
-        Camera.main.transform.position += new Vector3(tile.transform.position.x, tile.transform.position.y);
+        if(playerID == 2)
+            Camera.main.transform.position += new Vector3(tile.transform.position.x, tile.transform.position.y);
     }
 
     public void startNewTurn()
@@ -84,7 +85,8 @@ public class Gameplay_Controler : MonoBehaviour
                     {
                         InitUnitMove();
                     }
-                    uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+                    if(selectedTile.owner.ID == 0)
+                        uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
                     
                 }
                 else
@@ -93,7 +95,8 @@ public class Gameplay_Controler : MonoBehaviour
                     {
                         if (unitMoves == null)
                         {
-                            uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+                            if (selectedTile.owner.ID == 0)
+                                uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
                             selectedTile = null;
                             return;
                         }
@@ -122,8 +125,8 @@ public class Gameplay_Controler : MonoBehaviour
                     }
                     if (unitMoves != null)
                         RemoveInitUnitMove();
-
-                    uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
+                    if (selectedTile.owner.ID == 0)
+                        uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
                     selectedTile = null;
                 }
                 
@@ -178,8 +181,8 @@ public class Gameplay_Controler : MonoBehaviour
 
         if (newSelected == null)
             return;
-        
-        if (selectedTile.getType() == 1)
+
+        if (selectedTile.getType() == 1 && selectedTile.owner.ID == 0)
         {
             uI_Controler.openCloseCity(selectedTile.GetComponent<Tile_City>());
             return;
@@ -457,9 +460,9 @@ public class Gameplay_Controler : MonoBehaviour
         }
         return returnTiles.ToArray();
 
-    } 
+    }
 
-
+    #region Spawns
     public GameObject SpawnUnit(GameObject unit, Tile location, int playerID = 0) 
     {
         GameObject temp = Instantiate(unit, location.transform.position, unit.transform.rotation);
@@ -499,6 +502,9 @@ public class Gameplay_Controler : MonoBehaviour
     public void SpawnCity(GameObject city, Tile location, int playerID = 0)
     {
         Tile_City cityTile = Instantiate(city, location.transform.position, city.transform.rotation).GetComponent<Tile_City>();
+        if (players[playerID].allCities.Count == 0)
+            cityTile.capital = true;
+        
         cityTile.InitCityTile(location.position, players[playerID]);
         cityTile.transform.SetParent(GameObject.Find("Grid").transform);
 
@@ -512,6 +518,7 @@ public class Gameplay_Controler : MonoBehaviour
             tile.owner = players[playerID];
             cityTile.cityTiles.Add(tile);
         }
+
         cityTile.cityTiles.Remove(location);
 
         tiles = FindTilesInRange(location, 2);
@@ -523,9 +530,13 @@ public class Gameplay_Controler : MonoBehaviour
         Destroy(location.gameObject);
         
         grid_Controler.tiles[location.position.x, location.position.y] = cityTile;
-        DiscoverTiles(cityTile, 2);
+        if(playerID == 0)
+            DiscoverTiles(cityTile, 2);
+        else
+        {
+            cityTile.TurnVisibility(false);
+        }
         uI_Controler.updateUI();
-        
     }
 
     public TileCamp SpawnCamp(GameObject camp, Tile location, int playerID = 1)
@@ -545,10 +556,7 @@ public class Gameplay_Controler : MonoBehaviour
         return campTile;
     }
 
-    public void OpenCity(Tile_City city)
-    {
-        uI_Controler.openCloseCity(city);
-    }
+    
 
     public Tile SpawnCityTile(GameObject tile, Tile location, Tile_City city, bool destroy = true)
     {
@@ -556,7 +564,8 @@ public class Gameplay_Controler : MonoBehaviour
         spawn.transform.SetParent(GameObject.Find("Grid").transform);
         spawn.owner = city.owner;
         spawn.InitTile(location.position);
-        
+        spawn.seeUnits.Add(city);
+        spawn.visiblity = true;
 
         grid_Controler.tiles[location.position.x, location.position.y] = spawn;
 
@@ -578,6 +587,9 @@ public class Gameplay_Controler : MonoBehaviour
         spawn.owner = city.owner;
         spawn.InitTile(location.position);
 
+        spawn.seeUnits.Add(city);
+        spawn.visiblity = true;
+
         grid_Controler.tiles[location.position.x, location.position.y] = spawn;
 
         city.cityTiles.Remove(location);
@@ -587,6 +599,12 @@ public class Gameplay_Controler : MonoBehaviour
             Destroy(location.gameObject);
 
         return spawn;
+    }
+    #endregion
+
+    public void OpenCity(Tile_City city)
+    {
+        uI_Controler.openCloseCity(city);
     }
 
     public Tile[] GetTilesBuyExpanse(Tile tile, int distance)

@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitAiBase : MonoBehaviour
 {
-    public void MoveUnit()
+    bool isIdle = true;
+
+    public virtual void MoveUnit()
     {
         Unit unit = GetComponent<Unit>();
-
-        Gameplay_Controler.MoveUnit(GetComponentInParent<Tile>(), UnitAi.GetIdleUnitMove(unit));
+        
+        if(isIdle)
+            Gameplay_Controler.MoveUnit(GetComponentInParent<Tile>(), UnitAi.GetIdleUnitMove(unit));
 
     }
 
