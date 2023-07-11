@@ -8,15 +8,29 @@ public class FPSCounter : MonoBehaviour
     [SerializeField] TMP_Text counter;
 
     float _timer;
+    int lastFrameIndex;
+    float[] frameDeltaTimeArray;
+
+    private void Awake()
+    {
+        frameDeltaTimeArray = new float[50];
+    }
 
     public void Update()
     {
-        if (Time.unscaledTime > _timer)
-        {
-            int fps = (int)(1f / Time.unscaledDeltaTime);
-            counter.text = fps + "FPS";
-            _timer = Time.unscaledTime + 0.125f;
-        }
+        frameDeltaTimeArray[lastFrameIndex] = Time.deltaTime;
+        lastFrameIndex = (lastFrameIndex + 1) % frameDeltaTimeArray.Length;
+
+        counter.text = Mathf.RoundToInt(CalculateFPS()) + "FPS";
     }
 
+    float CalculateFPS()
+    {
+        float total = 0f;
+        foreach(float delta in frameDeltaTimeArray)
+        {
+            total += delta;
+        }
+        return frameDeltaTimeArray.Length / total;
+    }
 }
